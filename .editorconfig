@@ -1,0 +1,75 @@
+# top-most EditorConfig file
+root = true
+
+# ==========================================
+# Global Defaults
+# ==========================================
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 120
+
+# ==========================================
+# Java 21 / Spring Boot Defaults
+# ==========================================
+[*.java]
+indent_style = space
+indent_size = 4
+max_line_length = 120
+
+# IntelliJ IDEA Specific Settings for Java
+ij_java_align_multiline_parameters = true
+ij_java_blank_lines_before_package_statement = 0
+ij_java_blank_lines_after_imports = 1
+ij_java_imports_layout = static $*,*,java.*,javax.*
+
+# ==========================================
+# Frontend: TypeScript, JavaScript, Vue
+# ==========================================
+[*.{ts,js,mts,cts,jsx,tsx}]
+indent_style = space
+indent_size = 2
+max_line_length = 100
+
+[*.vue]
+indent_style = space
+indent_size = 2
+max_line_length = 100
+# IntelliJ Vue formatting
+ij_vue_indent_children_of_top_level_tags = true
+
+# ==========================================
+# Data Formats & Configs
+# ==========================================
+[*.json]
+indent_style = space
+indent_size = 2
+
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.xml]
+indent_style = space
+indent_size = 4
+
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
+
+# ==========================================
+# Shell, Docker & DevOps
+# ==========================================
+[{Dockerfile,*.sh,*.bash}]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+
+[*.properties]
+indent_style = space
+indent_size = 2
+charset = iso-8859-1
