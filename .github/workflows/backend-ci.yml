@@ -2,18 +2,30 @@ name: Backend CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - 'backend/**'
-      - '.github/workflows/backend-ci.yml'
+      - "backend/core/**"
+      - ".github/workflows/backend-ci.yml"
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - 'backend/**'
-      - '.github/workflows/backend-ci.yml'
+      - "backend/core/**"
+      - ".github/workflows/backend-ci.yml"
+
+concurrency:
+  group: backend-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: backend/core
 
 jobs:
-  build-and-test:
+  verify:
+    name: Build and test backend
     runs-on: ubuntu-latest
 
     services:
@@ -26,39 +38,51 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
+          --health-cmd="pg_isready -U test -d risklens_test"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=12
       redis:
         image: redis:7-alpine
         ports:
           - 6379:6379
         options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          --health-cmd="redis-cli ping"
+          --health-interval=5s
+          --health-timeout=3s
+          --health-retries=12
 
     steps:
-      - name: Checkout repository
+      - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 21
+      - name: Set up Java 21
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: 'maven'
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: backend/core/pom.xml
 
-      - name: Build with Maven & Run Tests
+      - name: Make Maven wrapper executable
+        run: chmod +x mvnw
+
+      - name: Verify backend
         env:
-          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/risklens_test
-          SPRING_DATASOURCE_USERNAME: test
-          SPRING_DATASOURCE_PASSWORD: testpassword
-          SPRING_REDIS_HOST: localhost
-          SPRING_REDIS_PORT: 6379
-        run: |
-          cd Z:\IdeaProjects\risklens\backend
-          mvn clean verify -B
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: risklens_test
+          DB_USERNAME: test
+          DB_PASSWORD: testpassword
+          SPRING_DATA_REDIS_HOST: localhost
+          SPRING_DATA_REDIS_PORT: 6379
+        run: ./mvnw --batch-mode --no-transfer-progress verify
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-test-reports
+          path: backend/core/target/surefire-reports/
+          if-no-files-found: ignore
+          retention-days: 14
