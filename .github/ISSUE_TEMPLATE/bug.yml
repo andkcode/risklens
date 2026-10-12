@@ -1,0 +1,37 @@
+name: 🐛 Bug Report
+description: Report a bug or unexpected behavior in RiskLens
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Please provide detailed information to help us reproduce and resolve the issue quickly."
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: What happened and how does it manifest?
+      placeholder: Describe the expected vs actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction Steps
+      description: How can we reproduce this bug?
+      placeholder: |
+        1. Navigate to...
+        2. Enter portfolio...
+        3. Click button...
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P1 (Critical — system crash, incorrect risk calculations)
+        - P2 (Medium — UI/UX bug, validation error)
+        - P3 (Low — minor styling issue, typo)
+    validations:
+      required: true
