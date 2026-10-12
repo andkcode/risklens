@@ -23,6 +23,5 @@ jobs:
           cache: 'maven'
 
       - name: Run Maven Verify
-        run: |
-          cd Z:\IdeaProjects\risklens\backend
-          mvn verify -B
+        working-directory: ./backend/core
+        run: mvn clean package
