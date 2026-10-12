@@ -1,31 +1,23 @@
-# =========================================
-# Stage 1: Build stage
-# =========================================
-FROM eclipse-temurin:21-jdk-alpine AS builder
-WORKDIR /app
+# syntax=docker/dockerfile:1
 
-# Копируем файл обертки Maven и pom.xml для кэширования зависимостей
-COPY .mvn/ .mvn
+FROM eclipse-temurin:21-jdk-alpine AS build
+WORKDIR /workspace
+
+COPY .mvn/ .mvn/
 COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline -B
+RUN chmod +x mvnw && ./mvnw -B dependency:go-offline
 
-# Копируем исходный код и собираем JAR без запуска тестов
-COPY src ./src
-RUN ./mvnw clean package -DskipTests
+COPY src/ src/
+RUN ./mvnw -B clean package -DskipTests && \
+    mv target/*.jar target/app.jar
 
-# =========================================
-# Stage 2: Runtime stage
-# =========================================
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:21-jre-alpine AS runtime
 WORKDIR /app
 
-# Создаем не-root пользователя для безопасности
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-USER appuser
+RUN addgroup -S app && adduser -S -G app app
+COPY --from=build --chown=app:app /workspace/target/app.jar /app/app.jar
 
-# Копируем собранный JAR изbuilder стейджа
-COPY --from=builder /app/target/*.jar app.jar
-
+USER app
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75", "-jar", "/app/app.jar"]

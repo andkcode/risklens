@@ -1,0 +1,20 @@
+# Build outputs and local tooling
+**/target/
+**/.mvn/wrapper/maven-wrapper.jar
+**/.idea/
+**/*.iml
+
+# Version control and local configuration
+.git/
+.gitignore
+.env
+.env.*
+!.env.example
+
+# Frontend dependencies and build outputs
+**/node_modules/
+**/.nuxt/
+**/.output/
+
+# Documentation and IDE metadata
+**/docs/
