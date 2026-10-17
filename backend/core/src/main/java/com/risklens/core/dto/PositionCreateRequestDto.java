@@ -14,17 +14,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PositionCreateRequestDto {
-    @NotBlank
-    private String assetSymbol;
+  @NotBlank private String assetSymbol;
 
-    @NotBlank
-    private String assetType;
+  @NotBlank private String assetType;
 
-    @NotNull
-    @DecimalMin(value = "0.00000001")
-    private BigDecimal quantity;
+  @NotNull
+  @DecimalMin(value = "0.00000001")
+  private BigDecimal quantity;
 
-    @NotNull
-    @DecimalMin(value = "0.0")
-    private BigDecimal avgBuyPrice;
+  @NotNull
+  @DecimalMin(value = "0.0")
+  private BigDecimal avgBuyPrice;
 }

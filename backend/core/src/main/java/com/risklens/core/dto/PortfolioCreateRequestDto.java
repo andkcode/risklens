@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PortfolioCreateRequestDto {
-    @NotBlank
-    @Size(max = 100)
-    private String name;
+  @NotBlank
+  @Size(max = 100)
+  private String name;
 
-    @NotBlank
-    @Size(min = 3, max = 3)
-    private String baseCurrency;
+  @NotBlank
+  @Size(min = 3, max = 3)
+  private String baseCurrency;
 }

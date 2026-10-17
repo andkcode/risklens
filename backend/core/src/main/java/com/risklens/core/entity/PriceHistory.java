@@ -13,7 +13,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "price_history")
+@Table(
+    name = "price_history",
+    uniqueConstraints = {
+      @UniqueConstraint(columnNames = {"asset_symbol", "asset_type", "price_date"})
+    })
 public class PriceHistory {
 
   @Id
@@ -21,13 +25,13 @@ public class PriceHistory {
   @Column(name = "id", updatable = false, nullable = false)
   private Long id;
 
-  @Column(name = "asset_symbol", length = 20, nullable = false, unique = true)
+  @Column(name = "asset_symbol", length = 20, nullable = false)
   private String assetSymbol;
 
-  @Column(name = "asset_type", length = 10, nullable = false, unique = true)
+  @Column(name = "asset_type", length = 10, nullable = false)
   private String assetType;
 
-  @Column(name = "price_date", nullable = false, unique = true)
+  @Column(name = "price_date", nullable = false)
   private LocalDate priceDate;
 
   @Column(name = "close_price", precision = 24, scale = 8, nullable = false)

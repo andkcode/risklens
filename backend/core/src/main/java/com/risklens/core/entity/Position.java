@@ -14,7 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "positions")
+@Table(
+    name = "positions",
+    uniqueConstraints = {@UniqueConstraint(columnNames = {"portfolio_id", "asset_symbol"})})
 public class Position {
 
   @Id
@@ -26,7 +28,7 @@ public class Position {
   @JoinColumn(name = "portfolio_id", nullable = false)
   private Portfolio portfolio;
 
-  @Column(name = "asset_symbol", nullable = false, length = 20, unique = true)
+  @Column(name = "asset_symbol", nullable = false, length = 20)
   private String assetSymbol;
 
   @Column(name = "asset_type", nullable = false, length = 10)
