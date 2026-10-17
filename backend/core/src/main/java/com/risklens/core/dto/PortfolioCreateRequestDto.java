@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PortfolioCreateRequestDto {
-  @NotBlank
-  @Size(max = 100)
+  @NotBlank(message = "Portfolio name cannot be blank")
+  @Size(max = 100, message = "Name must be up to 100 characters")
   private String name;
 
-  @NotBlank
-  @Size(min = 3, max = 3)
+  @NotBlank(message = "Base currency cannot be blank")
+  @Size(min = 3, max = 3, message = "Base currency must be exactly 3 characters (e.g. USD)")
   private String baseCurrency;
 }

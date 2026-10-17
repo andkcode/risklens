@@ -31,8 +31,7 @@ public class SecurityConfig {
         .formLogin(form -> form.disable())
         .httpBasic(basic -> basic.disable())
         .logout(logout -> logout.disable())
-        .authorizeHttpRequests(
-            auth -> auth.anyRequest().authenticated())
+        .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
         .sessionManagement(
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authenticationProvider(authenticationProvider)
