@@ -1,9 +1,14 @@
 spring:
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:portfolio-x-ray}?ssl=false
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:75801}
     driver-class-name: org.postgresql.Driver
+
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
 
   sql:
     init:
@@ -13,8 +18,8 @@ spring:
     enabled: true
     baseline-on-migrate: true
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:portfolio-x-ray}?ssl=false
-    user: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    user: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:75801}
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
