@@ -14,13 +14,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/portfolios")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class PortfolioController {
 
     private final PortfolioService portfolioService;
 
-    @PostMapping
+    @PostMapping("/portfolios/create")
     public ResponseEntity<PortfolioResponseDto> createPortfolio(
         @Valid @RequestBody PortfolioCreateRequestDto createRequestDto,
         Principal principal) {
@@ -29,7 +29,7 @@ public class PortfolioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping
+    @GetMapping("/portfolios")
     public ResponseEntity<Page<PortfolioResponseDto>> getPortfolios(
         Principal principal,
         @ParameterObject Pageable pageable) {

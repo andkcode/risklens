@@ -15,13 +15,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/portfolios/{portfolioId}/positions")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class PositionController {
 
     private final PositionService positionService;
 
-    @PostMapping
+    @PostMapping("/portfolios/{portfolioId}/positions/add")
     public ResponseEntity<PositionResponseDto> addPosition(
         @PathVariable UUID portfolioId,
         @Valid @RequestBody PositionCreateRequestDto createRequestDto,
@@ -32,7 +32,7 @@ public class PositionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping
+    @GetMapping("/portfolios/{portfolioId}/positions")
     public ResponseEntity<Page<PositionResponseDto>> getPositions(
         @PathVariable UUID portfolioId,
         Principal principal,
