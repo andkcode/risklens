@@ -16,27 +16,33 @@ import lombok.NoArgsConstructor;
 @Table(
     name = "price_history",
     uniqueConstraints = {
-      @UniqueConstraint(columnNames = {"asset_symbol", "asset_type", "price_date"})
+        @UniqueConstraint(columnNames = {"asset_symbol", "trade_date"})
     })
 public class PriceHistory {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", updatable = false, nullable = false)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
 
-  @Column(name = "asset_symbol", length = 20, nullable = false)
-  private String assetSymbol;
+    @Column(name = "asset_symbol", length = 20, nullable = false)
+    private String assetSymbol;
 
-  @Column(name = "asset_type", length = 10, nullable = false)
-  private String assetType;
+    @Column(name = "trade_date", nullable = false)
+    private LocalDate tradeDate;
 
-  @Column(name = "price_date", nullable = false)
-  private LocalDate priceDate;
+    @Column(name = "open_price", precision = 18, scale = 4)
+    private BigDecimal openPrice;
 
-  @Column(name = "close_price", precision = 24, scale = 8, nullable = false)
-  private BigDecimal closePrice;
+    @Column(name = "close_price", precision = 18, scale = 4, nullable = false)
+    private BigDecimal closePrice;
 
-  @Column(name = "source", length = 30)
-  private String source;
+    @Column(name = "high_price", precision = 18, scale = 4)
+    private BigDecimal highPrice;
+
+    @Column(name = "low_price", precision = 18, scale = 4)
+    private BigDecimal lowPrice;
+
+    @Column(name = "volume", precision = 24, scale = 2)
+    private BigDecimal volume;
 }
