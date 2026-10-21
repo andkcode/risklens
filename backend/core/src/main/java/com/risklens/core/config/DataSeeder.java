@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,21 +44,57 @@ public class DataSeeder implements CommandLineRunner {
 
     log.info("Starting demo data seeding...");
 
+    OffsetDateTime now = OffsetDateTime.now();
     String defaultHash = "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy";
 
-    User regularUser = User.builder().email("user@risklens.com").passwordHash(defaultHash).build();
+    User regularUser =
+        User.builder()
+            .email("user@risklens.com")
+            .passwordHash(defaultHash)
+            .createdAt(now)
+            .updatedAt(now)
+            .build();
     User analystUser =
-        User.builder().email("analyst@risklens.com").passwordHash(defaultHash).build();
-    User adminUser = User.builder().email("admin@risklens.com").passwordHash(defaultHash).build();
+        User.builder()
+            .email("analyst@risklens.com")
+            .passwordHash(defaultHash)
+            .createdAt(now)
+            .updatedAt(now)
+            .build();
+    User adminUser =
+        User.builder()
+            .email("admin@risklens.com")
+            .passwordHash(defaultHash)
+            .createdAt(now)
+            .updatedAt(now)
+            .build();
 
     userRepository.saveAll(List.of(regularUser, analystUser, adminUser));
 
     Portfolio p1 =
-        Portfolio.builder().user(regularUser).name("Growth Portfolio").baseCurrency("USD").build();
+        Portfolio.builder()
+            .user(regularUser)
+            .name("Growth Portfolio")
+            .baseCurrency("USD")
+            .createdAt(now)
+            .updatedAt(now)
+            .build();
     Portfolio p2 =
-        Portfolio.builder().user(analystUser).name("Crypto & Tech").baseCurrency("USD").build();
+        Portfolio.builder()
+            .user(analystUser)
+            .name("Crypto & Tech")
+            .baseCurrency("USD")
+            .createdAt(now)
+            .updatedAt(now)
+            .build();
     Portfolio p3 =
-        Portfolio.builder().user(adminUser).name("Conservative Assets").baseCurrency("USD").build();
+        Portfolio.builder()
+            .user(adminUser)
+            .name("Conservative Assets")
+            .baseCurrency("USD")
+            .createdAt(now)
+            .updatedAt(now)
+            .build();
 
     portfolioRepository.saveAll(List.of(p1, p2, p3));
 
@@ -68,6 +105,8 @@ public class DataSeeder implements CommandLineRunner {
             .assetType("STOCK")
             .quantity(BigDecimal.valueOf(10))
             .avgBuyPrice(BigDecimal.valueOf(175.50))
+            .createdAt(now)
+            .updatedAt(now)
             .build();
     Position pos2 =
         Position.builder()
@@ -76,6 +115,8 @@ public class DataSeeder implements CommandLineRunner {
             .assetType("STOCK")
             .quantity(BigDecimal.valueOf(5))
             .avgBuyPrice(BigDecimal.valueOf(400.00))
+            .createdAt(now)
+            .updatedAt(now)
             .build();
     Position pos3 =
         Position.builder()
@@ -84,6 +125,8 @@ public class DataSeeder implements CommandLineRunner {
             .assetType("STOCK")
             .quantity(BigDecimal.valueOf(8))
             .avgBuyPrice(BigDecimal.valueOf(140.00))
+            .createdAt(now)
+            .updatedAt(now)
             .build();
     Position pos4 =
         Position.builder()
@@ -92,6 +135,8 @@ public class DataSeeder implements CommandLineRunner {
             .assetType("STOCK")
             .quantity(BigDecimal.valueOf(12))
             .avgBuyPrice(BigDecimal.valueOf(150.00))
+            .createdAt(now)
+            .updatedAt(now)
             .build();
 
     Position pos5 =
@@ -101,6 +146,8 @@ public class DataSeeder implements CommandLineRunner {
             .assetType("CRYPTO")
             .quantity(BigDecimal.valueOf(0.5))
             .avgBuyPrice(BigDecimal.valueOf(42000.00))
+            .createdAt(now)
+            .updatedAt(now)
             .build();
     Position pos6 =
         Position.builder()
@@ -109,6 +156,8 @@ public class DataSeeder implements CommandLineRunner {
             .assetType("CRYPTO")
             .quantity(BigDecimal.valueOf(4.0))
             .avgBuyPrice(BigDecimal.valueOf(2200.00))
+            .createdAt(now)
+            .updatedAt(now)
             .build();
     Position pos7 =
         Position.builder()
@@ -117,6 +166,8 @@ public class DataSeeder implements CommandLineRunner {
             .assetType("STOCK")
             .quantity(BigDecimal.valueOf(15))
             .avgBuyPrice(BigDecimal.valueOf(500.00))
+            .createdAt(now)
+            .updatedAt(now)
             .build();
     Position pos8 =
         Position.builder()
@@ -125,6 +176,8 @@ public class DataSeeder implements CommandLineRunner {
             .assetType("STOCK")
             .quantity(BigDecimal.valueOf(10))
             .avgBuyPrice(BigDecimal.valueOf(240.00))
+            .createdAt(now)
+            .updatedAt(now)
             .build();
 
     Position pos9 =
@@ -134,6 +187,8 @@ public class DataSeeder implements CommandLineRunner {
             .assetType("STOCK")
             .quantity(BigDecimal.valueOf(20))
             .avgBuyPrice(BigDecimal.valueOf(170.00))
+            .createdAt(now)
+            .updatedAt(now)
             .build();
     Position pos10 =
         Position.builder()
@@ -142,6 +197,8 @@ public class DataSeeder implements CommandLineRunner {
             .assetType("STOCK")
             .quantity(BigDecimal.valueOf(15))
             .avgBuyPrice(BigDecimal.valueOf(390.00))
+            .createdAt(now)
+            .updatedAt(now)
             .build();
     Position pos11 =
         Position.builder()
@@ -150,6 +207,8 @@ public class DataSeeder implements CommandLineRunner {
             .assetType("STOCK")
             .quantity(BigDecimal.valueOf(10))
             .avgBuyPrice(BigDecimal.valueOf(135.00))
+            .createdAt(now)
+            .updatedAt(now)
             .build();
     Position pos12 =
         Position.builder()
@@ -158,12 +217,14 @@ public class DataSeeder implements CommandLineRunner {
             .assetType("STOCK")
             .quantity(BigDecimal.valueOf(25))
             .avgBuyPrice(BigDecimal.valueOf(145.00))
+            .createdAt(now)
+            .updatedAt(now)
             .build();
 
     positionRepository.saveAll(
         List.of(pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12));
 
-    // 4. Load Price History from CSV Fixture
+    // Load Price History from CSV Fixture
     loadPriceHistoryFromCsv();
 
     log.info("Demo data seeding completed successfully!");
@@ -183,17 +244,22 @@ public class DataSeeder implements CommandLineRunner {
         }
         String[] parts = line.split(",");
         if (parts.length >= 7) {
-          PriceHistory history =
-              PriceHistory.builder()
-                  .assetSymbol(parts[0].trim())
-                  .tradeDate(LocalDate.parse(parts[1].trim()))
-                  .openPrice(new BigDecimal(parts[2].trim()))
-                  .closePrice(new BigDecimal(parts[3].trim()))
-                  .highPrice(new BigDecimal(parts[4].trim()))
-                  .lowPrice(new BigDecimal(parts[5].trim()))
-                  .volume(new BigDecimal(parts[6].trim()))
-                  .build();
-          priceHistoryRepository.save(history);
+          String symbol = parts[0].trim();
+          LocalDate tradeDate = LocalDate.parse(parts[1].trim());
+
+          if (!priceHistoryRepository.existsByAssetSymbolAndTradeDate(symbol, tradeDate)) {
+            PriceHistory history =
+                PriceHistory.builder()
+                    .assetSymbol(symbol)
+                    .tradeDate(tradeDate)
+                    .openPrice(new BigDecimal(parts[2].trim()))
+                    .closePrice(new BigDecimal(parts[3].trim()))
+                    .highPrice(new BigDecimal(parts[4].trim()))
+                    .lowPrice(new BigDecimal(parts[5].trim()))
+                    .volume(new BigDecimal(parts[6].trim()))
+                    .build();
+            priceHistoryRepository.save(history);
+          }
         }
       }
       log.info("Price history successfully loaded from CSV fixture.");
