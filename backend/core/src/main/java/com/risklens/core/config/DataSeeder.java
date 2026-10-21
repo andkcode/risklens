@@ -45,7 +45,7 @@ public class DataSeeder implements CommandLineRunner {
     log.info("Starting demo data seeding...");
 
     OffsetDateTime now = OffsetDateTime.now();
-    String defaultHash = "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy";
+    String defaultHash = "$2a$12$LaFnfhgoRGM7BegUNqisPOMpHtE9/AqTKnFX.CJ3vp.6xPzMKze3G";
 
     User regularUser =
         User.builder()
@@ -53,6 +53,7 @@ public class DataSeeder implements CommandLineRunner {
             .passwordHash(defaultHash)
             .createdAt(now)
             .updatedAt(now)
+            .role("USER")
             .build();
     User analystUser =
         User.builder()
@@ -60,6 +61,7 @@ public class DataSeeder implements CommandLineRunner {
             .passwordHash(defaultHash)
             .createdAt(now)
             .updatedAt(now)
+            .role("ANALYST")
             .build();
     User adminUser =
         User.builder()
@@ -67,6 +69,7 @@ public class DataSeeder implements CommandLineRunner {
             .passwordHash(defaultHash)
             .createdAt(now)
             .updatedAt(now)
+            .role("ADMIN")
             .build();
 
     userRepository.saveAll(List.of(regularUser, analystUser, adminUser));
