@@ -1,20 +1,32 @@
-name: CI Pipeline
+name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [ main, develop ]
   pull_request:
-    branches: [main]
-
-permissions:
-  contents: read
+    branches: [ main, develop ]
 
 jobs:
-  workflow-check:
-    name: Workflow configuration
+  lint-openapi:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: Checkout code
         uses: actions/checkout@v4
-      - name: Validate Compose configuration
-        run: docker compose --env-file .env.example config --quiet
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Generate OpenAPI spec
+        run: |
+          mvn spring-boot:start &
+          sleep 15
+          curl -s http://localhost:8080/v3/api-docs.yaml > openapi.yaml
+          mvn spring-boot:stop
+
+      - name: Run Spectral Lint
+        uses: stoplight/spectral-action@v1.4.0
+        with:
+          file_path: openapi.yaml
