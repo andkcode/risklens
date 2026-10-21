@@ -22,16 +22,25 @@ public class SecurityConfig {
 
   @Bean
   public WebSecurityCustomizer webSecurityCustomizer() {
-    return web -> web.ignoring().requestMatchers("/api/auth/**", "/actuator/health");
+    return web ->
+        web.ignoring().requestMatchers("/api/v1/auth/**", "/api/auth/**", "/actuator/health");
   }
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable())
+        .authorizeHttpRequests(
+            auth ->
+                auth.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html")
+                    .permitAll()
+                    .requestMatchers("/api/v1/auth/**", "/api/auth/**")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated())
         .formLogin(form -> form.disable())
         .httpBasic(basic -> basic.disable())
         .logout(logout -> logout.disable())
-        .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+        // УДАЛЕН второй дублирующий вызов .authorizeHttpRequests(), который всё затирал!
         .sessionManagement(
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authenticationProvider(authenticationProvider)
