@@ -2,6 +2,8 @@ package com.risklens.core.controller;
 
 import com.risklens.core.dto.AuthRequestDto;
 import com.risklens.core.dto.AuthResponseDto;
+import com.risklens.core.dto.RefreshTokenRequestDto;
+import com.risklens.core.entity.RefreshToken;
 import com.risklens.core.entity.User;
 import com.risklens.core.repository.UserRepository;
 import com.risklens.core.security.JwtService;
@@ -16,11 +18,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -73,6 +71,31 @@ public class AuthController {
 
     String refreshToken = refreshTokenService.createRefreshToken(user);
     return ResponseEntity.ok(new AuthResponseDto(accessToken, refreshToken));
+  }
+
+  @PostMapping("/refresh")
+  public ResponseEntity<AuthResponseDto> refresh(@RequestBody RefreshTokenRequestDto request) {
+    String requestRefreshToken = request.getRefreshToken();
+
+    return refreshTokenService
+        .findByToken(requestRefreshToken)
+        .map(refreshTokenService::verifyExpiration)
+        .map(RefreshToken::getUser)
+        .map(
+            user -> {
+              UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
+              String accessToken = jwtService.generateToken(userDetails);
+              return ResponseEntity.ok(new AuthResponseDto(accessToken, requestRefreshToken));
+            })
+        .orElseThrow(() -> new RuntimeException("Refresh token is not in database!"));
+  }
+
+  @PostMapping("/logout")
+  public ResponseEntity<Void> logout(@RequestBody RefreshTokenRequestDto request) {
+    if (request != null && request.getRefreshToken() != null) {
+      refreshTokenService.deleteByToken(request.getRefreshToken());
+    }
+    return ResponseEntity.ok().build();
   }
 
   @ExceptionHandler(AuthenticationException.class)
