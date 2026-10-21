@@ -39,9 +39,7 @@ public class OpenApiConfig {
                         .name(securitySchemeName)
                         .type(SecurityScheme.Type.HTTP)
                         .scheme("bearer")
-                        .bearerFormat("JWT")
-                        .description(
-                            "Provide the JWT token prefixed with Bearer, e.g., 'Bearer eyJhbGciOi...'")))
+                        .bearerFormat("JWT")))
         // 4. Tags
         .tags(
             List.of(
