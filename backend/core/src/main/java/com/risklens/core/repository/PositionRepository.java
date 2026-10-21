@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PositionRepository extends JpaRepository<Position, UUID> {
-    List<Position> findAllByPortfolioId(UUID portfolio);
+  List<Position> findAllByPortfolioId(UUID portfolio);
 }
