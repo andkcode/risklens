@@ -1,4 +1,4 @@
-ticker,trade_date,open_price,close_price,high_price,low_price,volume
+asset_symbol,trade_date,open_price,close_price,high_price,low_price,volume
 AAPL,2026-01-02,180.50,182.20,183.00,179.80,50000000
 AAPL,2026-01-05,182.00,181.50,183.50,180.90,45000000
 MSFT,2026-01-02,400.00,405.50,407.00,398.50,30000000
