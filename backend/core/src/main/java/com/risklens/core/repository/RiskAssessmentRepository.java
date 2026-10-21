@@ -13,4 +13,5 @@ public interface RiskAssessmentRepository extends JpaRepository<RiskAssessment, 
     Optional<RiskAssessment> findTopByPortfolioIdOrderByCalculatedAtDesc(UUID portfolioId);
 
     Page<RiskAssessment> findAllByPortfolioId(UUID portfolioId, Pageable pageable);
+
 }
