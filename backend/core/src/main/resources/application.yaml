@@ -4,7 +4,7 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
-  
+
   api-docs:
     path: /v3/api-docs
     swagger-ui:
@@ -12,7 +12,14 @@ spring:
       enabled: true
       operations-sorter: method
       tags-sorter: alpha
-  
+
+  jwt:
+    secret: ${JWT_SECRET_KEY}
+    expiration: ${JWT_EXPIRATION}
+    refresh-token:
+      expiration: ${JWT_ACCESS_TOKEN_EXPIRATION}
+
+
   data:
     redis:
       host: ${SPRING_DATA_REDIS_HOST:localhost}

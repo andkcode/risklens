@@ -54,11 +54,14 @@ public class AuthService {
     return new AuthResponseDto(accessToken, refreshToken);
   }
 
+  @Transactional
   public AuthResponseDto authenticate(AuthRequestDto request) {
+
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
     UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+
     String accessToken = jwtService.generateToken(userDetails);
 
     User user =
@@ -67,9 +70,11 @@ public class AuthService {
             .orElseThrow(() -> new RuntimeException("User not found"));
 
     String refreshToken = refreshTokenService.createRefreshToken(user);
+
     return new AuthResponseDto(accessToken, refreshToken);
   }
 
+  @Transactional
   public AuthResponseDto refreshToken(String requestRefreshToken) {
     return refreshTokenService
         .findByToken(requestRefreshToken)
@@ -84,6 +89,7 @@ public class AuthService {
         .orElseThrow(() -> new RuntimeException("Refresh token is not in database!"));
   }
 
+  @Transactional
   public void logout(String refreshToken) {
     if (refreshToken != null) {
       refreshTokenService.deleteByToken(refreshToken);
