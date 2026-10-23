@@ -48,7 +48,7 @@ public class DataSeeder implements CommandLineRunner {
 
         OffsetDateTime now = OffsetDateTime.now();
         String defaultHash =
-            passwordEncoder.encode("12345");
+            passwordEncoder.encode("12345678");
 
         User regularUser =
             User.builder()
