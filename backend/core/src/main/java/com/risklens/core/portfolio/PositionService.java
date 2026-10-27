@@ -8,7 +8,9 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
@@ -24,12 +26,11 @@ public class PositionService {
 
     Portfolio portfolio =
         portfolioRepository
-            .findById(portfolioId)
-            .orElseThrow(() -> new RuntimeException("Portfolio Not Found With Id: " + portfolioId));
-
-    if (!portfolio.getUser().getEmail().equals(userEmail)) {
-      throw new RuntimeException("Access denied: portfolio does not belong to the user");
-    }
+            .findByIdAndUserEmail(portfolioId, userEmail)
+            .orElseThrow(
+                () ->
+                    new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Portfolio not found with id: " + portfolioId));
 
     Position position =
         Position.builder()
@@ -52,12 +53,11 @@ public class PositionService {
 
     Portfolio portfolio =
         portfolioRepository
-            .findById(portfolioId)
-            .orElseThrow(() -> new RuntimeException("Portfolio Not Found With Id: " + portfolioId));
-
-    if (!portfolio.getUser().getEmail().equals(userEmail)) {
-      throw new RuntimeException("Access denied: portfolio does not belong to the user");
-    }
+            .findByIdAndUserEmail(portfolioId, userEmail)
+            .orElseThrow(
+                () ->
+                    new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Portfolio not found with id: " + portfolioId));
 
     Page<Position> positions = positionRepository.findAllByPortfolioId(portfolioId, pageable);
 
