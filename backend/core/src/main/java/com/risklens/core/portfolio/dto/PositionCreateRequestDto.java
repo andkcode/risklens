@@ -1,9 +1,6 @@
 package com.risklens.core.portfolio.dto;
 
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,13 +14,17 @@ import lombok.NoArgsConstructor;
 public class PositionCreateRequestDto {
   @NotBlank(message = "Asset symbol cannot be blank")
   @Size(max = 20, message = "Asset symbol must be up to 20 characters")
+  @Pattern(
+      regexp = "^[A-Z]{1,5}$",
+      message = "Asset symbol must be uppercase letters from 1 to 5 characters")
   private String assetSymbol;
 
   @NotBlank(message = "Asset type cannot be blank")
   @Size(max = 10, message = "Asset type must be up to 10 characters")
-  private String assetType; // Например: STOCK, CRYPTO
+  private String assetType;
 
   @NotNull(message = "Quantity cannot be null")
+  @Positive(message = "Quantity must be greater than 0")
   @DecimalMin(value = "0.00000001", message = "Quantity must be greater than zero")
   private BigDecimal quantity;
 

@@ -12,4 +12,6 @@ public interface PositionRepository extends JpaRepository<Position, UUID> {
   Page<Position> findAllByPortfolioId(UUID portfolio, Pageable pageable);
 
   List<Position> findAllByPortfolioId(UUID portfolioId);
+
+  boolean existsByPortfolioIdAndAssetSymbol(UUID portfolioId, String assetSymbol);
 }

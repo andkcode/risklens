@@ -25,9 +25,8 @@ public class PositionController {
       @PathVariable UUID portfolioId,
       @Valid @RequestBody PositionCreateRequestDto createRequestDto,
       Principal principal) {
-    String userEmail = principal.getName();
     PositionResponseDto response =
-        positionService.addPosition(userEmail, portfolioId, createRequestDto);
+        positionService.addPosition(principal.getName(), portfolioId, createRequestDto);
     return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 

@@ -32,6 +32,14 @@ public class PositionService {
                     new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Portfolio not found with id: " + portfolioId));
 
+    String normalizedAssetSymbol = createRequestDto.getAssetSymbol().toUpperCase();
+
+    if (positionRepository.existsByPortfolioIdAndAssetSymbol(portfolioId, normalizedAssetSymbol)) {
+      throw new ResponseStatusException(
+          HttpStatus.CONFLICT,
+          "Position with symbol" + normalizedAssetSymbol + " already exists in this portfolio");
+    }
+
     Position position =
         Position.builder()
             .portfolio(portfolio)
