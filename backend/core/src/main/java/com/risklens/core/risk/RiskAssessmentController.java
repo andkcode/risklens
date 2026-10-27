@@ -1,12 +1,15 @@
 package com.risklens.core.risk;
 
+import com.risklens.core.risk.dto.RiskAssessmentCreateRequestDto;
 import com.risklens.core.risk.dto.RiskAssessmentResponseDto;
+import jakarta.validation.Valid;
 import java.security.Principal;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,30 +20,28 @@ public class RiskAssessmentController {
 
   private final RiskCalculationService riskCalculationService;
 
-  @PostMapping("/portfolios/{portfolioId}/risk-assessments")
+  @PostMapping("/risk-assessments")
   public ResponseEntity<RiskAssessmentResponseDto> calculateRisk(
-      @PathVariable UUID portfolioId, Principal principal) {
-    String userEmail = principal.getName();
+      @Valid @RequestBody RiskAssessmentCreateRequestDto requestDto, Principal principal) {
     RiskAssessmentResponseDto response =
-        riskCalculationService.calculateAndSaveRisk(userEmail, portfolioId);
-    return ResponseEntity.ok(response);
+        riskCalculationService.calculateAndSaveRisk(
+            principal.getName(), requestDto.getPortfolioId());
+    return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 
   @GetMapping("/portfolios/{portfolioId}/risk-assessments")
   public ResponseEntity<Page<RiskAssessmentResponseDto>> getRiskAssessments(
       @PathVariable UUID portfolioId, Principal principal, @ParameterObject Pageable pageable) {
-    String userEmail = principal.getName();
     Page<RiskAssessmentResponseDto> response =
-        riskCalculationService.getRiskAssessments(userEmail, portfolioId, pageable);
+        riskCalculationService.getRiskAssessments(principal.getName(), portfolioId, pageable);
     return ResponseEntity.ok(response);
   }
 
   @GetMapping("/risk-assessments/{id}")
   public ResponseEntity<RiskAssessmentResponseDto> getRiskAssessmentById(
       @PathVariable UUID id, Principal principal) {
-    String userEmail = principal.getName();
     RiskAssessmentResponseDto response =
-        riskCalculationService.getRiskAssessmentById(userEmail, id);
+        riskCalculationService.getRiskAssessmentById(principal.getName(), id);
     return ResponseEntity.ok(response);
   }
 }
