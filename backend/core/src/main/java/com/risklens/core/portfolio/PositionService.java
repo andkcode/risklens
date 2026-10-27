@@ -37,7 +37,7 @@ public class PositionService {
     if (positionRepository.existsByPortfolioIdAndAssetSymbol(portfolioId, normalizedAssetSymbol)) {
       throw new ResponseStatusException(
           HttpStatus.CONFLICT,
-          "Position with symbol" + normalizedAssetSymbol + " already exists in this portfolio");
+          "Position with symbol " + normalizedAssetSymbol + " already exists in this portfolio");
     }
 
     Position position =
