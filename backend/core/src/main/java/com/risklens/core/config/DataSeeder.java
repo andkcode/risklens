@@ -1,13 +1,8 @@
 package com.risklens.core.config;
 
-import com.risklens.core.entity.Portfolio;
-import com.risklens.core.entity.Position;
-import com.risklens.core.entity.PriceHistory;
-import com.risklens.core.entity.User;
-import com.risklens.core.repository.PortfolioRepository;
-import com.risklens.core.repository.PositionRepository;
-import com.risklens.core.repository.PriceHistoryRepository;
-import com.risklens.core.repository.UserRepository;
+import com.risklens.core.portfolio.*;
+import com.risklens.core.user.User;
+import com.risklens.core.user.UserRepository;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;

@@ -21,41 +21,41 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-  private final JwtAuthenticationFilter jwtAuthFilter;
-  private final AuthenticationProvider authenticationProvider;
-  private final CustomAuthenticationEntryPoint authenticationEntryPoint;
-  private final CustomAccessDeniedHandler accessDeniedHandler;
+    private final JwtAuthenticationFilter jwtAuthFilter;
+    private final AuthenticationProvider authenticationProvider;
+    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
+    private final CustomAccessDeniedHandler accessDeniedHandler;
 
-  @Bean
-  public WebSecurityCustomizer webSecurityCustomizer() {
-    return web ->
-        web.ignoring().requestMatchers("/api/v1/auth/**", "/api/auth/**", "/actuator/health");
-  }
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return web ->
+            web.ignoring().requestMatchers("/api/v1/auth/**", "/api/auth/**", "/actuator/health");
+    }
 
-  @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(
-            auth ->
-                auth.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html")
-                    .permitAll()
-                    .requestMatchers("/api/v1/auth/**", "/api/auth/**")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated())
-        .formLogin(form -> form.disable())
-        .httpBasic(basic -> basic.disable())
-        .logout(logout -> logout.disable())
-        .sessionManagement(
-            session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .exceptionHandling(
-            exception ->
-                exception
-                    .authenticationEntryPoint(authenticationEntryPoint)
-                    .accessDeniedHandler(accessDeniedHandler))
-        .authenticationProvider(authenticationProvider)
-        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(
+                auth ->
+                    auth.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html")
+                        .permitAll()
+                        .requestMatchers("/api/v1/auth/**", "/api/auth/**")
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated())
+            .formLogin(form -> form.disable())
+            .httpBasic(basic -> basic.disable())
+            .logout(logout -> logout.disable())
+            .sessionManagement(
+                session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .exceptionHandling(
+                exception ->
+                    exception
+                        .authenticationEntryPoint(authenticationEntryPoint)
+                        .accessDeniedHandler(accessDeniedHandler))
+            .authenticationProvider(authenticationProvider)
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-    return http.build();
-  }
+        return http.build();
+    }
 }

@@ -1,0 +1,20 @@
+package com.risklens.core.auth.dto;
+
+import java.time.OffsetDateTime;
+import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class RefreshTokenResponseDto {
+    private UUID id;
+    private UUID userId;
+    private OffsetDateTime expiresAt;
+    private OffsetDateTime revokedAt;
+    private OffsetDateTime createdAt;
+}
