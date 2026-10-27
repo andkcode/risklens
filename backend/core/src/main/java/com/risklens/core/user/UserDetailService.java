@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class UserDetailService implements UserDetailsService {
 
   private final UserRepository userRepository;
+  private final UserMapper userMapper;
 
   @Override
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -38,17 +39,6 @@ public class UserDetailService implements UserDetailsService {
 
   public Page<UserResponseDto> getAllUsers(Pageable pageable) {
     Page<User> users = userRepository.findAll(pageable);
-    return users.map(this::mapToDto);
-  }
-
-  private UserResponseDto mapToDto(User user) {
-    return UserResponseDto.builder()
-        .id(user.getId())
-        .email(user.getEmail())
-        .role(user.getRole())
-        .isActive(user.isActive())
-        .createdAt(user.getCreatedAt())
-        .updatedAt(user.getUpdatedAt())
-        .build();
+    return users.map(userMapper::toDto);
   }
 }

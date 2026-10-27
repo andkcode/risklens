@@ -16,6 +16,7 @@ public class PositionService {
 
   private final PositionRepository positionRepository;
   private final PortfolioRepository portfolioRepository;
+  private final PositionMapper positionMapper;
 
   @Transactional
   public PositionResponseDto addPosition(
@@ -43,16 +44,7 @@ public class PositionService {
 
     Position savedPosition = positionRepository.save(position);
 
-    return PositionResponseDto.builder()
-        .id(savedPosition.getId())
-        .portfolioId(portfolio.getId())
-        .assetSymbol(savedPosition.getAssetSymbol())
-        .assetType(savedPosition.getAssetType())
-        .quantity(savedPosition.getQuantity())
-        .avgBuyPrice(savedPosition.getAvgBuyPrice())
-        .createdAt(savedPosition.getCreatedAt())
-        .updatedAt(savedPosition.getUpdatedAt())
-        .build();
+    return positionMapper.toDto(savedPosition);
   }
 
   public Page<PositionResponseDto> getPositions(
@@ -69,17 +61,6 @@ public class PositionService {
 
     Page<Position> positions = positionRepository.findAllByPortfolioId(portfolioId, pageable);
 
-    return positions.map(
-        position ->
-            PositionResponseDto.builder()
-                .id(position.getId())
-                .portfolioId(portfolio.getId())
-                .assetSymbol(position.getAssetSymbol())
-                .assetType(position.getAssetType())
-                .quantity(position.getQuantity())
-                .avgBuyPrice(position.getAvgBuyPrice())
-                .createdAt(position.getCreatedAt())
-                .updatedAt(position.getUpdatedAt())
-                .build());
+    return positions.map(positionMapper::toDto);
   }
 }

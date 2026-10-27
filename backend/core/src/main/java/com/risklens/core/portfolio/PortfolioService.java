@@ -15,86 +15,78 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class PortfolioService {
-  private final PortfolioRepository portfolioRepository;
-  private final UserRepository userRepository;
 
-  @Transactional
-  public PortfolioResponseDto createPortfolio(
-      String userEmail, PortfolioCreateRequestDto createRequestDto) {
-    User user =
-        userRepository
-            .findByEmail(userEmail)
-            .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
+    private final PortfolioRepository portfolioRepository;
+    private final UserRepository userRepository;
+    private final PortfolioMapper portfolioMapper;
 
-    Portfolio portfolio =
-        Portfolio.builder()
-            .user(user)
-            .name(createRequestDto.getName())
-            .baseCurrency(createRequestDto.getBaseCurrency().toUpperCase())
-            .createdAt(OffsetDateTime.now())
-            .updatedAt(OffsetDateTime.now())
-            .build();
+    @Transactional
+    public PortfolioResponseDto createPortfolio(
+        String userEmail, PortfolioCreateRequestDto createRequestDto) {
+        User user =
+            userRepository
+                .findByEmail(userEmail)
+                .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
 
-    Portfolio savedPortfolio = portfolioRepository.save(portfolio);
+        Portfolio portfolio =
+            Portfolio.builder()
+                .user(user)
+                .name(createRequestDto.getName())
+                .baseCurrency(createRequestDto.getBaseCurrency().toUpperCase())
+                .createdAt(OffsetDateTime.now())
+                .updatedAt(OffsetDateTime.now())
+                .build();
 
-    return mapToDto(savedPortfolio);
-  }
+        Portfolio savedPortfolio = portfolioRepository.save(portfolio);
 
-  public Page<PortfolioResponseDto> getPortfolios(String userEmail, Pageable pageable) {
-    User user =
-        userRepository
-            .findByEmail(userEmail)
-            .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
-
-    Page<Portfolio> portfolios = portfolioRepository.findAllByUser(user, pageable);
-
-    return portfolios.map(this::mapToDto);
-  }
-
-  public PortfolioResponseDto getPortfolioById(String userEmail, UUID portfolioId) {
-    User user =
-        userRepository
-            .findByEmail(userEmail)
-            .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
-
-    Portfolio portfolio =
-        portfolioRepository
-            .findById(portfolioId)
-            .orElseThrow(() -> new RuntimeException("Portfolio not found with id: " + portfolioId));
-
-    if (!portfolio.getUser().getId().equals(user.getId())) {
-      throw new RuntimeException("Access Denied: portfolio does not belong to this User");
+        return portfolioMapper.toDto(savedPortfolio);
     }
 
-    return mapToDto(portfolio);
-  }
+    public Page<PortfolioResponseDto> getPortfolios(String userEmail, Pageable pageable) {
+        User user =
+            userRepository
+                .findByEmail(userEmail)
+                .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
 
-  @Transactional
-  public void deletePortfolio(String userEmail, UUID portfolioId) {
-    User user =
-        userRepository
-            .findByEmail(userEmail)
-            .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
+        Page<Portfolio> portfolios = portfolioRepository.findAllByUser(user, pageable);
 
-    Portfolio portfolio =
-        portfolioRepository
-            .findById(portfolioId)
-            .orElseThrow(() -> new RuntimeException("Portfolio not found with id: " + portfolioId));
-
-    if (!portfolio.getUser().getId().equals(user.getId())) {
-      throw new RuntimeException("Access Denied: portfolio does not belong to this User");
+        return portfolios.map(portfolioMapper::toDto);
     }
 
-    portfolioRepository.delete(portfolio);
-  }
+    public PortfolioResponseDto getPortfolioById(String userEmail, UUID portfolioId) {
+        User user =
+            userRepository
+                .findByEmail(userEmail)
+                .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
 
-  private PortfolioResponseDto mapToDto(Portfolio portfolio) {
-    return PortfolioResponseDto.builder()
-        .id(portfolio.getId())
-        .name(portfolio.getName())
-        .baseCurrency(portfolio.getBaseCurrency())
-        .createdAt(portfolio.getCreatedAt())
-        .updatedAt(portfolio.getUpdatedAt())
-        .build();
-  }
+        Portfolio portfolio =
+            portfolioRepository
+                .findById(portfolioId)
+                .orElseThrow(() -> new RuntimeException("Portfolio not found with id: " + portfolioId));
+
+        if (!portfolio.getUser().getId().equals(user.getId())) {
+            throw new RuntimeException("Access Denied: portfolio does not belong to this User");
+        }
+
+        return portfolioMapper.toDto(portfolio);
+    }
+
+    @Transactional
+    public void deletePortfolio(String userEmail, UUID portfolioId) {
+        User user =
+            userRepository
+                .findByEmail(userEmail)
+                .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
+
+        Portfolio portfolio =
+            portfolioRepository
+                .findById(portfolioId)
+                .orElseThrow(() -> new RuntimeException("Portfolio not found with id: " + portfolioId));
+
+        if (!portfolio.getUser().getId().equals(user.getId())) {
+            throw new RuntimeException("Access Denied: portfolio does not belong to this User");
+        }
+
+        portfolioRepository.delete(portfolio);
+    }
 }
