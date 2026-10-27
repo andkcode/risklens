@@ -7,5 +7,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PortfolioRepository extends JpaRepository<Portfolio, UUID> {
-    Page<Portfolio> findAllByUser(User user, Pageable pageable);
+  Page<Portfolio> findAllByUser(User user, Pageable pageable);
 }

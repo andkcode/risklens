@@ -18,34 +18,34 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class PortfolioController {
 
-    private final PortfolioService portfolioService;
+  private final PortfolioService portfolioService;
 
-    @PostMapping
-    public ResponseEntity<PortfolioResponseDto> createPortfolio(
-        @Valid @RequestBody PortfolioCreateRequestDto createRequestDto, Principal principal) {
-        String userEmail = principal.getName();
-        PortfolioResponseDto response = portfolioService.createPortfolio(userEmail, createRequestDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-    }
+  @PostMapping
+  public ResponseEntity<PortfolioResponseDto> createPortfolio(
+      @Valid @RequestBody PortfolioCreateRequestDto createRequestDto, Principal principal) {
+    String userEmail = principal.getName();
+    PortfolioResponseDto response = portfolioService.createPortfolio(userEmail, createRequestDto);
+    return ResponseEntity.status(HttpStatus.CREATED).body(response);
+  }
 
-    @GetMapping
-    public ResponseEntity<Page<PortfolioResponseDto>> getPortfolios(
-        Principal principal, @ParameterObject Pageable pageable) {
-        Page<PortfolioResponseDto> response =
-            portfolioService.getPortfolios(principal.getName(), pageable);
-        return ResponseEntity.ok(response);
-    }
+  @GetMapping
+  public ResponseEntity<Page<PortfolioResponseDto>> getPortfolios(
+      Principal principal, @ParameterObject Pageable pageable) {
+    Page<PortfolioResponseDto> response =
+        portfolioService.getPortfolios(principal.getName(), pageable);
+    return ResponseEntity.ok(response);
+  }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PortfolioResponseDto> getPortfolioById(
-        @PathVariable UUID id, Principal principal) {
-        PortfolioResponseDto response = portfolioService.getPortfolioById(principal.getName(), id);
-        return ResponseEntity.ok(response);
-    }
+  @GetMapping("/{id}")
+  public ResponseEntity<PortfolioResponseDto> getPortfolioById(
+      @PathVariable UUID id, Principal principal) {
+    PortfolioResponseDto response = portfolioService.getPortfolioById(principal.getName(), id);
+    return ResponseEntity.ok(response);
+  }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePortfolio(@PathVariable UUID id, Principal principal) {
-        portfolioService.deletePortfolio(principal.getName(), id);
-        return ResponseEntity.ok().build();
-    }
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deletePortfolio(@PathVariable UUID id, Principal principal) {
+    portfolioService.deletePortfolio(principal.getName(), id);
+    return ResponseEntity.ok().build();
+  }
 }

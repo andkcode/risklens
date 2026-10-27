@@ -16,23 +16,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+  private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Override
-    public void commence(
-        HttpServletRequest request,
-        HttpServletResponse response,
-        AuthenticationException authException
-    ) throws IOException, ServletException {
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
+  @Override
+  public void commence(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      AuthenticationException authException)
+      throws IOException, ServletException {
+    ProblemDetail problemDetail =
+        ProblemDetail.forStatusAndDetail(
             HttpStatus.UNAUTHORIZED,
-            authException.getMessage() != null ? authException.getMessage() : "Full authentication is required to access this resource"
-        );
-        problemDetail.setTitle("Unauthorized");
-        problemDetail.setType(URI.create("https://api.risklens.com/errors/unauthorized"));
+            authException.getMessage() != null
+                ? authException.getMessage()
+                : "Full authentication is required to access this resource");
+    problemDetail.setTitle("Unauthorized");
+    problemDetail.setType(URI.create("https://api.risklens.com/errors/unauthorized"));
 
-        response.setContentType(MediaType.APPLICATION_PROBLEM_JSON_VALUE);
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        objectMapper.writeValue(response.getWriter(), problemDetail);
-    }
+    response.setContentType(MediaType.APPLICATION_PROBLEM_JSON_VALUE);
+    response.setStatus(HttpStatus.UNAUTHORIZED.value());
+    objectMapper.writeValue(response.getWriter(), problemDetail);
+  }
 }

@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResponseDto {
-    private UUID id;
-    private String email;
-    private String role;
-    private boolean isActive;
-    private OffsetDateTime createdAt;
-    private OffsetDateTime updatedAt;
+  private UUID id;
+  private String email;
+  private String role;
+  private boolean isActive;
+  private OffsetDateTime createdAt;
+  private OffsetDateTime updatedAt;
 }

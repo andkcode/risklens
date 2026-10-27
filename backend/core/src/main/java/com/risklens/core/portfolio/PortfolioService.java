@@ -15,86 +15,86 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class PortfolioService {
-    private final PortfolioRepository portfolioRepository;
-    private final UserRepository userRepository;
+  private final PortfolioRepository portfolioRepository;
+  private final UserRepository userRepository;
 
-    @Transactional
-    public PortfolioResponseDto createPortfolio(
-        String userEmail, PortfolioCreateRequestDto createRequestDto) {
-        User user =
-            userRepository
-                .findByEmail(userEmail)
-                .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
+  @Transactional
+  public PortfolioResponseDto createPortfolio(
+      String userEmail, PortfolioCreateRequestDto createRequestDto) {
+    User user =
+        userRepository
+            .findByEmail(userEmail)
+            .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
 
-        Portfolio portfolio =
-            Portfolio.builder()
-                .user(user)
-                .name(createRequestDto.getName())
-                .baseCurrency(createRequestDto.getBaseCurrency().toUpperCase())
-                .createdAt(OffsetDateTime.now())
-                .updatedAt(OffsetDateTime.now())
-                .build();
-
-        Portfolio savedPortfolio = portfolioRepository.save(portfolio);
-
-        return mapToDto(savedPortfolio);
-    }
-
-    public Page<PortfolioResponseDto> getPortfolios(String userEmail, Pageable pageable) {
-        User user =
-            userRepository
-                .findByEmail(userEmail)
-                .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
-
-        Page<Portfolio> portfolios = portfolioRepository.findAllByUser(user, pageable);
-
-        return portfolios.map(this::mapToDto);
-    }
-
-    public PortfolioResponseDto getPortfolioById(String userEmail, UUID portfolioId) {
-        User user =
-            userRepository
-                .findByEmail(userEmail)
-                .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
-
-        Portfolio portfolio =
-            portfolioRepository
-                .findById(portfolioId)
-                .orElseThrow(() -> new RuntimeException("Portfolio not found with id: " + portfolioId));
-
-        if (!portfolio.getUser().getId().equals(user.getId())) {
-            throw new RuntimeException("Access Denied: portfolio does not belong to this User");
-        }
-
-        return mapToDto(portfolio);
-    }
-
-    @Transactional
-    public void deletePortfolio(String userEmail, UUID portfolioId) {
-        User user =
-            userRepository
-                .findByEmail(userEmail)
-                .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
-
-        Portfolio portfolio =
-            portfolioRepository
-                .findById(portfolioId)
-                .orElseThrow(() -> new RuntimeException("Portfolio not found with id: " + portfolioId));
-
-        if (!portfolio.getUser().getId().equals(user.getId())) {
-            throw new RuntimeException("Access Denied: portfolio does not belong to this User");
-        }
-
-        portfolioRepository.delete(portfolio);
-    }
-
-    private PortfolioResponseDto mapToDto(Portfolio portfolio) {
-        return PortfolioResponseDto.builder()
-            .id(portfolio.getId())
-            .name(portfolio.getName())
-            .baseCurrency(portfolio.getBaseCurrency())
-            .createdAt(portfolio.getCreatedAt())
-            .updatedAt(portfolio.getUpdatedAt())
+    Portfolio portfolio =
+        Portfolio.builder()
+            .user(user)
+            .name(createRequestDto.getName())
+            .baseCurrency(createRequestDto.getBaseCurrency().toUpperCase())
+            .createdAt(OffsetDateTime.now())
+            .updatedAt(OffsetDateTime.now())
             .build();
+
+    Portfolio savedPortfolio = portfolioRepository.save(portfolio);
+
+    return mapToDto(savedPortfolio);
+  }
+
+  public Page<PortfolioResponseDto> getPortfolios(String userEmail, Pageable pageable) {
+    User user =
+        userRepository
+            .findByEmail(userEmail)
+            .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
+
+    Page<Portfolio> portfolios = portfolioRepository.findAllByUser(user, pageable);
+
+    return portfolios.map(this::mapToDto);
+  }
+
+  public PortfolioResponseDto getPortfolioById(String userEmail, UUID portfolioId) {
+    User user =
+        userRepository
+            .findByEmail(userEmail)
+            .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
+
+    Portfolio portfolio =
+        portfolioRepository
+            .findById(portfolioId)
+            .orElseThrow(() -> new RuntimeException("Portfolio not found with id: " + portfolioId));
+
+    if (!portfolio.getUser().getId().equals(user.getId())) {
+      throw new RuntimeException("Access Denied: portfolio does not belong to this User");
     }
+
+    return mapToDto(portfolio);
+  }
+
+  @Transactional
+  public void deletePortfolio(String userEmail, UUID portfolioId) {
+    User user =
+        userRepository
+            .findByEmail(userEmail)
+            .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
+
+    Portfolio portfolio =
+        portfolioRepository
+            .findById(portfolioId)
+            .orElseThrow(() -> new RuntimeException("Portfolio not found with id: " + portfolioId));
+
+    if (!portfolio.getUser().getId().equals(user.getId())) {
+      throw new RuntimeException("Access Denied: portfolio does not belong to this User");
+    }
+
+    portfolioRepository.delete(portfolio);
+  }
+
+  private PortfolioResponseDto mapToDto(Portfolio portfolio) {
+    return PortfolioResponseDto.builder()
+        .id(portfolio.getId())
+        .name(portfolio.getName())
+        .baseCurrency(portfolio.getBaseCurrency())
+        .createdAt(portfolio.getCreatedAt())
+        .updatedAt(portfolio.getUpdatedAt())
+        .build();
+  }
 }

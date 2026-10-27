@@ -18,30 +18,30 @@ import lombok.NoArgsConstructor;
 @Builder
 public class RiskAssessment {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", updatable = false, nullable = false)
-    private UUID id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
+  @Column(name = "id", updatable = false, nullable = false)
+  private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "portfolio_id", nullable = false)
-    private Portfolio portfolio;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "portfolio_id", nullable = false)
+  private Portfolio portfolio;
 
-    @Column(name = "calculated_at", nullable = false)
-    private OffsetDateTime calculatedAt;
+  @Column(name = "calculated_at", nullable = false)
+  private OffsetDateTime calculatedAt;
 
-    @Column(name = "volatility", precision = 12, scale = 6, nullable = false)
-    private BigDecimal volatility;
+  @Column(name = "volatility", precision = 12, scale = 6, nullable = false)
+  private BigDecimal volatility;
 
-    @Column(name = "var_95", precision = 12, scale = 6, nullable = false)
-    private BigDecimal var95;
+  @Column(name = "var_95", precision = 12, scale = 6, nullable = false)
+  private BigDecimal var95;
 
-    @Column(name = "max_drawdown", precision = 12, scale = 6, nullable = false)
-    private BigDecimal maxDrawdown;
+  @Column(name = "max_drawdown", precision = 12, scale = 6, nullable = false)
+  private BigDecimal maxDrawdown;
 
-    @Column(name = "sharpe_ratio", precision = 12, scale = 6, nullable = false)
-    private BigDecimal sharpeRatio;
+  @Column(name = "sharpe_ratio", precision = 12, scale = 6, nullable = false)
+  private BigDecimal sharpeRatio;
 
-    @Column(name = "risk_score", nullable = false)
-    private Short riskScore;
+  @Column(name = "risk_score", nullable = false)
+  private Short riskScore;
 }

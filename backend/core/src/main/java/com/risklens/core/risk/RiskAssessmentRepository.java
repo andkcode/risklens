@@ -9,8 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RiskAssessmentRepository extends JpaRepository<RiskAssessment, UUID> {
-    Optional<RiskAssessment> findTopByPortfolioIdOrderByCalculatedAtDesc(UUID portfolioId);
+  Optional<RiskAssessment> findTopByPortfolioIdOrderByCalculatedAtDesc(UUID portfolioId);
 
-    Page<RiskAssessment> findAllByPortfolioId(UUID portfolioId, Pageable pageable);
-
+  Page<RiskAssessment> findAllByPortfolioId(UUID portfolioId, Pageable pageable);
 }

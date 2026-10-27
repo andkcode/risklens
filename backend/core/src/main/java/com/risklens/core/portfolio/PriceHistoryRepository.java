@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PriceHistoryRepository extends JpaRepository<PriceHistory, Long> {
 
-    List<PriceHistory> findAllByAssetSymbolOrderByTradeDateDesc(String assetSymbol);
+  List<PriceHistory> findAllByAssetSymbolOrderByTradeDateDesc(String assetSymbol);
 
-    boolean existsByAssetSymbolAndTradeDate(String assetSymbol, LocalDate tradeDate);
+  boolean existsByAssetSymbolAndTradeDate(String assetSymbol, LocalDate tradeDate);
 }

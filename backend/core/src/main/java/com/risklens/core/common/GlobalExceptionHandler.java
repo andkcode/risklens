@@ -14,35 +14,35 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(OpenApiResourceNotFoundException.class)
-    public ProblemDetail handleResourceNotFoundException(OpenApiResourceNotFoundException ex) {
-        ProblemDetail problemDetail =
-            ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
-        problemDetail.setTitle("Resource Not Found");
-        return problemDetail;
-    }
+  @ExceptionHandler(OpenApiResourceNotFoundException.class)
+  public ProblemDetail handleResourceNotFoundException(OpenApiResourceNotFoundException ex) {
+    ProblemDetail problemDetail =
+        ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+    problemDetail.setTitle("Resource Not Found");
+    return problemDetail;
+  }
 
-    @ExceptionHandler(BadRequestException.class)
-    public ProblemDetail handleBadRequestException(BadRequestException ex) {
-        ProblemDetail problemDetail =
-            ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
-        problemDetail.setTitle("Bad Request");
-        return problemDetail;
-    }
+  @ExceptionHandler(BadRequestException.class)
+  public ProblemDetail handleBadRequestException(BadRequestException ex) {
+    ProblemDetail problemDetail =
+        ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
+    problemDetail.setTitle("Bad Request");
+    return problemDetail;
+  }
 
-    @ExceptionHandler(Exception.class)
-    public ProblemDetail handleAllUncaughtException(Exception ex) {
-        ProblemDetail problemDetail =
-            ProblemDetail.forStatusAndDetail(
-                HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred: " + ex.getMessage());
-        problemDetail.setTitle("Internal Server Error");
-        return problemDetail;
-    }
+  @ExceptionHandler(Exception.class)
+  public ProblemDetail handleAllUncaughtException(Exception ex) {
+    ProblemDetail problemDetail =
+        ProblemDetail.forStatusAndDetail(
+            HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred: " + ex.getMessage());
+    problemDetail.setTitle("Internal Server Error");
+    return problemDetail;
+  }
 
-    @ExceptionHandler(UserAlreadyExistsException.class)
-    public ResponseEntity<ErrorResponse> handleUserAlreadyExists(UserAlreadyExistsException ex) {
-        ErrorResponse error =
-            new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage(), LocalDateTime.now());
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
-    }
+  @ExceptionHandler(UserAlreadyExistsException.class)
+  public ResponseEntity<ErrorResponse> handleUserAlreadyExists(UserAlreadyExistsException ex) {
+    ErrorResponse error =
+        new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage(), LocalDateTime.now());
+    return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+  }
 }

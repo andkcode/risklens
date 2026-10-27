@@ -20,78 +20,78 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManager authenticationManager;
-    private final UserDetailsService userDetailsService;
-    private final JwtService jwtService;
-    private final RefreshTokenService refreshTokenService;
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
+  private final AuthenticationManager authenticationManager;
+  private final UserDetailsService userDetailsService;
+  private final JwtService jwtService;
+  private final RefreshTokenService refreshTokenService;
 
-    @Transactional
-    public AuthResponseDto register(AuthRequestDto request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new UserAlreadyExistsException(
-                "User with email " + request.getEmail() + " already exists");
-        }
-
-        User user =
-            User.builder()
-                .email(request.getEmail().trim().toLowerCase())
-                .passwordHash(passwordEncoder.encode(request.getPassword()))
-                .role("USER")
-                .isActive(true)
-                .createdAt(OffsetDateTime.now())
-                .updatedAt(OffsetDateTime.now())
-                .build();
-
-        userRepository.save(user);
-
-        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
-        String accessToken = jwtService.generateToken(userDetails);
-        String refreshToken = refreshTokenService.createRefreshToken(user);
-
-        return new AuthResponseDto(accessToken, refreshToken);
+  @Transactional
+  public AuthResponseDto register(AuthRequestDto request) {
+    if (userRepository.existsByEmail(request.getEmail())) {
+      throw new UserAlreadyExistsException(
+          "User with email " + request.getEmail() + " already exists");
     }
 
-    @Transactional
-    public AuthResponseDto authenticate(AuthRequestDto request) {
+    User user =
+        User.builder()
+            .email(request.getEmail().trim().toLowerCase())
+            .passwordHash(passwordEncoder.encode(request.getPassword()))
+            .role("USER")
+            .isActive(true)
+            .createdAt(OffsetDateTime.now())
+            .updatedAt(OffsetDateTime.now())
+            .build();
 
-        authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+    userRepository.save(user);
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+    UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
+    String accessToken = jwtService.generateToken(userDetails);
+    String refreshToken = refreshTokenService.createRefreshToken(user);
 
-        String accessToken = jwtService.generateToken(userDetails);
+    return new AuthResponseDto(accessToken, refreshToken);
+  }
 
-        User user =
-            userRepository
-                .findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+  @Transactional
+  public AuthResponseDto authenticate(AuthRequestDto request) {
 
-        String refreshToken = refreshTokenService.createRefreshToken(user);
+    authenticationManager.authenticate(
+        new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
-        return new AuthResponseDto(accessToken, refreshToken);
+    UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+
+    String accessToken = jwtService.generateToken(userDetails);
+
+    User user =
+        userRepository
+            .findByEmail(request.getEmail())
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+    String refreshToken = refreshTokenService.createRefreshToken(user);
+
+    return new AuthResponseDto(accessToken, refreshToken);
+  }
+
+  @Transactional
+  public AuthResponseDto refreshToken(String requestRefreshToken) {
+    return refreshTokenService
+        .findByToken(requestRefreshToken)
+        .map(refreshTokenService::verifyExpiration)
+        .map(RefreshToken::getUser)
+        .map(
+            user -> {
+              UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
+              String accessToken = jwtService.generateToken(userDetails);
+              return new AuthResponseDto(accessToken, requestRefreshToken);
+            })
+        .orElseThrow(() -> new RuntimeException("Refresh token is not in database!"));
+  }
+
+  @Transactional
+  public void logout(String refreshToken) {
+    if (refreshToken != null) {
+      refreshTokenService.deleteByToken(refreshToken);
     }
-
-    @Transactional
-    public AuthResponseDto refreshToken(String requestRefreshToken) {
-        return refreshTokenService
-            .findByToken(requestRefreshToken)
-            .map(refreshTokenService::verifyExpiration)
-            .map(RefreshToken::getUser)
-            .map(
-                user -> {
-                    UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
-                    String accessToken = jwtService.generateToken(userDetails);
-                    return new AuthResponseDto(accessToken, requestRefreshToken);
-                })
-            .orElseThrow(() -> new RuntimeException("Refresh token is not in database!"));
-    }
-
-    @Transactional
-    public void logout(String refreshToken) {
-        if (refreshToken != null) {
-            refreshTokenService.deleteByToken(refreshToken);
-        }
-    }
+  }
 }

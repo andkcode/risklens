@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PortfolioResponseDto {
-    private UUID id;
-    private String name;
-    private String baseCurrency;
-    private OffsetDateTime createdAt;
-    private OffsetDateTime updatedAt;
+  private UUID id;
+  private String name;
+  private String baseCurrency;
+  private OffsetDateTime createdAt;
+  private OffsetDateTime updatedAt;
 }

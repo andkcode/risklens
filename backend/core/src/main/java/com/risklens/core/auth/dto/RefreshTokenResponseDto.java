@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RefreshTokenResponseDto {
-    private UUID id;
-    private UUID userId;
-    private OffsetDateTime expiresAt;
-    private OffsetDateTime revokedAt;
-    private OffsetDateTime createdAt;
+  private UUID id;
+  private UUID userId;
+  private OffsetDateTime expiresAt;
+  private OffsetDateTime revokedAt;
+  private OffsetDateTime createdAt;
 }

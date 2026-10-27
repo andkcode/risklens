@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PriceHistoryResponseDto {
-    private Long id;
-    private String assetSymbol;
-    private LocalDate tradeDate;
-    private BigDecimal openPrice;
-    private BigDecimal closePrice;
-    private BigDecimal highPrice;
-    private BigDecimal lowPrice;
-    private BigDecimal volume;
+  private Long id;
+  private String assetSymbol;
+  private LocalDate tradeDate;
+  private BigDecimal openPrice;
+  private BigDecimal closePrice;
+  private BigDecimal highPrice;
+  private BigDecimal lowPrice;
+  private BigDecimal volume;
 }

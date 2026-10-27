@@ -17,38 +17,38 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserDetailService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user =
-            userRepository
-                .findByEmail(email)
-                .orElseThrow(
-                    () -> new UsernameNotFoundException("User not found with email: " + email));
+  @Override
+  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    User user =
+        userRepository
+            .findByEmail(email)
+            .orElseThrow(
+                () -> new UsernameNotFoundException("User not found with email: " + email));
 
-        List<GrantedAuthority> authorities =
-            user.getRole() != null
-                ? Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
-                : Collections.emptyList();
+    List<GrantedAuthority> authorities =
+        user.getRole() != null
+            ? Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
+            : Collections.emptyList();
 
-        return new org.springframework.security.core.userdetails.User(
-            user.getEmail(), user.getPasswordHash(), authorities);
-    }
+    return new org.springframework.security.core.userdetails.User(
+        user.getEmail(), user.getPasswordHash(), authorities);
+  }
 
-    public Page<UserResponseDto> getAllUsers(Pageable pageable) {
-        Page<User> users = userRepository.findAll(pageable);
-        return users.map(this::mapToDto);
-    }
+  public Page<UserResponseDto> getAllUsers(Pageable pageable) {
+    Page<User> users = userRepository.findAll(pageable);
+    return users.map(this::mapToDto);
+  }
 
-    private UserResponseDto mapToDto(User user) {
-        return UserResponseDto.builder()
-            .id(user.getId())
-            .email(user.getEmail())
-            .role(user.getRole())
-            .isActive(user.isActive())
-            .createdAt(user.getCreatedAt())
-            .updatedAt(user.getUpdatedAt())
-            .build();
-    }
+  private UserResponseDto mapToDto(User user) {
+    return UserResponseDto.builder()
+        .id(user.getId())
+        .email(user.getEmail())
+        .role(user.getRole())
+        .isActive(user.isActive())
+        .createdAt(user.getCreatedAt())
+        .updatedAt(user.getUpdatedAt())
+        .build();
+  }
 }

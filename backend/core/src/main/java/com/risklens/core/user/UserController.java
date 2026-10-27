@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserDetailService userDetailService;
+  private final UserDetailService userDetailService;
 
-    @GetMapping("/users")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Page<UserResponseDto>> getAllUsers(
-        Principal principal, @ParameterObject Pageable pageable) {
-        Page<UserResponseDto> response = userDetailService.getAllUsers(pageable);
-        return ResponseEntity.ok(response);
-    }
+  @GetMapping("/users")
+  @PreAuthorize("hasRole('ADMIN')")
+  public ResponseEntity<Page<UserResponseDto>> getAllUsers(
+      Principal principal, @ParameterObject Pageable pageable) {
+    Page<UserResponseDto> response = userDetailService.getAllUsers(pageable);
+    return ResponseEntity.ok(response);
+  }
 }

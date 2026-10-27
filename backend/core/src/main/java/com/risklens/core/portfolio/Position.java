@@ -19,30 +19,30 @@ import lombok.NoArgsConstructor;
     uniqueConstraints = {@UniqueConstraint(columnNames = {"portfolio_id", "asset_symbol"})})
 public class Position {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", updatable = false, nullable = false)
-    private UUID id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
+  @Column(name = "id", updatable = false, nullable = false)
+  private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "portfolio_id", nullable = false)
-    private Portfolio portfolio;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "portfolio_id", nullable = false)
+  private Portfolio portfolio;
 
-    @Column(name = "asset_symbol", nullable = false, length = 20)
-    private String assetSymbol;
+  @Column(name = "asset_symbol", nullable = false, length = 20)
+  private String assetSymbol;
 
-    @Column(name = "asset_type", nullable = false, length = 10)
-    private String assetType;
+  @Column(name = "asset_type", nullable = false, length = 10)
+  private String assetType;
 
-    @Column(name = "quantity", precision = 24, scale = 8, nullable = false)
-    private BigDecimal quantity;
+  @Column(name = "quantity", precision = 24, scale = 8, nullable = false)
+  private BigDecimal quantity;
 
-    @Column(name = "avg_buy_price", precision = 24, scale = 8, nullable = false)
-    private BigDecimal avgBuyPrice;
+  @Column(name = "avg_buy_price", precision = 24, scale = 8, nullable = false)
+  private BigDecimal avgBuyPrice;
 
-    @Column(name = "created_at", nullable = false)
-    private OffsetDateTime createdAt;
+  @Column(name = "created_at", nullable = false)
+  private OffsetDateTime createdAt;
 
-    @Column(name = "updated_at", nullable = false)
-    private OffsetDateTime updatedAt;
+  @Column(name = "updated_at", nullable = false)
+  private OffsetDateTime updatedAt;
 }

@@ -16,23 +16,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+  private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Override
-    public void handle(
-        HttpServletRequest request,
-        HttpServletResponse response,
-        AccessDeniedException accessDeniedException
-    ) throws IOException, ServletException {
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
+  @Override
+  public void handle(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      AccessDeniedException accessDeniedException)
+      throws IOException, ServletException {
+    ProblemDetail problemDetail =
+        ProblemDetail.forStatusAndDetail(
             HttpStatus.FORBIDDEN,
-            accessDeniedException.getMessage() != null ? accessDeniedException.getMessage() : "You do not have permission to access this resource"
-        );
-        problemDetail.setTitle("Forbidden");
-        problemDetail.setType(URI.create("https://api.risklens.com/errors/forbidden"));
+            accessDeniedException.getMessage() != null
+                ? accessDeniedException.getMessage()
+                : "You do not have permission to access this resource");
+    problemDetail.setTitle("Forbidden");
+    problemDetail.setType(URI.create("https://api.risklens.com/errors/forbidden"));
 
-        response.setContentType(MediaType.APPLICATION_PROBLEM_JSON_VALUE);
-        response.setStatus(HttpStatus.FORBIDDEN.value());
-        objectMapper.writeValue(response.getWriter(), problemDetail);
-    }
+    response.setContentType(MediaType.APPLICATION_PROBLEM_JSON_VALUE);
+    response.setStatus(HttpStatus.FORBIDDEN.value());
+    objectMapper.writeValue(response.getWriter(), problemDetail);
+  }
 }

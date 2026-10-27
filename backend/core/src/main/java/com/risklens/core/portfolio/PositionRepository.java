@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PositionRepository extends JpaRepository<Position, UUID> {
-    Page<Position> findAllByPortfolioId(UUID portfolio, Pageable pageable);
+  Page<Position> findAllByPortfolioId(UUID portfolio, Pageable pageable);
 
-    List<Position> findAllByPortfolioId(UUID portfolioId);
+  List<Position> findAllByPortfolioId(UUID portfolioId);
 }

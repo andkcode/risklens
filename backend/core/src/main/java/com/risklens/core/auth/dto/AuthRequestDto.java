@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthRequestDto {
-    @NotBlank(message = "Email cannot be blank")
-    @Email(message = "Invalid email format")
-    private String email;
+  @NotBlank(message = "Email cannot be blank")
+  @Email(message = "Invalid email format")
+  private String email;
 
-    @NotBlank(message = "Password cannot be blank")
-    @Size(min = 8, message = "Password must be at least 8 characters long")
-    private String password;
+  @NotBlank(message = "Password cannot be blank")
+  @Size(min = 8, message = "Password must be at least 8 characters long")
+  private String password;
 }

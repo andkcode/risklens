@@ -15,26 +15,26 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", updatable = false, nullable = false)
-    private UUID id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
+  @Column(name = "id", updatable = false, nullable = false)
+  private UUID id;
 
-    @Column(unique = true, nullable = false)
-    private String email;
+  @Column(unique = true, nullable = false)
+  private String email;
 
-    @Column(nullable = false, name = "password_hash")
-    private String passwordHash;
+  @Column(nullable = false, name = "password_hash")
+  private String passwordHash;
 
-    @Column(length = 20)
-    private String role;
+  @Column(length = 20)
+  private String role;
 
-    @Column(name = "is_active")
-    private boolean isActive;
+  @Column(name = "is_active")
+  private boolean isActive;
 
-    @Column(name = "created_at")
-    private OffsetDateTime createdAt;
+  @Column(name = "created_at")
+  private OffsetDateTime createdAt;
 
-    @Column(name = "updated_at")
-    private OffsetDateTime updatedAt;
+  @Column(name = "updated_at")
+  private OffsetDateTime updatedAt;
 }
