@@ -15,12 +15,12 @@ defineProps({
 
 <template>
   <div
-      class="p-4 rounded-xl border flex items-start gap-3 text-sm"
-      :class="[
+    class="p-4 rounded-xl border flex items-start gap-3 text-sm"
+    :class="[
       variant === 'success' && 'bg-emerald-50 border-emerald-200 text-emerald-900',
       variant === 'danger' && 'bg-red-50 border-red-200 text-red-900',
       variant === 'warning' && 'bg-amber-50 border-amber-200 text-amber-900',
-      variant === 'info' && 'bg-blue-50 border-blue-200 text-blue-900'
+      variant === 'info' && 'bg-blue-50 border-blue-200 text-blue-900',
     ]"
   >
     <div class="flex-1">
