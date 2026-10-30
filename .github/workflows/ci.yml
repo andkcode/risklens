@@ -12,11 +12,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-                - name: Debug paths
-                run: |
-                  pwd
-                  ls -la
-                  find . -name "package-lock.json" -not -path "*/node_modules/*"
+      - name: Debug paths
+        run: |
+         pwd
+         ls -la
+         find . -name "package-lock.json" -not -path "*/node_modules/*"
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
