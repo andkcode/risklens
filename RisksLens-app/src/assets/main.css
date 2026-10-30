@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  /* Фирменная палитра финтех-платформы */
+  --color-brand-primary: #0F172A;   /* Slate 900 */
+  --color-brand-secondary: #475569; /* Slate 600 */
+  --color-brand-accent: #2563EB;    /* Blue 600 */
+  --color-brand-hover: #1D4ED8;     /* Blue 700 */
+  --color-brand-surface: #F8FAFC;   /* Slate 50 */
+  --color-brand-border: #E2E8F0;    /* Slate 200 */
+
+  /* Индикаторы рынка, PnL и рисков */
+  --color-market-success: #10B981;  /* Emerald 500 (Прибыль / Низкий риск) */
+  --color-market-danger: #EF4444;   /* Red 500 (Убыток / Высокий риск) */
+  --color-market-warning: #F59E0B;  /* Amber 500 (Средний риск) */
+
+  /* Шрифты (Интер для UI, JetBrains Mono для цифр/котировок) */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
+
+  /* Тени */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+  --shadow-dropdown: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* Базовые стили проекта */
+@layer base {
+  body {
+    background-color: var(--color-brand-surface);
+    color: var(--color-brand-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}

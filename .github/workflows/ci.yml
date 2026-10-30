@@ -1,0 +1,36 @@
+name: Frontend CI
+
+on:
+  push:
+    branches: [main, frontend]
+  pull_request:
+    branches: [main, frontend]
+
+jobs:
+  build-and-lint:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: RiskLense-app/package-lock.json
+
+      - name: Install dependencies
+        working-directory: RiskLense-app
+        run: npm ci
+
+      - name: Run linter
+        working-directory: RiskLense-app
+        run: npm run lint
+
+      - name: Check formatting
+        working-directory: RiskLense-app
+        run: npm run format:check
+
+      - name: Run typecheck and build
+        working-directory: RiskLense-app
+        run: npm run build

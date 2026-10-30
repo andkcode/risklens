@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="move-to-subfolder" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;AndriiKulikovskyii&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/andkcode/risklens.git&quot;,
+    &quot;accountId&quot;: &quot;e1115cc2-b408-4406-bb62-c9a47d021ff2&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.5846484340796918" />
+      <entry key="MS500" value="3.2715814142854622" />
+      <entry key="S2" value="6.013162477893292" />
+      <entry key="S5" value="8.190775509200556" />
+      <entry key="S10" value="11.253739980823717" />
+      <entry key="S30" value="19.638146824916944" />
+      <entry key="S60" value="25.793708768044695" />
+      <entry key="M2" value="32.163049379514284" />
+      <entry key="M5" value="56.130158942534436" />
+      <entry key="M10" value="96.88095384116012" />
+      <entry key="M15" value="124.67123467666049" />
+      <entry key="M30" value="168.21465115427168" />
+      <entry key="H1" value="205.0106751622739" />
+      <entry key="H2" value="238.1340559305549" />
+      <entry key="H4" value="265.21088996764837" />
+      <entry key="D1" value="298.5837467834796" />
+      <entry key="W1" value="305.7545052021621" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0419463167525503E-10" />
+      <entry key="MS500" value="0.010082519456654523" />
+      <entry key="S2" value="0.3168781305118084" />
+      <entry key="S5" value="0.6315013294302237" />
+      <entry key="S10" value="0.7996792094118504" />
+      <entry key="S30" value="1.0975221894172247" />
+      <entry key="S60" value="1.3762778048911661" />
+      <entry key="M2" value="1.6266910663272423" />
+      <entry key="M5" value="1.9253104791152789" />
+      <entry key="M10" value="2.2990492646130734" />
+      <entry key="M15" value="2.6297211374209146" />
+      <entry key="M30" value="3.3978991596813612" />
+      <entry key="H1" value="4.291668819291931" />
+      <entry key="H2" value="5.150035952430946" />
+      <entry key="H4" value="5.861406420718758" />
+      <entry key="D1" value="6.76574358781284" />
+      <entry key="W1" value="6.965165252779222" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.4303375237866458" />
+      <entry key="MS500" value="3.206007020938025" />
+      <entry key="S2" value="6.12553341890137" />
+      <entry key="S5" value="8.606650333870867" />
+      <entry key="S10" value="11.890145512326656" />
+      <entry key="S30" value="20.65330508905345" />
+      <entry key="S60" value="27.120372604252008" />
+      <entry key="M2" value="33.761200555511145" />
+      <entry key="M5" value="58.03897360234489" />
+      <entry key="M10" value="99.16708649487123" />
+      <entry key="M15" value="127.28999412055997" />
+      <entry key="M30" value="171.60463835231468" />
+      <entry key="H1" value="209.29643260454463" />
+      <entry key="H2" value="243.2796664111943" />
+      <entry key="H4" value="271.0693404926046" />
+      <entry key="D1" value="305.3488303114468" />
+      <entry key="W1" value="312.7195708454053" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3LKv0OuFCXtUP8fXPenIt1CzaY4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;26.13.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;26.6.6&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/profi/Desktop/RiskLense&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;C:/Users/profi/AppData/Roaming/JetBrains/WebStorm2026.2/node/versions/26.13.0/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;C:\\Program Files\\nodejs\\npm.cmd&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\profi\\Desktop\\RiskLense\\RiskLense-app\\node_modules\\typescript\\lib&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\profi\Desktop\RiskLense" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-WS-262.10968.77" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="" />
+      <created>1793215350667</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1793215350667</updated>
+      <workItem from="1793215352437" duration="18456000" />
+      <workItem from="1793284839479" duration="8421000" />
+      <workItem from="1793363891599" duration="2240000" />
+      <workItem from="1793367739029" duration="1138000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
