@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,61 +45,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.3685673043227753" />
-      <entry key="MS500" value="1.8190389050476625" />
-      <entry key="S2" value="2.1006995528661774" />
-      <entry key="S5" value="3.742591315933119" />
-      <entry key="S10" value="6.419190944961577" />
-      <entry key="S30" value="12.33640378316573" />
-      <entry key="S60" value="20.753310126954542" />
-      <entry key="M2" value="33.058192156274814" />
-      <entry key="M5" value="48.77931059032077" />
-      <entry key="M10" value="63.953950385939784" />
-      <entry key="M15" value="80.85049219437923" />
-      <entry key="M30" value="127.66657591587517" />
-      <entry key="H1" value="191.34783655817338" />
-      <entry key="H2" value="277.5902826234735" />
-      <entry key="H4" value="376.5544632652396" />
-      <entry key="D1" value="538.1129703757034" />
-      <entry key="W1" value="578.729623591636" />
+      <entry key="MS100" value="1.6597617522810766" />
+      <entry key="MS500" value="2.1240161130009367" />
+      <entry key="S2" value="3.576172508527394" />
+      <entry key="S5" value="5.611100731153255" />
+      <entry key="S10" value="8.46698363430119" />
+      <entry key="S30" value="14.735677426127921" />
+      <entry key="S60" value="23.256114415397427" />
+      <entry key="M2" value="35.665983260352654" />
+      <entry key="M5" value="51.54896904067654" />
+      <entry key="M10" value="66.80341590590231" />
+      <entry key="M15" value="83.72393501095992" />
+      <entry key="M30" value="130.56701452760313" />
+      <entry key="H1" value="194.2733813836292" />
+      <entry key="H2" value="280.5363482234303" />
+      <entry key="H4" value="379.5179107348383" />
+      <entry key="D1" value="541.1042702911602" />
+      <entry key="W1" value="581.7282870557317" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="7.38313879256054E-108" />
-      <entry key="S2" value="1.668438474710832E-27" />
-      <entry key="S5" value="2.2673971872646478E-11" />
-      <entry key="S10" value="6.221014699081102E-6" />
-      <entry key="S30" value="0.02863117797977987" />
-      <entry key="S60" value="0.24424326340110053" />
-      <entry key="M2" value="0.7658858601223184" />
-      <entry key="M5" value="1.6708395795281779" />
-      <entry key="M10" value="2.3220631735090835" />
-      <entry key="M15" value="2.735026677993248" />
-      <entry key="M30" value="3.587880512097516" />
-      <entry key="H1" value="4.675447940126512" />
-      <entry key="H2" value="6.3084513785864695" />
-      <entry key="H4" value="8.35463669946985" />
-      <entry key="D1" value="11.90991918769617" />
-      <entry key="W1" value="12.833588754143696" />
+      <entry key="MS500" value="4.538332697066838E-109" />
+      <entry key="S2" value="8.307570215470383E-28" />
+      <entry key="S5" value="1.715509523308326E-11" />
+      <entry key="S10" value="5.411205064321456E-6" />
+      <entry key="S30" value="0.027330661185175298" />
+      <entry key="S60" value="0.2386316558902701" />
+      <entry key="M2" value="0.7570364351352452" />
+      <entry key="M5" value="1.6630903616044854" />
+      <entry key="M10" value="2.3166721454935946" />
+      <entry key="M15" value="2.730791847284569" />
+      <entry key="M30" value="3.5851017544427073" />
+      <entry key="H1" value="4.673637058577183" />
+      <entry key="H2" value="6.307229574308977" />
+      <entry key="H4" value="8.353827608256875" />
+      <entry key="D1" value="11.90972694714428" />
+      <entry key="W1" value="12.833559161124716" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.2906339681485113" />
-      <entry key="MS500" value="1.7987301390774517" />
-      <entry key="S2" value="2.0939830637476957" />
-      <entry key="S5" value="3.734650719792517" />
-      <entry key="S10" value="6.411094916362725" />
-      <entry key="S30" value="12.358079911843308" />
-      <entry key="S60" value="20.986315304140387" />
-      <entry key="M2" value="33.80947013463045" />
-      <entry key="M5" value="50.43786544248428" />
-      <entry key="M10" value="66.26667679765843" />
-      <entry key="M15" value="83.57723754964877" />
-      <entry key="M30" value="131.24775725623348" />
-      <entry key="H1" value="196.01827527799543" />
-      <entry key="H2" value="283.8948428042718" />
-      <entry key="H4" value="384.90608293574286" />
-      <entry key="D1" value="550.0220152863569" />
-      <entry key="W1" value="591.5630724521187" />
+      <entry key="MS100" value="0.9220998059771308" />
+      <entry key="MS500" value="1.5820965282338308" />
+      <entry key="S2" value="3.3451730734232803" />
+      <entry key="S5" value="5.499204029921979" />
+      <entry key="S10" value="8.403998187892027" />
+      <entry key="S30" value="14.736995989242816" />
+      <entry key="S60" value="23.47398509406073" />
+      <entry key="M2" value="36.40366609482542" />
+      <entry key="M5" value="53.19786005795438" />
+      <entry key="M10" value="69.10978620168056" />
+      <entry key="M15" value="86.44580029951172" />
+      <entry key="M30" value="134.14509316164845" />
+      <entry key="H1" value="198.9418465665698" />
+      <entry key="H2" value="286.8396050491024" />
+      <entry key="H4" value="387.8686804523796" />
+      <entry key="D1" value="553.0131161161513" />
+      <entry key="W1" value="594.5617053436235" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -111,35 +111,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "javascript.nodejs.core.library.configured.version": "26.13.0",
-    "javascript.nodejs.core.library.typings.version": "26.6.6",
-    "javascript.preferred.runtime.type.id": "node",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/profi/Desktop/RiskLense",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "C:/Users/profi/AppData/Roaming/JetBrains/WebStorm2026.2/node/versions/26.13.0/node",
-    "nodejs_package_manager_path": "C:\\Program Files\\nodejs\\npm.cmd",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "C:\\Users\\profi\\Desktop\\RiskLense\\RiskLense-app\\node_modules\\typescript\\lib"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;26.13.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;26.6.6&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/profi/Desktop/RiskLense&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;C:/Users/profi/AppData/Roaming/JetBrains/WebStorm2026.2/node/versions/26.13.0/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;C:\\Program Files\\nodejs\\npm.cmd&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\profi\\Desktop\\RiskLense\\RiskLense-app\\node_modules\\typescript\\lib&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\profi\Desktop\RiskLense" />
@@ -163,6 +163,7 @@
       <workItem from="1793284839479" duration="8421000" />
       <workItem from="1793363891599" duration="2240000" />
       <workItem from="1793367739029" duration="6234000" />
+      <workItem from="1793383934326" duration="893000" />
     </task>
     <servers />
   </component>
