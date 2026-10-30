@@ -17,20 +17,20 @@ jobs:
         with:
           node-version: '26.x'
           cache: npm
-          cache-dependency-path: RiskLense-app/package-lock.json
+          cache-dependency-path: RisksLens-app/package-lock.json
 
       - name: Install dependencies
-        working-directory: RiskLense-app
+        working-directory: RisksLens-app
         run: npm ci
 
       - name: Run linter
-        working-directory: RiskLense-app
+        working-directory: RisksLens-app
         run: npm run lint
 
       - name: Check formatting
-        working-directory: RiskLense-app
+        working-directory: RisksLens-app
         run: npm run format:check
 
       - name: Run typecheck and build
-        working-directory: RiskLense-app
+        working-directory: RisksLens-app
         run: npm run build
