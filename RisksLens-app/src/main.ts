@@ -2,13 +2,15 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import App from './App.vue';
 import { router } from './router';
-
-// Подключаем стили Tailwind v4
 import './assets/main.css';
+import { initMsw } from './mocks/init';
+
+await initMsw();
 
 const app = createApp(App);
+const pinia = createPinia();
 
-app.use(createPinia());
+app.use(pinia);
 app.use(router);
 
 app.mount('#app');

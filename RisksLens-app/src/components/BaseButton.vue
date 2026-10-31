@@ -1,37 +1,36 @@
 <script setup lang="ts">
-interface Props {
-  variant?: 'primary' | 'secondary' | 'outline' | 'danger';
-  size?: 'sm' | 'md' | 'lg';
-  loading?: boolean;
-  disabled?: boolean;
-}
-
-withDefaults(defineProps<Props>(), {
-  variant: 'primary',
-  size: 'md',
-  loading: false,
-  disabled: false,
-});
+withDefaults(
+  defineProps<{
+    variant?: 'primary' | 'secondary' | 'danger' | 'outline';
+    size?: 'sm' | 'md' | 'lg';
+    loading?: boolean;
+    disabled?: boolean;
+  }>(),
+  { variant: 'primary', size: 'md', loading: false, disabled: false },
+);
 </script>
 
 <template>
   <button
-    class="inline-flex items-center justify-center font-medium transition-all rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-accent/50 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+    class="inline-flex items-center justify-center font-semibold transition-all rounded-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
     :class="[
-      size === 'sm' && 'px-3 py-1.5 text-xs',
-      size === 'md' && 'px-4 py-2 text-sm',
-      size === 'lg' && 'px-5 py-2.5 text-base',
-      variant === 'primary' && 'bg-brand-accent text-white hover:bg-brand-hover shadow-sm',
-      variant === 'secondary' && 'bg-slate-100 text-brand-primary hover:bg-slate-200',
+      size === 'sm' && 'h-8 px-3 text-[10px]',
+      size === 'md' && 'h-9 px-3.5 text-[11px]',
+      size === 'lg' && 'h-10 px-4 text-xs',
+      variant === 'primary' &&
+        'text-white bg-gradient-to-b from-[#4386f5] to-[#2f70df] border border-[#5593f8] shadow-[0_8px_24px_rgba(38,105,220,.2)] hover:brightness-108',
+      variant === 'secondary' &&
+        'text-[#bac2cc] bg-[#101419] border border-[#2b333d] hover:text-[#ebedf0] hover:bg-[#171d24]',
+      variant === 'danger' &&
+        'text-white bg-[#ff6978]/20 border border-[#ff6978]/40 hover:bg-[#ff6978]/30',
       variant === 'outline' &&
-        'border border-brand-border text-brand-primary hover:bg-brand-surface',
-      variant === 'danger' && 'bg-market-danger text-white hover:opacity-90',
+        'text-[#8994a2] bg-transparent border border-[#222830] hover:border-[#4c8dff] hover:text-[#4c8dff]',
     ]"
     :disabled="disabled || loading"
   >
     <svg
       v-if="loading"
-      class="animate-spin -ml-1 mr-2 h-4 w-4 text-current"
+      class="animate-spin -ml-1 mr-2 size-4 text-current"
       fill="none"
       viewBox="0 0 24 24"
     >

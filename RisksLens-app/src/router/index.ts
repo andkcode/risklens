@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import AppLayout from '../layouts/AppLayout.vue';
 import { useAuthStore } from '../stores/auth';
-import { pinia } from '../stores/pinia';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -66,14 +65,17 @@ export const router = createRouter({
   routes,
 });
 
-router.beforeEach((to) => {
-  const auth = useAuthStore(pinia);
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
+  const requiresAuth = to.meta.requiresAuth;
 
-  if (to.meta.requiresAuth && !auth.isAuthenticated) {
-    return { name: 'login', query: { redirect: to.fullPath } };
-  }
-
-  if ((to.name === 'login' || to.name === 'register') && auth.isAuthenticated) {
-    return { name: 'dashboard' };
+  if (requiresAuth && !authStore.isAuthenticated) {
+    next({ name: 'login' });
+  } else if ((to.name === 'login' || to.name === 'register') && authStore.isAuthenticated) {
+    next({ name: 'dashboard' });
+  } else {
+    next();
   }
 });
+
+export default router;

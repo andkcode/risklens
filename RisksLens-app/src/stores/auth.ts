@@ -1,28 +1,65 @@
-import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
+import { ref, computed } from 'vue';
+import { apiClient } from '../api/client';
 
-const TOKEN_KEY = 'access_token';
+// 1. Описываем интерфейс пользователя
+export interface User {
+  id: number | string;
+  fullName: string;
+  email: string;
+  role: string;
+}
 
 export const useAuthStore = defineStore('auth', () => {
-  const token = ref<string | null>(localStorage.getItem(TOKEN_KEY));
-  const user = ref<{ email: string } | null>(null);
-  const isAuthenticated = computed(() => Boolean(token.value));
+  const token = ref<string | null>(localStorage.getItem('access_token'));
 
-  function setToken(newToken: string) {
-    token.value = newToken;
-    localStorage.setItem(TOKEN_KEY, newToken);
+  // 2. Используем интерфейс вместо any
+  const user = ref<User | null>(null);
+
+  const isAuthenticated = computed(() => !!token.value);
+
+  async function login(email: string, password?: string) {
+    try {
+      const response = await apiClient.post('/auth/login', { email, password });
+      token.value = response.data.token;
+      user.value = response.data.user;
+
+      if (token.value) {
+        localStorage.setItem('access_token', token.value);
+      }
+    } catch (error) {
+      console.error('Login action error:', error);
+      throw error;
+    }
+  }
+
+  async function register(fullName: string, email: string, password: string) {
+    try {
+      const response = await apiClient.post('/auth/register', { fullName, email, password });
+      token.value = response.data.token;
+      user.value = response.data.user;
+
+      if (token.value) {
+        localStorage.setItem('access_token', token.value);
+      }
+    } catch (error) {
+      console.error('Register action error:', error);
+      throw error;
+    }
   }
 
   function logout() {
     token.value = null;
     user.value = null;
-    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem('access_token');
   }
 
-  async function login(email: string): Promise<void> {
-    setToken('mock-jwt-token-15min');
-    user.value = { email };
-  }
-
-  return { token, user, isAuthenticated, setToken, login, logout };
+  return {
+    token,
+    user,
+    isAuthenticated,
+    login,
+    register,
+    logout,
+  };
 });
