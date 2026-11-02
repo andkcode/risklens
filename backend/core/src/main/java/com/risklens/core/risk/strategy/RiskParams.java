@@ -1,6 +1,7 @@
-package com.risklens.core.risk;
+package com.risklens.core.risk.strategy;
 
 import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
