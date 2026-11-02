@@ -27,6 +27,6 @@ jobs:
           mvn spring-boot:stop
 
       - name: Run Spectral Lint
-        uses: stoplight/spectral-action@v1.4.0
+      - uses: stoplightio/spectral-action@latest
         with:
           file_path: openapi.yaml
