@@ -19,7 +19,14 @@ spring:
     refresh-token:
       expiration: ${JWT_ACCESS_TOKEN_EXPIRATION}
 
-
+  risklens:
+    risk:
+      scoring:
+        min-positions: ${SCORING_MIN_POSITIONS}
+        position-count-penalty: ${SCORING_PENALTY}
+        max-concentration-threshold: ${SCORING_MAX}
+        concentration-penalty: ${SCORING_CONC_PENALTY}
+        base-score: ${SCORING_BASE_SCORE}
   data:
     redis:
       host: ${SPRING_DATA_REDIS_HOST:localhost}
