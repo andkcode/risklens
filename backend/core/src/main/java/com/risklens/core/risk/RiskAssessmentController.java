@@ -25,7 +25,15 @@ public class RiskAssessmentController {
       @Valid @RequestBody RiskAssessmentCreateRequestDto requestDto, Principal principal) {
     RiskAssessmentResponseDto response =
         riskCalculationService.calculateAndSaveRisk(
-            principal.getName(), requestDto.getPortfolioId());
+            principal.getName(), requestDto.getPortfolioId(), requestDto.getRiskMethod());
+    return ResponseEntity.status(HttpStatus.CREATED).body(response);
+  }
+
+  @PostMapping("/portfolios/{portfolioId}/riskassessments")
+  public ResponseEntity<RiskAssessmentResponseDto> calculatePortfolioRisk(
+      @PathVariable UUID portfolioId, Principal principal) {
+    RiskAssessmentResponseDto response =
+        riskCalculationService.calculateAndSaveRisk(principal.getName(), portfolioId, null);
     return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 
