@@ -27,9 +27,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.web.server.ResponseStatusException;
 
 @ExtendWith(MockitoExtension.class)
+@AutoConfigureMockMvc
 class RiskCalculationServiceTest extends BaseIntegrationTest {
 
   @Mock private PortfolioRepository portfolioRepository;

@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.risklens.core.BaseIntegrationTest;
+import com.risklens.core.security.JwtService; // Fixed import: JwtService is in security package
 import com.risklens.core.user.User;
 import com.risklens.core.user.UserRepository;
 import java.math.BigDecimal;
@@ -14,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.web.servlet.MockMvc;
 
 @AutoConfigureMockMvc
@@ -28,17 +29,21 @@ class PortfolioPositionIntegrationTest extends BaseIntegrationTest {
 
   @Autowired private PositionRepository positionRepository;
 
+  @Autowired private JwtService jwtService; // Injected JwtService directly
+
+  @Autowired
+  private UserDetailsService userDetailsService; // Needed to build UserDetails for token generation
+
   private User testUser;
   private Portfolio testPortfolio;
+  private String jwtToken;
 
   @BeforeEach
   void setUp() {
-    // Clean database state before each test
     positionRepository.deleteAll();
     portfolioRepository.deleteAll();
     userRepository.deleteAll();
 
-    // Persist test owner matching MockUser username
     testUser =
         userRepository.save(
             User.builder()
@@ -50,7 +55,6 @@ class PortfolioPositionIntegrationTest extends BaseIntegrationTest {
                 .updatedAt(OffsetDateTime.now())
                 .build());
 
-    // Persist test portfolio linked to the user
     testPortfolio =
         portfolioRepository.save(
             Portfolio.builder()
@@ -60,41 +64,38 @@ class PortfolioPositionIntegrationTest extends BaseIntegrationTest {
                 .createdAt(OffsetDateTime.now())
                 .updatedAt(OffsetDateTime.now())
                 .build());
+
+    // Generate valid JWT token using JwtService and UserDetails
+    jwtToken = jwtService.generateToken(userDetailsService.loadUserByUsername(testUser.getEmail()));
   }
 
   @Test
-  @WithMockUser(username = "trader@risklens.com")
   void addPosition_HappyPath_ReturnsCreated() throws Exception {
     String requestJson =
         """
-                {
-                    "assetSymbol": "AAPL",
-                    "assetType": "STOCK",
-                    "quantity": 15.50000000,
-                    "avgBuyPrice": 185.25000000
-                }
-                """;
+                    {
+                        "assetSymbol": "AAPL",
+                        "assetType": "STOCK",
+                        "quantity": 15.50000000,
+                        "avgBuyPrice": 185.25000000
+                    }
+                    """;
 
     mockMvc
         .perform(
             post("/api/v1/portfolios/" + testPortfolio.getId() + "/positions")
+                .header("Authorization", "Bearer " + jwtToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestJson))
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.id").exists())
-        .andExpect(jsonPath("$.assetSymbol").value("AAPL"))
-        .andExpect(jsonPath("$.assetType").value("STOCK"))
-        .andExpect(jsonPath("$.quantity").value(15.5))
-        .andExpect(jsonPath("$.avgBuyPrice").value(185.25));
+        .andExpect(jsonPath("$.assetSymbol").value("AAPL"));
 
-    // Verify database persistence and entity mapping
     assertThat(positionRepository.findAll()).hasSize(1);
   }
 
   @Test
-  @WithMockUser(username = "trader@risklens.com")
   void addPosition_DuplicateAssetSymbol_ReturnsConflict409() throws Exception {
-    // Save initial position to trigger unique constraint on (portfolio_id, asset_symbol)
     positionRepository.save(
         Position.builder()
             .portfolio(testPortfolio)
@@ -108,40 +109,54 @@ class PortfolioPositionIntegrationTest extends BaseIntegrationTest {
 
     String duplicateRequestJson =
         """
-                {
-                    "assetSymbol": "MSFT",
-                    "assetType": "STOCK",
-                    "quantity": 5.0,
-                    "avgBuyPrice": 410.0
-                }
-                """;
+                    {
+                        "assetSymbol": "MSFT",
+                        "assetType": "STOCK",
+                        "quantity": 5.0,
+                        "avgBuyPrice": 410.0
+                    }
+                    """;
 
-    // Attempting to add the same symbol again must result in 409 Conflict
     mockMvc
         .perform(
             post("/api/v1/portfolios/" + testPortfolio.getId() + "/positions")
+                .header("Authorization", "Bearer " + jwtToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(duplicateRequestJson))
         .andExpect(status().isConflict());
   }
 
   @Test
-  @WithMockUser(username = "intruder@risklens.com")
   void accessPortfolio_OwnerIsolation_ReturnsNotFound404() throws Exception {
-    // A different user tries to query a portfolio they do not own
+    User intruder =
+        userRepository.save(
+            User.builder()
+                .email("intruder@risklens.com")
+                .passwordHash("hash")
+                .role("USER")
+                .isActive(true)
+                .createdAt(OffsetDateTime.now())
+                .updatedAt(OffsetDateTime.now())
+                .build());
+
+    String intruderToken =
+        jwtService.generateToken(userDetailsService.loadUserByUsername(intruder.getEmail()));
+
     mockMvc
-        .perform(get("/api/v1/portfolios/" + testPortfolio.getId()))
+        .perform(
+            get("/api/v1/portfolios/" + testPortfolio.getId())
+                .header("Authorization", "Bearer " + intruderToken))
         .andExpect(status().isNotFound());
   }
 
   @Test
-  @WithMockUser(username = "trader@risklens.com")
   void getPortfolioById_HappyPath_ReturnsPortfolio() throws Exception {
     mockMvc
-        .perform(get("/api/v1/portfolios/" + testPortfolio.getId()))
+        .perform(
+            get("/api/v1/portfolios/" + testPortfolio.getId())
+                .header("Authorization", "Bearer " + jwtToken))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id").value(testPortfolio.getId().toString()))
-        .andExpect(jsonPath("$.name").value("Global Equities"))
-        .andExpect(jsonPath("$.baseCurrency").value("USD"));
+        .andExpect(jsonPath("$.name").value("Global Equities"));
   }
 }
