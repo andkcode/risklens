@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RiskAssessmentCreateRequestDto {
-    @NotNull(message = "Portfolio ID is required")
-    private UUID portfolioId;
-    public RiskMethod riskMethod;
+  @NotNull(message = "Portfolio ID is required")
+  private UUID portfolioId;
+
+  public RiskMethod riskMethod;
 }

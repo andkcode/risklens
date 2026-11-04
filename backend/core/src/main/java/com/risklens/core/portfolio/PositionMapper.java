@@ -7,6 +7,6 @@ import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PositionMapper {
-    @Mapping(source = "portfolio.id", target = "portfolioId")
-    PositionResponseDto toDto(Position position);
+  @Mapping(source = "portfolio.id", target = "portfolioId")
+  PositionResponseDto toDto(Position position);
 }

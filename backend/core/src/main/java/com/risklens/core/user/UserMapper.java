@@ -7,5 +7,5 @@ import org.mapstruct.MappingConstants;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserMapper {
 
-    UserResponseDto toDto(User user);
+  UserResponseDto toDto(User user);
 }
