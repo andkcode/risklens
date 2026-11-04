@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RiskResult {
-    private Short score;
-    private String level;
-    private BigDecimal varValue;
-    private BigDecimal volatility;
-    private BigDecimal maxDrawdown;
-    private BigDecimal sharpeRatio;
-    private Map<String, Object> details;
+  private Short score;
+  private String level;
+  private BigDecimal varValue;
+  private BigDecimal volatility;
+  private BigDecimal maxDrawdown;
+  private BigDecimal sharpeRatio;
+  private Map<String, Object> details;
 }

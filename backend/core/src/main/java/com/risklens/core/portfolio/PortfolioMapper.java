@@ -7,5 +7,5 @@ import org.mapstruct.MappingConstants;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PortfolioMapper {
 
-    PortfolioResponseDto toDto(Portfolio portfolio);
+  PortfolioResponseDto toDto(Portfolio portfolio);
 }

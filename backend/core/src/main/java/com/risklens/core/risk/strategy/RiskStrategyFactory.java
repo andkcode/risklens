@@ -11,22 +11,23 @@ import org.springframework.web.server.ResponseStatusException;
 @Component
 public class RiskStrategyFactory {
 
-    private final Map<RiskMethod, RiskStrategy> strategies;
+  private final Map<RiskMethod, RiskStrategy> strategies;
 
-    public RiskStrategyFactory(List<RiskStrategy> strategyList) {
-        this.strategies = strategyList.stream()
+  public RiskStrategyFactory(List<RiskStrategy> strategyList) {
+    this.strategies =
+        strategyList.stream()
             .collect(Collectors.toMap(RiskStrategy::getSupportedMethod, Function.identity()));
+  }
+
+  public RiskStrategy getStrategy(RiskMethod method) {
+    RiskMethod resolvedMethod = method != null ? method : RiskMethod.SCORING;
+    RiskStrategy strategy = strategies.get(resolvedMethod);
+
+    if (strategy == null) {
+      throw new ResponseStatusException(
+          HttpStatus.BAD_REQUEST, "Unsupported risk calculation method: " + resolvedMethod);
     }
 
-    public RiskStrategy getStrategy(RiskMethod method) {
-        RiskMethod resolvedMethod = method != null ? method : RiskMethod.SCORING;
-        RiskStrategy strategy = strategies.get(resolvedMethod);
-
-        if (strategy == null) {
-            throw new ResponseStatusException(
-                HttpStatus.BAD_REQUEST, "Unsupported risk calculation method: " + resolvedMethod);
-        }
-
-        return strategy;
-    }
+    return strategy;
+  }
 }

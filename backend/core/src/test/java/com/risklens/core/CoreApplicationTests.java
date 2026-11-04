@@ -16,7 +16,5 @@ class CoreApplicationTests {
   static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
 
   @Test
-  void contextLoads() {
-    // Тест автоматически пройдет, так как Spring подключится к контейнеру базы
-  }
+  void contextLoads() {}
 }
