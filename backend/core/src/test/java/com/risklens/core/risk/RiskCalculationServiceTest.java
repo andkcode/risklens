@@ -1,9 +1,11 @@
 package com.risklens.core.risk;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import com.risklens.core.BaseIntegrationTest;
 import com.risklens.core.portfolio.Portfolio;
 import com.risklens.core.portfolio.PortfolioRepository;
 import com.risklens.core.portfolio.Position;
@@ -28,7 +30,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
 @ExtendWith(MockitoExtension.class)
-class RiskCalculationServiceTest {
+class RiskCalculationServiceTest extends BaseIntegrationTest {
 
   @Mock private PortfolioRepository portfolioRepository;
 
@@ -60,6 +62,12 @@ class RiskCalculationServiceTest {
             .name(userEmail)
             .createdAt(OffsetDateTime.now().minusDays(45))
             .build();
+  }
+
+  @Test
+  void flywayMigrationsAppliedAndRepositoryAccessible() {
+    long count = riskAssessmentRepository.count();
+    assertThat(count).isGreaterThanOrEqualTo(0);
   }
 
   @Test

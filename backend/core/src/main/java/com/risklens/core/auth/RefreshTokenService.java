@@ -18,7 +18,7 @@ public class RefreshTokenService {
 
   private final RefreshTokenRepository refreshTokenRepository;
 
-  @Value("${JWT_REFRESH_TOKEN_EXPIRATION}")
+  @Value("${JWT_REFRESH_TOKEN_EXPIRATION:604800000}")
   private long refreshTokenDurationMs;
 
   @Transactional
