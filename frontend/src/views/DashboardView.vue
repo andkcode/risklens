@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { riskService, type RiskAssessmentResponseDto } from '@/api/riskService';
+import { riskService, type RiskAssessmentResponseDto } from '../api/riskService';
 import { isAxiosError } from 'axios';
 
 // Example portfolio ID (in a real app, this would come from user selection or route params)

@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,13 +21,17 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+  private static final Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+
   private final JwtService jwtService;
   private final UserDetailsService userDetailsService;
 
   @Override
   protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-    String path = request.getRequestURI();
-    return path.startsWith("/api/auth/") || path.startsWith("/actuator/");
+    String path = request.getServletPath();
+    return path.startsWith("/api/v1/auth/")
+        || path.startsWith("/api/auth/")
+        || path.startsWith("/actuator/");
   }
 
   @Override
@@ -36,8 +42,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       throws ServletException, IOException {
 
     final String authHeader = request.getHeader("Authorization");
-    System.out.println(
-        "Incoming URI: " + request.getRequestURI() + " | Auth Header: " + authHeader);
 
     if (authHeader == null || !authHeader.startsWith("Bearer ")) {
       filterChain.doFilter(request, response);
@@ -58,13 +62,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
           authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
           SecurityContextHolder.getContext().setAuthentication(authToken);
-          System.out.println("Successfully authenticated user: " + userEmail);
         } else {
-          System.out.println("JWT token is invalid!");
+          log.warn("JWT token validation failed");
         }
       }
     } catch (Exception e) {
-      System.out.println("Cannot set user authentication: " + e.getMessage());
+      log.warn("JWT authentication failed", e);
     }
 
     filterChain.doFilter(request, response);

@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(frontend): implement risk assessment service and dashboard view">
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/composables/useLoginForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/composables/useLoginForm.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/composables/useRegisterForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/composables/useRegisterForm.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/RegisterView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/RegisterView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.run/Unnamed.run.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/security/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/security/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/mocks/handlers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/mocks/handlers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/stores/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/stores/auth.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,6 +135,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.CoreApplication.executor": "Run",
+    "Application.Unnamed.executor": "Debug",
     "Maven.core [spotless:apply...].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
@@ -142,7 +146,7 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "frontend",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "javascript.nodejs.core.library.configured.version": "26.13.0",
     "javascript.nodejs.core.library.typings.version": "26.6.6",
@@ -167,6 +171,12 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\profi\Desktop\RiskLense" />
     </key>
+  </component>
+  <component name="RunManager" selected="Application.CoreApplication">
+    <list>
+      <item itemvalue="Application.Unnamed" />
+      <item itemvalue="Application.CoreApplication" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>

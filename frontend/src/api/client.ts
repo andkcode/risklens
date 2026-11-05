@@ -66,7 +66,7 @@ axiosInstance.interceptors.response.use(
       try {
         const refreshToken = localStorage.getItem('refresh_token')
         // Request to refresh the access token
-        const response = await axios.post<{ accessToken: string; refreshToken?: string }>('/api/v1/auth/refresh', { refreshToken })
+        const response = await axiosInstance.post<{ accessToken: string; refreshToken?: string }>('/api/v1/auth/refresh', { refreshToken })
         const { accessToken, refreshToken: newRefresh } = response.data
 
         localStorage.setItem('access_token', accessToken)

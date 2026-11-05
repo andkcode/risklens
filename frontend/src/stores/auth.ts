@@ -10,6 +10,11 @@ export interface User {
   role: string;
 }
 
+interface AuthResponse {
+  accessToken: string;
+  refreshToken: string;
+}
+
 export const useAuthStore = defineStore('auth', () => {
   const token = ref<string | null>(localStorage.getItem('access_token'));
 
@@ -20,12 +25,13 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function login(email: string, password?: string): Promise<void> {
     try {
-      const response = await apiClient.post('/auth/login', { email, password });
-      token.value = response.data.token;
-      user.value = response.data.user;
+      const response = await apiClient.post<AuthResponse>('/api/v1/auth/login', { email, password });
+      token.value = response.data.accessToken;
+      user.value = null;
 
       if (token.value) {
         localStorage.setItem('access_token', token.value);
+        localStorage.setItem('refresh_token', response.data.refreshToken);
       }
     } catch (error) {
       console.error('Login action error:', error);
@@ -35,12 +41,13 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function register(fullName: string, email: string, password: string): Promise<void> {
     try {
-      const response = await apiClient.post('/auth/register', { fullName, email, password });
-      token.value = response.data.token;
-      user.value = response.data.user;
+      const response = await apiClient.post<AuthResponse>('/api/v1/auth/register', { fullName, email, password });
+      token.value = response.data.accessToken;
+      user.value = null;
 
       if (token.value) {
         localStorage.setItem('access_token', token.value);
+        localStorage.setItem('refresh_token', response.data.refreshToken);
       }
     } catch (error) {
       console.error('Register action error:', error);
@@ -52,6 +59,7 @@ export const useAuthStore = defineStore('auth', () => {
     token.value = null;
     user.value = null;
     localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
   }
 
   return {

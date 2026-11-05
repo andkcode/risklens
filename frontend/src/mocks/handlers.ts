@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw';
 
 export const handlers = [
   // Эндпоинт входа
-  http.post('/api/auth/login', async ({ request }) => {
+  http.post('/api/v1/auth/login', async ({ request }) => {
     const body = (await request.json()) as { email?: string; password?: string };
 
     if (!body.email || !body.password) {
@@ -10,27 +10,17 @@ export const handlers = [
     }
 
     return HttpResponse.json({
-      token: 'mock-jwt-token-risklens-15min',
-      user: {
-        id: 'usr_1',
-        email: body.email,
-        fullName: 'RiskLense Analyst',
-      },
+      accessToken: 'mock-jwt-token-risklens-15min',
+      refreshToken: 'mock-refresh-token-risklens',
     });
   }),
 
   // Эндпоинт регистрации
-  http.post('/api/auth/register', async ({ request }) => {
-    const body = (await request.json()) as { email?: string; fullName?: string };
-
+  http.post('/api/v1/auth/register', () => {
     return HttpResponse.json(
       {
-        token: 'mock-jwt-token-risklens-15min',
-        user: {
-          id: 'usr_2',
-          email: body.email || 'new@risklens.com',
-          fullName: body.fullName || 'New User',
-        },
+        accessToken: 'mock-jwt-token-risklens-15min',
+        refreshToken: 'mock-refresh-token-risklens',
       },
       { status: 201 },
     );
