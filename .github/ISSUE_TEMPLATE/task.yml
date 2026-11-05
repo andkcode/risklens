@@ -1,0 +1,19 @@
+name: 📋 Engineering Task
+description: Create a task aligned with the WBS project roadmap
+title: "[Task]: "
+labels: ["task"]
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Task Objective
+      description: What business or technical value does this task deliver?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope / Definition of Done
+      description: What specific deliverables are required to complete this task?
+    validations:
+      required: true

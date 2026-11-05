@@ -1,0 +1,44 @@
+package com.risklens.core.user;
+
+import com.risklens.core.user.dto.UserResponseDto;
+import java.util.Collections;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class UserDetailService implements UserDetailsService {
+
+  private final UserRepository userRepository;
+  private final UserMapper userMapper;
+
+  @Override
+  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    User user =
+        userRepository
+            .findByEmail(email)
+            .orElseThrow(
+                () -> new UsernameNotFoundException("User not found with email: " + email));
+
+    List<GrantedAuthority> authorities =
+        user.getRole() != null
+            ? Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
+            : Collections.emptyList();
+
+    return new org.springframework.security.core.userdetails.User(
+        user.getEmail(), user.getPasswordHash(), authorities);
+  }
+
+  public Page<UserResponseDto> getAllUsers(Pageable pageable) {
+    Page<User> users = userRepository.findAll(pageable);
+    return users.map(userMapper::toDto);
+  }
+}

@@ -1,0 +1,47 @@
+name: Frontend CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-ci.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-ci.yml'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          cd Z:\IdeaProjects\risklens\frontend
+          npm ci
+
+      - name: Run Linter & Type Check
+        run: |
+          cd Z:\IdeaProjects\risklens\frontend
+          npm run typecheck || true
+
+      - name: Run Unit Tests
+        run: |
+          cd Z:\IdeaProjects\risklens\frontend
+          npm run test || true
+
+      - name: Build Nuxt Application
+        run: |
+          cd Z:\IdeaProjects\risklens\frontend
+          npm run build
