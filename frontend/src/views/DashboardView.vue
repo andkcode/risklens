@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { portfolioService, type PortfolioResponseDto } from '../api/portfolioService';
 import { riskService, type RiskAssessmentResponseDto } from '../api/riskService';
 import { isAxiosError } from 'axios';
 
-// Example portfolio ID (in a real app, this would come from user selection or route params)
-const selectedPortfolioId = ref<string>('123e4567-e89b-12d3-a456-426614174000');
+const selectedPortfolio = ref<PortfolioResponseDto | null>(null);
 const latestAssessment = ref<RiskAssessmentResponseDto | null>(null);
 const isLoading = ref(true);
 const errorMessage = ref('');
@@ -13,9 +13,19 @@ const fetchDashboardData = async () => {
   isLoading.value = true;
   errorMessage.value = '';
   try {
-    const pageData = await riskService.getRiskAssessments(selectedPortfolioId.value, 0, 1);
+    const portfolios = await portfolioService.getPortfolios(0, 1);
+    selectedPortfolio.value = portfolios.content[0] ?? null;
+
+    if (!selectedPortfolio.value) {
+      latestAssessment.value = null;
+      return;
+    }
+
+    const pageData = await riskService.getRiskAssessments(selectedPortfolio.value.id, 0, 1);
     if (pageData.content.length > 0) {
       latestAssessment.value = pageData.content[0];
+    } else {
+      latestAssessment.value = null;
     }
   } catch (err: unknown) {
     if (isAxiosError(err)) {
@@ -27,6 +37,12 @@ const fetchDashboardData = async () => {
     isLoading.value = false;
   }
 };
+
+const formatVaR = (value: number): string =>
+  new Intl.NumberFormat(undefined, {
+    style: 'currency',
+    currency: selectedPortfolio.value?.baseCurrency ?? 'USD',
+  }).format(value);
 
 onMounted(() => {
   void fetchDashboardData();
@@ -62,18 +78,16 @@ onMounted(() => {
     <div v-else-if="latestAssessment" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       <!-- Portfolio ID Card -->
       <div class="rounded-xl border border-brand-border bg-brand-card p-5 shadow-sm">
-        <span class="text-xs font-semibold uppercase tracking-wider text-brand-secondary">
-          Portfolio ID
-        </span>
-        <p class="mt-2 text-sm font-mono text-brand-primary truncate">{{ latestAssessment.portfolioId }}</p>
+        <span class="text-xs font-semibold uppercase tracking-wider text-brand-secondary">Portfolio</span>
+        <p class="mt-2 text-sm text-brand-primary truncate">{{ selectedPortfolio?.name }}</p>
       </div>
 
       <!-- Overall VaR Card -->
       <div class="rounded-xl border border-brand-border bg-brand-card p-5 shadow-sm">
         <span class="text-xs font-semibold uppercase tracking-wider text-brand-secondary">
-          Overall VaR (95%)
+          VaR (95%)
         </span>
-        <p class="mt-2 text-3xl font-bold text-rose-500">{{ latestAssessment.overallVaR }}%</p>
+        <p class="mt-2 text-3xl font-bold text-rose-500">{{ formatVaR(latestAssessment.var95) }}</p>
       </div>
 
       <!-- Active Risk Score Card -->
@@ -81,13 +95,14 @@ onMounted(() => {
         <span class="text-xs font-semibold uppercase tracking-wider text-brand-secondary">
           Active Risk Score
         </span>
-        <p class="mt-2 text-3xl font-bold text-brand-accent">{{ latestAssessment.activeRiskScore }}</p>
+        <p class="mt-2 text-3xl font-bold text-brand-accent">{{ latestAssessment.riskScore }}</p>
       </div>
     </div>
 
     <!-- Empty State if no assessments found -->
     <div v-else class="text-center py-12 text-brand-secondary">
-      <p>No risk assessments found for this portfolio.</p>
+      <p v-if="selectedPortfolio">No risk assessments found for {{ selectedPortfolio.name }}.</p>
+      <p v-else>No portfolios found. Create a portfolio to view risk metrics.</p>
     </div>
   </div>
 </template>

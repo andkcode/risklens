@@ -3,9 +3,12 @@ import { axiosInstance } from './client';
 export interface RiskAssessmentResponseDto {
   id: string;
   portfolioId: string;
-  overallVaR: number;
-  activeRiskScore: number;
-  createdAt: string;
+  calculatedAt: string;
+  volatility: number;
+  var95: number;
+  maxDrawdown: number;
+  sharpeRatio: number;
+  riskScore: number;
 }
 
 export interface PageResponse<T> {
