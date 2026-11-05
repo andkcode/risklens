@@ -45,10 +45,7 @@ const fetchDashboardData = async () => {
 };
 
 const formatVaR = (value: number): string =>
-  new Intl.NumberFormat(undefined, {
-    style: 'currency',
-    currency: selectedPortfolio.value?.baseCurrency ?? 'USD',
-  }).format(value);
+  `${(value * 100).toFixed(2)}%`;
 
 onMounted(() => {
   void fetchDashboardData();

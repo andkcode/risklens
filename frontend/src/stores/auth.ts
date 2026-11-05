@@ -16,6 +16,14 @@ interface AuthResponse {
 }
 
 export const useAuthStore = defineStore('auth', () => {
+  const mocksEnabled = import.meta.env.DEV && import.meta.env.VITE_ENABLE_MOCKS === 'true';
+  const storedToken = localStorage.getItem('access_token');
+
+  if (!mocksEnabled && storedToken?.startsWith('mock-jwt-token-')) {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+  }
+
   const token = ref<string | null>(localStorage.getItem('access_token'));
 
   // 2. Use the strict interface instead of 'any'
@@ -25,7 +33,10 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function login(email: string, password?: string): Promise<void> {
     try {
-      const response = await apiClient.post<AuthResponse>('/api/v1/auth/login', { email, password });
+      const response = await apiClient.post<AuthResponse>('/api/v1/auth/login', {
+        email,
+        password,
+      });
       token.value = response.data.accessToken;
       user.value = null;
 
@@ -41,7 +52,11 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function register(fullName: string, email: string, password: string): Promise<void> {
     try {
-      const response = await apiClient.post<AuthResponse>('/api/v1/auth/register', { fullName, email, password });
+      const response = await apiClient.post<AuthResponse>('/api/v1/auth/register', {
+        fullName,
+        email,
+        password,
+      });
       token.value = response.data.accessToken;
       user.value = null;
 

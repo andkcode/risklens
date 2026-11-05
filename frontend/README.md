@@ -11,6 +11,8 @@ npm run dev
 
 The backend's `demo` profile seeds sample users, portfolios, positions, price history, and an initial risk assessment. Start the backend and sign in as `user@risklens.com` with password `12345678` to view the seeded Growth Portfolio dashboard. Other demo accounts are `analyst@risklens.com` and `admin@risklens.com` with the same password. Existing databases are seeded idempotently at application startup.
 
+The frontend connects to the backend by default. To use the mock login and sample dashboard responses instead, set `VITE_ENABLE_MOCKS=true` before starting Vite.
+
 ## Quality checks
 
 ```sh
