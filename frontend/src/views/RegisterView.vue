@@ -25,7 +25,6 @@ const {
   passwordError,
   confirmPasswordError,
   termsError,
-  generalError,
   isLoading,
   hasMinLength,
   hasUpperCase,
@@ -72,14 +71,6 @@ const {
             Start monitoring portfolio exposure and downside risk with institutional-grade
             analytics.
           </p>
-        </div>
-
-        <!-- Общая ошибка -->
-        <div
-          v-if="generalError"
-          class="mb-4 rounded-lg bg-rose-500/10 border border-rose-500/20 p-3 text-xs text-rose-500 text-center font-medium"
-        >
-          {{ generalError }}
         </div>
 
         <!-- Форма регистрации -->

@@ -8,6 +8,9 @@ import IconEye from '../components/icons/IconEye.vue';
 import IconEyeOff from '../components/icons/IconEyeOff.vue';
 import MainLogo from '../components/icons/MainLogo.vue';
 import IconSecurity from '../components/icons/IconSecurity.vue';
+import { useToastStore } from '../stores/toast';
+
+const toast = useToastStore();
 
 const {
   email,
@@ -16,7 +19,6 @@ const {
   rememberMe,
   emailError,
   passwordError,
-  generalError,
   isLoading,
   handleSubmit,
   register,
@@ -56,14 +58,6 @@ const {
           <p class="mt-2 text-sm text-brand-secondary">
             Sign in to monitor exposure, stress-test positions, and manage portfolio risk.
           </p>
-        </div>
-
-        <!-- Общая ошибка авторизации -->
-        <div
-          v-if="generalError"
-          class="mb-4 rounded-lg bg-rose-500/10 border border-rose-500/20 p-3 text-xs text-rose-500 text-center font-medium"
-        >
-          {{ generalError }}
         </div>
 
         <!-- Форма входа -->
@@ -106,7 +100,11 @@ const {
 
           <div class="flex items-center justify-between text-sm">
             <BaseInput v-model="rememberMe" label="Remember me" type="checkbox" />
-            <button type="button" class="font-medium text-brand-accent hover:underline">
+            <button
+              type="button"
+              class="font-medium text-brand-accent hover:underline"
+              @click="toast.info('Password reset is not available yet.', 'Password reset')"
+            >
               Forgot password?
             </button>
           </div>

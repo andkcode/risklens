@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(frontend): implement token refresh logic and strict types in API client" />
+    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(frontend): implement risk assessment service and dashboard view">
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/composables/useLoginForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/composables/useLoginForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/composables/useRegisterForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/composables/useRegisterForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/RegisterView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/RegisterView.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -214,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1793899207508</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat(frontend): implement risk assessment service and dashboard view">
+      <option name="closed" value="true" />
+      <created>1793899669783</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1793899669783</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,9 +245,11 @@
     <MESSAGE value="chore(" />
     <MESSAGE value="chore(frontend): update IDE workspace configuration and metadata" />
     <MESSAGE value="feat(frontend): add OpenAPI generator configuration and generated API client" />
-    <MESSAGE value="feat(" />
     <MESSAGE value="feat(core): add CORS configuration for frontend integration" />
     <MESSAGE value="feat(frontend): implement token refresh logic and strict types in API client" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(frontend): implement token refresh logic and strict types in API client" />
+    <MESSAGE value="feat(" />
+    <MESSAGE value="feat(frontend): implement risk assessment service and dashboard view" />
+    <MESSAGE value="feat(frontend): integrate toast notifications and backend error mapping for auth forms" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(frontend): integrate toast notifications and backend error mapping for auth forms" />
   </component>
 </project>
