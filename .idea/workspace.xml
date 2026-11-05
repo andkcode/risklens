@@ -4,7 +4,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="frontend(merge): Resolve merge conflicts" />
+    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="frontend(merge): Resolve merge conflicts">
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/.prettierrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/.vscode/extensions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/eslint.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/postcss.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/public/mockServiceWorker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/api/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/api/client.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/assets/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/BaseAlert.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/BaseButton.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/BaseCard.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/BaseInput.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/BaseTable.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/PasswordRequirements.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/icons/IconEye.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/icons/IconEyeOff.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/icons/IconLock.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/icons/IconSecurity.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/icons/IconUser.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/icons/MainLogo.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/composables/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/composables/useLoginForm.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/composables/useRegisterForm.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/layouts/AppLayout.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/mocks/browser.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/mocks/handlers.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/mocks/init.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/router/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/stores/auth.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/types/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/DashboardView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/LoginView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/NotFoundView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/PortfolioDetailsView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/PortfoliosView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/RegisterView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/RiskAnalysisView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/tsconfig.node.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RisksLens-app/vite.config.js" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +84,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="move-to-subfolder" />
+        <entry key="$PROJECT_DIR$" value="frontend" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -149,7 +198,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "C:/Users/profi/AppData/Roaming/JetBrains/WebStorm2026.2/node/versions/26.13.0/node",
     "nodejs_package_manager_path": "C:\\Program Files\\nodejs\\npm.cmd",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "settings.editor.selected.configurable": "com.github.blarc.ai.commits.intellij.plugin.settings.AppSettingsConfigurable",
     "to.speed.mode.migration.done": "true",
     "ts.external.directory.path": "C:\\Users\\profi\\Desktop\\RiskLense\\RiskLense-app\\node_modules\\typescript\\lib"
   }
