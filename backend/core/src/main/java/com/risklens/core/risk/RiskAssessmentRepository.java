@@ -11,5 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface RiskAssessmentRepository extends JpaRepository<RiskAssessment, UUID> {
   Page<RiskAssessment> findAllByPortfolioId(UUID portfolioId, Pageable pageable);
 
+  boolean existsByPortfolioId(UUID portfolioId);
+
   Optional<RiskAssessment> findByIdAndPortfolioUserEmail(UUID id, String userEmail);
 }

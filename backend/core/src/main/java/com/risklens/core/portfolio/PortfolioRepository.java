@@ -11,4 +11,6 @@ public interface PortfolioRepository extends JpaRepository<Portfolio, UUID> {
   Page<Portfolio> findAllByUser(User user, Pageable pageable);
 
   Optional<Portfolio> findByIdAndUserEmail(UUID id, String userEmail);
+
+  Optional<Portfolio> findByNameAndUserEmail(String name, String userEmail);
 }

@@ -29,7 +29,13 @@ const fetchDashboardData = async () => {
     }
   } catch (err: unknown) {
     if (isAxiosError(err)) {
-      errorMessage.value = err.response?.data?.message || 'Failed to load portfolio risk metrics.';
+      const responseData = err.response?.data;
+      errorMessage.value =
+        (typeof responseData?.detail === 'string' && responseData.detail) ||
+        (typeof responseData?.message === 'string' && responseData.message) ||
+        (err.response?.status === 401
+          ? 'Your session has expired. Please sign in again.'
+          : 'Failed to load portfolio risk metrics.');
     } else {
       errorMessage.value = 'An unexpected error occurred.';
     }

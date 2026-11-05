@@ -1,6 +1,8 @@
 package com.risklens.core.config;
 
 import com.risklens.core.portfolio.*;
+import com.risklens.core.risk.RiskAssessment;
+import com.risklens.core.risk.RiskAssessmentRepository;
 import com.risklens.core.user.User;
 import com.risklens.core.user.UserRepository;
 import java.io.BufferedReader;
@@ -28,78 +30,25 @@ public class DataSeeder implements CommandLineRunner {
   private final UserRepository userRepository;
   private final PortfolioRepository portfolioRepository;
   private final PositionRepository positionRepository;
+  private final RiskAssessmentRepository riskAssessmentRepository;
   private final PriceHistoryRepository priceHistoryRepository;
   private final PasswordEncoder passwordEncoder;
 
   @Override
   @Transactional
   public void run(String... args) throws Exception {
-    if (userRepository.count() > 0) {
-      log.info("Database already seeded. Skipping demo data initialization.");
-      return;
-    }
-
     log.info("Starting demo data seeding...");
 
     OffsetDateTime now = OffsetDateTime.now();
     String defaultHash = passwordEncoder.encode("12345678");
 
-    User regularUser =
-        User.builder()
-            .email("user@risklens.com")
-            .passwordHash(defaultHash)
-            .createdAt(now)
-            .updatedAt(now)
-            .role("USER")
-            .isActive(true)
-            .build();
-    User analystUser =
-        User.builder()
-            .email("analyst@risklens.com")
-            .passwordHash(defaultHash)
-            .createdAt(now)
-            .updatedAt(now)
-            .role("ANALYST")
-            .isActive(true)
-            .build();
-    User adminUser =
-        User.builder()
-            .email("admin@risklens.com")
-            .passwordHash(defaultHash)
-            .createdAt(now)
-            .updatedAt(now)
-            .role("ADMIN")
-            .isActive(true)
-            .build();
+    User regularUser = getOrCreateDemoUser("user@risklens.com", "USER", defaultHash, now);
+    User analystUser = getOrCreateDemoUser("analyst@risklens.com", "ANALYST", defaultHash, now);
+    User adminUser = getOrCreateDemoUser("admin@risklens.com", "ADMIN", defaultHash, now);
 
-    userRepository.saveAll(List.of(regularUser, analystUser, adminUser));
-
-    Portfolio p1 =
-        Portfolio.builder()
-            .user(regularUser)
-            .name("Growth Portfolio")
-            .baseCurrency("USD")
-            .createdAt(now)
-            .updatedAt(now)
-            .build();
-    Portfolio p2 =
-        Portfolio.builder()
-            .user(analystUser)
-            .name("Crypto & Tech")
-            .baseCurrency("USD")
-            .createdAt(now)
-            .updatedAt(now)
-            .build();
-    Portfolio p3 =
-        Portfolio.builder()
-            .user(adminUser)
-            .name("Conservative Assets")
-            .baseCurrency("USD")
-            .createdAt(now)
-            .updatedAt(now)
-            .build();
-
-    portfolioRepository.saveAll(List.of(p1, p2, p3));
+    Portfolio p1 = getOrCreateDemoPortfolio(regularUser, "Growth Portfolio", now);
+    Portfolio p2 = getOrCreateDemoPortfolio(analystUser, "Crypto & Tech", now);
+    Portfolio p3 = getOrCreateDemoPortfolio(adminUser, "Conservative Assets", now);
 
     Position pos1 =
         Position.builder()
@@ -224,13 +173,71 @@ public class DataSeeder implements CommandLineRunner {
             .updatedAt(now)
             .build();
 
-    positionRepository.saveAll(
-        List.of(pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12));
+    savePositionsIfMissing(p1, pos1, pos2, pos3, pos4);
+    savePositionsIfMissing(p2, pos5, pos6, pos7, pos8);
+    savePositionsIfMissing(p3, pos9, pos10, pos11, pos12);
+
+    seedRiskAssessmentIfMissing(p1, now);
+    seedRiskAssessmentIfMissing(p2, now);
+    seedRiskAssessmentIfMissing(p3, now);
 
     // Load Price History from CSV Fixture
     loadPriceHistoryFromCsv();
 
     log.info("Demo data seeding completed successfully!");
+  }
+
+  private User getOrCreateDemoUser(
+      String email, String role, String defaultHash, OffsetDateTime now) {
+    return userRepository
+        .findByEmail(email)
+        .orElseGet(
+            () ->
+                userRepository.save(
+                    User.builder()
+                        .email(email)
+                        .passwordHash(defaultHash)
+                        .createdAt(now)
+                        .updatedAt(now)
+                        .role(role)
+                        .isActive(true)
+                        .build()));
+  }
+
+  private Portfolio getOrCreateDemoPortfolio(User user, String name, OffsetDateTime now) {
+    return portfolioRepository
+        .findByNameAndUserEmail(name, user.getEmail())
+        .orElseGet(
+            () ->
+                portfolioRepository.save(
+                    Portfolio.builder()
+                        .user(user)
+                        .name(name)
+                        .baseCurrency("USD")
+                        .createdAt(now.minusDays(365))
+                        .updatedAt(now)
+                        .build()));
+  }
+
+  private void savePositionsIfMissing(Portfolio portfolio, Position... positions) {
+    if (positionRepository.findAllByPortfolioId(portfolio.getId()).isEmpty()) {
+      positionRepository.saveAll(List.of(positions));
+    }
+  }
+
+  private void seedRiskAssessmentIfMissing(Portfolio portfolio, OffsetDateTime now) {
+    if (!riskAssessmentRepository.existsByPortfolioId(portfolio.getId())) {
+      riskAssessmentRepository.save(
+          RiskAssessment.builder()
+              .portfolio(portfolio)
+              .calculatedAt(now)
+              .volatility(new BigDecimal("0.185000"))
+              .var95(new BigDecimal("0.042000"))
+              .maxDrawdown(new BigDecimal("0.125000"))
+              .sharpeRatio(new BigDecimal("1.450000"))
+              .riskScore((short) 49)
+              .build());
+    }
   }
 
   private void loadPriceHistoryFromCsv() {

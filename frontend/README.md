@@ -9,7 +9,7 @@ npm ci
 npm run dev
 ```
 
-The demo login accepts any non-empty email address and stores a mock access token in browser local storage. All portfolio metrics and risk findings are sample data; authentication, market data, and AI analysis are not connected to a backend.
+The backend's `demo` profile seeds sample users, portfolios, positions, price history, and an initial risk assessment. Start the backend and sign in as `user@risklens.com` with password `12345678` to view the seeded Growth Portfolio dashboard. Other demo accounts are `analyst@risklens.com` and `admin@risklens.com` with the same password. Existing databases are seeded idempotently at application startup.
 
 ## Quality checks
 
