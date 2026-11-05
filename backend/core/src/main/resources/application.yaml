@@ -19,6 +19,10 @@ spring:
     refresh-token:
       expiration: ${JWT_ACCESS_TOKEN_EXPIRATION}
 
+  app:
+    cors:
+      allowed-origin: http://localhost:5173
+
   risklens:
     risk:
       scoring:
