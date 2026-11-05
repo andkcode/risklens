@@ -1,10 +1,14 @@
+// frontend/src/composables/useLoginForm.ts
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
+import { useToastStore } from '../stores/toast';
+import { parseProblemDetail } from '../utils/errorMapper';
 
 export function useLoginForm() {
   const router = useRouter();
   const auth = useAuthStore();
+  const toast = useToastStore();
 
   const email = ref('');
   const password = ref('');
@@ -13,7 +17,6 @@ export function useLoginForm() {
 
   const emailError = ref('');
   const passwordError = ref('');
-  const generalError = ref('');
   const isLoading = ref(false);
 
   function validate(): boolean {
@@ -41,23 +44,35 @@ export function useLoginForm() {
     return isValid;
   }
 
-  async function handleSubmit() {
-    generalError.value = '';
-    if (!validate()) return;
+  async function handleSubmit(): Promise<void> {
+    if (!validate()) {
+      toast.warning('Please correct the highlighted fields before continuing.', 'Check your details');
+      return;
+    }
 
     isLoading.value = true;
     try {
-      // Передаем и email, и password в стор авторизации
+      // Pass both email and password to the authentication store
       await auth.login(email.value, password.value);
+      toast.success('You are now signed in.', 'Welcome back');
       await router.push({ name: 'dashboard' });
-    } catch {
-      generalError.value = 'Invalid credentials or network error.';
+    } catch (err: unknown) {
+      // Parse backend ProblemDetail response
+      const parsedError = parseProblemDetail(err);
+      toast.error(parsedError.generalMessage, 'Sign-in failed');
+
+      if (parsedError.fieldErrors.email) {
+        emailError.value = parsedError.fieldErrors.email;
+      }
+      if (parsedError.fieldErrors.password) {
+        passwordError.value = parsedError.fieldErrors.password;
+      }
     } finally {
       isLoading.value = false;
     }
   }
 
-  function register() {
+  function register(): void {
     void router.push({ name: 'register' });
   }
 
@@ -68,7 +83,6 @@ export function useLoginForm() {
     rememberMe,
     emailError,
     passwordError,
-    generalError,
     isLoading,
     handleSubmit,
     register,

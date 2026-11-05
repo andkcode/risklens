@@ -1,10 +1,14 @@
+// frontend/src/composables/useRegisterForm.ts
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
+import { useToastStore } from '../stores/toast';
+import { parseProblemDetail } from '../utils/errorMapper';
 
 export function useRegisterForm() {
   const router = useRouter();
   const auth = useAuthStore();
+  const toast = useToastStore();
 
   const fullName = ref('');
   const email = ref('');
@@ -22,7 +26,6 @@ export function useRegisterForm() {
   const passwordError = ref('');
   const confirmPasswordError = ref('');
   const termsError = ref('');
-  const generalError = ref('');
   const isLoading = ref(false);
 
   const hasMinLength = computed(() => password.value.length >= 8);
@@ -87,23 +90,37 @@ export function useRegisterForm() {
     return isValid;
   }
 
-  async function handleRegister() {
-    generalError.value = '';
-    if (!validate()) return;
+  async function handleRegister(): Promise<void> {
+    if (!validate()) {
+      toast.warning('Please correct the highlighted fields before continuing.', 'Check your details');
+      return;
+    }
 
     isLoading.value = true;
     try {
-      // Добавлен await
       await auth.register(fullName.value, email.value, password.value);
+      toast.success('Your account has been created.', 'Account created');
       await router.push({ name: 'dashboard' });
-    } catch {
-      generalError.value = 'Registration failed. Please try again.';
+    } catch (err: unknown) {
+      // Parse backend ProblemDetail response
+      const parsedError = parseProblemDetail(err);
+      toast.error(parsedError.generalMessage, 'Registration failed');
+
+      if (parsedError.fieldErrors.fullName) {
+        fullNameError.value = parsedError.fieldErrors.fullName;
+      }
+      if (parsedError.fieldErrors.email) {
+        emailError.value = parsedError.fieldErrors.email;
+      }
+      if (parsedError.fieldErrors.password) {
+        passwordError.value = parsedError.fieldErrors.password;
+      }
     } finally {
       isLoading.value = false;
     }
   }
 
-  function goToLogin() {
+  function goToLogin(): void {
     void router.push({ name: 'login' });
   }
 
@@ -122,7 +139,6 @@ export function useRegisterForm() {
     passwordError,
     confirmPasswordError,
     termsError,
-    generalError,
     isLoading,
     hasMinLength,
     hasUpperCase,

@@ -4,55 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="frontend(merge): Resolve merge conflicts">
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/.prettierrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/.vscode/extensions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/eslint.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/postcss.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/public/mockServiceWorker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/App.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/api/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/api/client.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/assets/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/BaseAlert.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/BaseButton.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/BaseCard.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/BaseInput.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/BaseTable.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/PasswordRequirements.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/icons/IconEye.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/icons/IconEyeOff.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/icons/IconLock.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/icons/IconSecurity.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/icons/IconUser.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/components/icons/MainLogo.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/composables/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/composables/useLoginForm.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/composables/useRegisterForm.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/layouts/AppLayout.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/main.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/mocks/browser.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/mocks/handlers.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/mocks/init.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/router/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/stores/auth.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/types/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/DashboardView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/LoginView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/NotFoundView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/PortfolioDetailsView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/PortfoliosView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/RegisterView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/src/views/RiskAnalysisView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/tsconfig.app.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/tsconfig.node.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RisksLens-app/vite.config.js" beforeDir="false" />
+    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(frontend): implement risk assessment service and dashboard view">
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/composables/useLoginForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/composables/useLoginForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/composables/useRegisterForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/composables/useRegisterForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/RegisterView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/RegisterView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,13 +35,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="frontend" />
+        <entry key="$PROJECT_DIR$" value="backend" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -175,6 +133,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Maven.core [spotless:apply...].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -198,9 +157,10 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "C:/Users/profi/AppData/Roaming/JetBrains/WebStorm2026.2/node/versions/26.13.0/node",
     "nodejs_package_manager_path": "C:\\Program Files\\nodejs\\npm.cmd",
+    "prettierjs.PrettierConfiguration.Package": "Z:\\IdeaProjects\\risklens\\frontend\\node_modules\\prettier",
     "settings.editor.selected.configurable": "com.github.blarc.ai.commits.intellij.plugin.settings.AppSettingsConfigurable",
     "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "C:\\Users\\profi\\Desktop\\RiskLense\\RiskLense-app\\node_modules\\typescript\\lib"
+    "ts.external.directory.path": "Z:\\IdeaProjects\\risklens\\frontend\\node_modules\\typescript\\lib"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -236,7 +196,39 @@
       <option name="project" value="LOCAL" />
       <updated>1793886588679</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat(frontend): add OpenAPI generator configuration and generated API client">
+      <option name="closed" value="true" />
+      <created>1793895922135</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1793895922135</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat(core): add CORS configuration for frontend integration">
+      <option name="closed" value="true" />
+      <created>1793896152186</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1793896152186</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat(frontend): implement token refresh logic and strict types in API client">
+      <option name="closed" value="true" />
+      <created>1793899207508</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1793899207508</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat(frontend): implement risk assessment service and dashboard view">
+      <option name="closed" value="true" />
+      <created>1793899669783</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1793899669783</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,6 +242,14 @@
     <MESSAGE value="ci(" />
     <MESSAGE value="ci(ci): add CI workflows, Docker configuration, and project documentation" />
     <MESSAGE value="frontend(merge): Resolve merge conflicts" />
-    <option name="LAST_COMMIT_MESSAGE" value="frontend(merge): Resolve merge conflicts" />
+    <MESSAGE value="chore(" />
+    <MESSAGE value="chore(frontend): update IDE workspace configuration and metadata" />
+    <MESSAGE value="feat(frontend): add OpenAPI generator configuration and generated API client" />
+    <MESSAGE value="feat(core): add CORS configuration for frontend integration" />
+    <MESSAGE value="feat(frontend): implement token refresh logic and strict types in API client" />
+    <MESSAGE value="feat(" />
+    <MESSAGE value="feat(frontend): implement risk assessment service and dashboard view" />
+    <MESSAGE value="feat(frontend): integrate toast notifications and backend error mapping for auth forms" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(frontend): integrate toast notifications and backend error mapping for auth forms" />
   </component>
 </project>

@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import { apiClient } from '../api/client';
+import { axiosInstance as apiClient } from '../api/client';
 
-// 1. Описываем интерфейс пользователя
+// 1. Describe the user interface
 export interface User {
   id: number | string;
   fullName: string;
@@ -13,12 +13,12 @@ export interface User {
 export const useAuthStore = defineStore('auth', () => {
   const token = ref<string | null>(localStorage.getItem('access_token'));
 
-  // 2. Используем интерфейс вместо any
+  // 2. Use the strict interface instead of 'any'
   const user = ref<User | null>(null);
 
   const isAuthenticated = computed(() => !!token.value);
 
-  async function login(email: string, password?: string) {
+  async function login(email: string, password?: string): Promise<void> {
     try {
       const response = await apiClient.post('/auth/login', { email, password });
       token.value = response.data.token;
@@ -33,7 +33,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  async function register(fullName: string, email: string, password: string) {
+  async function register(fullName: string, email: string, password: string): Promise<void> {
     try {
       const response = await apiClient.post('/auth/register', { fullName, email, password });
       token.value = response.data.token;
@@ -48,7 +48,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  function logout() {
+  function logout(): void {
     token.value = null;
     user.value = null;
     localStorage.removeItem('access_token');
