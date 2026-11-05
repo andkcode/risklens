@@ -3,11 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
+"scripts": {
+    "gen:api": "npx @openapitools/openapi-generator-cli generate -i ../openapi.yaml -g typescript-axios -o ./src/api/generated --additional-properties=supportsES6=true,withInterfaces=true",
     "dev": "vite",
-    "lint": "eslint . --max-warnings 0",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "lint": "eslint --max-warnings 0",
+    "format": "prettier --write ",
+    "format:check": "prettier --check ",
     "typecheck": "vue-tsc --noEmit",
     "build": "vite build",
     "preview": "vite preview"
