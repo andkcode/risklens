@@ -1,8 +1,8 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    variant?: 'primary' | 'secondary' | 'danger' | 'outline';
-    size?: 'sm' | 'md' | 'lg';
+    variant?: 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost';
+    size?: 'sm' | 'md' | 'lg' | 'icon';
     loading?: boolean;
     disabled?: boolean;
   }>(),
@@ -17,6 +17,7 @@ withDefaults(
       size === 'sm' && 'h-8 px-3 text-[10px]',
       size === 'md' && 'h-9 px-3.5 text-[11px]',
       size === 'lg' && 'h-10 px-4 text-xs',
+      size === 'icon' && 'size-9 p-0 rounded-lg',
       variant === 'primary' &&
         'text-white bg-gradient-to-b from-[#4386f5] to-[#2f70df] border border-[#5593f8] shadow-[0_8px_24px_rgba(38,105,220,.2)] hover:brightness-108',
       variant === 'secondary' &&
@@ -25,6 +26,8 @@ withDefaults(
         'text-white bg-[#ff6978]/20 border border-[#ff6978]/40 hover:bg-[#ff6978]/30',
       variant === 'outline' &&
         'text-[#8994a2] bg-transparent border border-[#222830] hover:border-[#4c8dff] hover:text-[#4c8dff]',
+      variant === 'ghost' &&
+        'text-[#8994a2] bg-[#101419] border border-[#222830] hover:text-[#ebedf0] hover:bg-[#171d24]',
     ]"
     :disabled="disabled || loading"
   >

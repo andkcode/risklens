@@ -4,7 +4,46 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(frontend): add portfolio mock handlers and mock support toggle" />
+    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="Modify design Login and Registration views, added view Layout, Dashboard from wireframes with uses data from mocs">
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/Alerts.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/HistoryLog.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/MetricsGrid.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/PortfolioAllocation.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/Watchlist.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/mocks/authHandlers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/mocks/dashboardHandlers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/mocks/mainHandlers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/stores/dashboard.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/types/dashboard.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/utils/riskStyle.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/BaseAlert.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/BaseAlert.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/BaseButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/BaseButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/BaseCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/BaseCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/icons/IconEye.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/icons/IconEyeOff.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/icons/IconLock.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/icons/IconSecurity.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/icons/IconUser.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/icons/MainLogo.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/composables/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/composables/useLoginForm.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/composables/useRegisterForm.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/layouts/AppLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/layouts/AppLayout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/mocks/browser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/mocks/browser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/mocks/handlers.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/mocks/init.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/mocks/init.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/DashboardView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/NotFoundView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/PortfolioDetailsView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/PortfoliosView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/RegisterView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/RiskAnalysisView.vue" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +75,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="backend" />
+        <entry key="$PROJECT_DIR$" value="frontend" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -50,7 +89,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/andkcode/risklens.git&quot;,
-    &quot;accountId&quot;: &quot;46932453-700a-4621-a779-d89c8ab27dda&quot;
+    &quot;accountId&quot;: &quot;e1115cc2-b408-4406-bb62-c9a47d021ff2&quot;
   }
 }</component>
   <component name="JiraMajeraCodeReviewSettings">
@@ -64,61 +103,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.3257847048767128" />
-      <entry key="MS500" value="2.84733090669245" />
-      <entry key="S2" value="5.891267737669685" />
-      <entry key="S5" value="8.154281690005833" />
-      <entry key="S10" value="11.370814997393314" />
-      <entry key="S30" value="22.11224235954404" />
-      <entry key="S60" value="31.45402316272665" />
-      <entry key="M2" value="39.62946174827012" />
-      <entry key="M5" value="49.6891050538087" />
-      <entry key="M10" value="65.98988994499398" />
-      <entry key="M15" value="83.53619380030882" />
-      <entry key="M30" value="133.60949640127117" />
-      <entry key="H1" value="206.02895146633912" />
-      <entry key="H2" value="301.95140197441305" />
-      <entry key="H4" value="410.2877929758684" />
-      <entry key="D1" value="587.9481320411289" />
-      <entry key="W1" value="632.9333967501858" />
+      <entry key="MS100" value="1.000011894873095" />
+      <entry key="MS500" value="1.126098619497156" />
+      <entry key="S2" value="2.093902504335639" />
+      <entry key="S5" value="3.5566883460871854" />
+      <entry key="S10" value="5.599901122017215" />
+      <entry key="S30" value="12.133688776808008" />
+      <entry key="S60" value="17.29193841166925" />
+      <entry key="M2" value="21.357133824332138" />
+      <entry key="M5" value="24.692373670927488" />
+      <entry key="M10" value="27.721868259504507" />
+      <entry key="M15" value="31.977105385323465" />
+      <entry key="M30" value="56.35258830227183" />
+      <entry key="H1" value="126.0391752262956" />
+      <entry key="H2" value="248.13630157343587" />
+      <entry key="H4" value="398.97810436285107" />
+      <entry key="D1" value="666.6600946306727" />
+      <entry key="W1" value="738.0538949939648" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="9.16131837144835E-34" />
-      <entry key="MS500" value="2.4682639213594856E-7" />
-      <entry key="S2" value="0.02228937540420356" />
-      <entry key="S5" value="0.21839322397917368" />
-      <entry key="S10" value="0.46732560809265905" />
-      <entry key="S30" value="0.776020498500167" />
-      <entry key="S60" value="0.8809205164822766" />
-      <entry key="M2" value="0.9393635373860982" />
-      <entry key="M5" value="1.0817002133665568" />
-      <entry key="M10" value="1.5743068923429473" />
-      <entry key="M15" value="2.084929405532323" />
-      <entry key="M30" value="3.2642684356163767" />
-      <entry key="H1" value="4.715571376180717" />
-      <entry key="H2" value="6.624264644218386" />
-      <entry key="H4" value="8.888796559880669" />
-      <entry key="D1" value="12.796620734914415" />
-      <entry key="W1" value="13.816077559947137" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="5.4047282036794597E-297" />
+      <entry key="S5" value="3.9522177506912854E-119" />
+      <entry key="S10" value="8.521477116283318E-60" />
+      <entry key="S30" value="3.2093416247417744E-20" />
+      <entry key="S60" value="2.530211715722025E-10" />
+      <entry key="M2" value="2.2488041008866058E-5" />
+      <entry key="M5" value="0.020991396189126814" />
+      <entry key="M10" value="0.21460969204955294" />
+      <entry key="M15" value="0.5138305069652035" />
+      <entry key="M30" value="1.6470445196771089" />
+      <entry key="H1" value="3.9055170865683664" />
+      <entry key="H2" value="7.126192986244943" />
+      <entry key="H4" value="10.756866277048342" />
+      <entry key="D1" value="17.024316584676843" />
+      <entry key="W1" value="18.696343751706696" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.262661849463767" />
-      <entry key="MS500" value="2.8143640247032145" />
-      <entry key="S2" value="5.834098513331788" />
-      <entry key="S5" value="8.265001788015779" />
-      <entry key="S10" value="11.741708006881685" />
-      <entry key="S30" value="22.83697407673301" />
-      <entry key="S60" value="32.3051339601504" />
-      <entry key="M2" value="40.55249395507845" />
-      <entry key="M5" value="50.76295560030949" />
-      <entry key="M10" value="67.55804049946126" />
-      <entry key="M15" value="85.61516702314093" />
-      <entry key="M30" value="136.8681207092005" />
-      <entry key="H1" value="210.73980640319604" />
-      <entry key="H2" value="308.5718215869917" />
-      <entry key="H4" value="419.1735506289792" />
-      <entry key="D1" value="600.7438548206566" />
-      <entry key="W1" value="646.7493300289123" />
+      <entry key="MS100" value="0.9265994722538008" />
+      <entry key="MS500" value="1.1099513991147134" />
+      <entry key="S2" value="2.087608629570595" />
+      <entry key="S5" value="3.5348570139591207" />
+      <entry key="S10" value="5.5475636654821505" />
+      <entry key="S30" value="12.07784114668357" />
+      <entry key="S60" value="17.253471852568463" />
+      <entry key="M2" value="21.334399879766746" />
+      <entry key="M5" value="24.703175989862224" />
+      <entry key="M10" value="27.93078747626574" />
+      <entry key="M15" value="32.48663347063993" />
+      <entry key="M30" value="57.99628245982406" />
+      <entry key="H1" value="129.94135646969957" />
+      <entry key="H2" value="255.2592011801436" />
+      <entry key="H4" value="409.7320509334517" />
+      <entry key="D1" value="683.6834334294131" />
+      <entry key="W1" value="756.7500775338866" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -130,45 +169,49 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.CoreApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.core [spotless:apply...].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;24.15.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;24.19.2&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/profi/Desktop/RiskLense&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;C:\\Program Files\\nodejs\\npm.cmd&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;Z:\\IdeaProjects\\risklens\\frontend\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.blarc.ai.commits.intellij.plugin.settings.AppSettingsConfigurable&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;Z:\\IdeaProjects\\risklens\\frontend\\node_modules\\typescript\\lib&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CoreApplication.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "Maven.core [spotless:apply...].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "frontend",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.nodejs.core.library.configured.version": "26.13.0",
+    "javascript.nodejs.core.library.typings.version": "26.6.6",
+    "javascript.preferred.runtime.type.id": "node",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/profi/WebstormProjects/risklens",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "C:\\Program Files\\nodejs\\npm.cmd",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\profi\\WebstormProjects\\risklens\\frontend\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "com.github.blarc.ai.commits.intellij.plugin.settings.AppSettingsConfigurable",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "C:\\Users\\profi\\WebstormProjects\\risklens\\frontend\\node_modules\\typescript\\lib"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\profi\Desktop\RiskLense" />
+      <recent name="C:\Users\profi\WebstormProjects\risklens\frontend\src" />
+      <recent name="C:\Users\profi\WebstormProjects\risklens\frontend\src\types" />
+      <recent name="C:\Users\profi\WebstormProjects\risklens\frontend\src\stores" />
+      <recent name="C:\Users\profi\WebstormProjects\risklens\frontend\src\utils" />
+      <recent name="C:\Users\profi\WebstormProjects\risklens\frontend\src\mocks" />
     </key>
   </component>
   <component name="RunManager">
@@ -188,8 +231,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.27258.48" />
-        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.27258.48" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-WS-262.10968.77" />
       </set>
     </attachedChunks>
   </component>
@@ -205,6 +247,12 @@
       <workItem from="1793363891599" duration="2240000" />
       <workItem from="1793367739029" duration="6234000" />
       <workItem from="1793383934326" duration="1199000" />
+      <workItem from="1793962078955" duration="1772000" />
+      <workItem from="1793963880058" duration="1151000" />
+      <workItem from="1793965055281" duration="87000" />
+      <workItem from="1793965161959" duration="101000" />
+      <workItem from="1793965281030" duration="1942000" />
+      <workItem from="1793967838144" duration="2073000" />
     </task>
     <task id="LOCAL-00001" summary="frontend(merge): Resolve merge conflicts">
       <option name="closed" value="true" />
@@ -277,6 +325,7 @@
     <option name="version" value="3" />
   </component>
   <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.cmd" />
     <option featureType="dependencySupport" implementationName="java:org.springframework.security:spring-security-core" />
     <option featureType="dependencySupport" implementationName="java:org.springframework:spring-core" />
     <option featureType="dependencySupport" implementationName="java:jakarta.validation:jakarta.validation-api" />
@@ -331,6 +380,7 @@
     <MESSAGE value="feat(frontend): add portfolio mock handlers and mock support config" />
     <MESSAGE value="feat(" />
     <MESSAGE value="feat(frontend): add portfolio mock handlers and mock support toggle" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(frontend): add portfolio mock handlers and mock support toggle" />
+    <MESSAGE value="Modify design Login and Registration views, added view Layout, Dashboard from wireframes with uses data from mocs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modify design Login and Registration views, added view Layout, Dashboard from wireframes with uses data from mocs" />
   </component>
 </project>
