@@ -48,5 +48,6 @@ export interface HistoryLogItem {
   primaryRiskFactor: string;
   riskRating: 'High' | 'Medium' | 'Low';
   score: number;
+  actionRecommended: string;
   actionStatus: 'Pending' | 'Applied' | 'In review' | 'Archived';
 }

@@ -2,7 +2,6 @@
 import type { MetricCardData } from '../../types/dashboard';
 import {
   getTrendColorClass,
-  getRiskBadgeClass,
   generateLinePath,
   calculateCircleOffset,
 } from '../../utils/riskStyle';
@@ -23,11 +22,11 @@ defineProps<{
     >
       <div>
         <!-- Card Header -->
-        <div class="flex items-center text-xs text-[#8994a2]">
+        <div class="flex items-center text-xs text-brand-secondary">
           <span>{{ metric.title }}</span>
           <span
             v-if="metric.timeframe"
-            class="text-[9px] bg-[#171d24] px-1.5 py-0.5 rounded border border-[#2b333d]"
+            class="text-[9px] bg-brand-surface-hover px-1.5 py-0.5 rounded border border-b-brand-border-light"
           >
             {{ metric.timeframe }}
           </span>
@@ -39,24 +38,24 @@ defineProps<{
           </span>
         </div>
 
-        <!-- Risk Score Card Layout (Replaced text value with circular gauge) -->
-        <div v-if="metric.riskLevel" class="mt-3 flex items-center ">
+        <!-- Risk Score Card Layout (Added justify-between for proper spacing) -->
+        <div v-if="metric.riskLevel" class="mt-3 flex items-center justify-between">
           <div>
             <div class="text-[11px] font-medium text-white">Risk evaluation</div>
-            <div class="text-[9px] text-[#8994a2] mt-0.5">Score out of 100</div>
+            <div class="text-[9px] text-brand-secondary mt-0.5">Score out of 100</div>
           </div>
-          <!-- Circular Gauge replacing text value -->
+          <!-- Circular Gauge shifted to the right with space -->
           <div class="relative size-20 flex items-center justify-center shrink-0">
             <svg class="size-full -rotate-90" viewBox="0 0 36 36">
               <path
-                class="text-[#222830]"
+                class="text-[#2228]"
                 stroke-width="3.5"
                 stroke="currentColor"
                 fill="none"
                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
               />
               <path
-                class="text-[#f0ad55]"
+                class="text-market-warning"
                 :stroke-dasharray="`100, 100`"
                 :stroke-dashoffset="calculateCircleOffset(metric.value)"
                 stroke-width="3.5"
@@ -87,7 +86,7 @@ defineProps<{
         </div>
 
         <!-- Subtitle / Details -->
-        <p class="text-[10px] text-[#8994a2] mt-1">{{ metric.subtitle }}</p>
+        <p class="text-[10px] text-brand-secondary mt-1">{{ metric.subtitle }}</p>
       </div>
 
       <!-- Dynamic Line & Bar Charts Rendered from Mocks -->
@@ -113,7 +112,7 @@ defineProps<{
           <div
             v-for="(val, vIdx) in metric.chartData"
             :key="vIdx"
-            class="flex-1 bg-[#222830] hover:bg-[#4c8dff] rounded-t transition-colors"
+            class="flex-1 bg-brand-border hover:bg-brand-accent rounded-t transition-colors"
             :style="{ height: `${val}%` }"
           ></div>
         </div>

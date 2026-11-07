@@ -6,6 +6,7 @@ import Icon from '../../../../../WebstormProjects/risklens/frontend/src/componen
 import BaseButton from '../components/BaseButton.vue';
 import BaseInput from '../components/BaseInput.vue';
 import BaseCard from '../components/BaseCard.vue';
+
 const auth = useAuthStore();
 const router = useRouter();
 
@@ -28,14 +29,13 @@ function handleLogout() {
 
 <template>
   <div
-    class="min-h-screen bg-[#09000c] text-[#ebedf0] font-sans antialiased selection:bg-[#4c8dff] selection:text-white"
+    class="min-h-screen bg-brand-bg text-brand-primary font-sans antialiased selection:bg-brand-accent selection:text-white"
   >
     <!-- TOP HEADER BAR -->
     <header
-      class="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-[#222830] bg-[#0b0e12] px-4 lg:px-6"
+      class="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-brand-border bg-brand-sidebar px-4 lg:px-6"
     >
       <!-- Left: Logo & Mobile Trigger -->
-
       <div class="flex items-center gap-4">
         <BaseButton
           variant="ghost"
@@ -57,11 +57,11 @@ function handleLogout() {
 
         <RouterLink to="/dashboard" class="flex items-center gap-2.5 group">
           <div
-            class="grid size-8 place-items-center rounded-lg bg-gradient-to-br from-[#4c8dff] to-[#2f70df] text-white shadow-md shadow-[#4c8dff]/20"
+            class="grid size-8 place-items-center rounded-lg bg-linear-to-br from-brand-accent to-[#2f70df] text-white shadow-md shadow-brand-accent/20"
           >
             <Icon name="logo" :size="16" />
           </div>
-          <span class="text-sm font-bold tracking-tight text-[#ebedf0]">Risk Lens</span>
+          <span class="text-sm font-bold tracking-tight text-brand-primary">Risk Lens</span>
         </RouterLink>
       </div>
 
@@ -73,7 +73,7 @@ function handleLogout() {
           class="w-full"
         >
           <template #prefix>
-            <Icon name="search" :size="15" class="text-[#8994a2] mr-2 shrink-0" />
+            <Icon name="search" :size="15" class="text-brand-secondary mr-2 shrink-0" />
           </template>
         </BaseInput>
       </div>
@@ -82,23 +82,23 @@ function handleLogout() {
       <div class="flex items-center gap-4">
         <!-- Notification Button -->
         <BaseButton variant="ghost" size="icon" class="relative" aria-label="Notifications">
-          <span class="absolute top-2 right-2 size-2 bg-[#4c8dff] rounded-full"></span>
+          <span class="absolute top-2 right-2 size-2 bg-brand-accent rounded-full"></span>
           <Icon name="bell" :size="16" />
         </BaseButton>
 
         <!-- User Profile & Logout -->
-        <div class="flex items-center gap-3 pl-2 border-l border-[#222830]">
+        <div class="flex items-center gap-3 pl-2 border-l border-brand-border">
           <div class="flex items-center gap-2.5">
             <div
-              class="grid size-8 place-items-center rounded-lg bg-[#171d24] border border-[#2b333d] text-[11px] font-bold text-[#ebedf0]"
+              class="grid size-8 place-items-center rounded-lg bg-brand-surface-hover border border-brand-border-light text-[11px] font-bold text-brand-primary"
             >
               {{ auth.user?.fullName ? auth.user.fullName.slice(0, 2).toUpperCase() : 'Us' }}
             </div>
             <div class="hidden sm:flex flex-col text-left">
-              <span class="text-[11px] font-semibold text-[#ebedf0] leading-tight">
+              <span class="text-[11px] font-semibold text-brand-primary leading-tight">
                 {{ auth.user?.fullName || 'User' }}
               </span>
-              <span class="text-[9px] font-semibold text-[#ebedf0]">{{
+              <span class="text-[9px] font-semibold text-brand-primary">{{
                 auth.user?.email || 'no data'
               }}</span>
             </div>
@@ -118,19 +118,20 @@ function handleLogout() {
 
     <!-- LEFT SIDEBAR NAVIGATION -->
     <aside
-      class="fixed bottom-0 top-16 z-40 w-64 border-r border-[#222830] bg-[#0b0e12] flex flex-col justify-between transition-transform duration-300 lg:translate-x-0"
+      class="fixed bottom-0 top-16 z-40 w-64 border-r border-brand-border bg-brand-sidebar flex flex-col justify-between transition-transform duration-300 lg:translate-x-0"
       :class="isMobileMenuOpen ? 'left-0 translate-x-0' : '-left-64 -translate-x-full lg:left-0'"
     >
       <nav class="p-3 space-y-1 overflow-y-auto" @click="closeMobileMenu">
         <div
-          class="px-3 pt-2 pb-2 text-[9px] font-semibold uppercase tracking-wider text-[#606b78]"
+          class="px-3 pt-2 pb-2 text-[9px] font-semibold uppercase tracking-wider text-brand-muted-2"
         >
           Workspace
         </div>
 
         <RouterLink
           to="/dashboard"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-[#8994a2] transition-all hover:bg-[#14191f] hover:text-[#ebedf0] [&.router-link-active]:bg-[#14191f] [&.router-link-active]:text-[#4c8dff] [&.router-link-active]:border [&.router-link-active]:border-[#222830]"
+          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-brand-secondary transition-all hover:bg-brand-surface-raised hover:text-brand-primary"
+          active-class="bg-brand-surface-raised text-brand-accent border border-brand-border"
         >
           <Icon name="dashboard" :size="16" />
           <span>Dashboard</span>
@@ -138,7 +139,8 @@ function handleLogout() {
 
         <RouterLink
           to="/portfolios"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-[#8994a2] transition-all hover:bg-[#14191f] hover:text-[#ebedf0] [&.router-link-active]:bg-[#14191f] [&.router-link-active]:text-[#4c8dff] [&.router-link-active]:border [&.router-link-active]:border-[#222830]"
+          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-brand-secondary transition-all hover:bg-brand-surface-raised hover:text-brand-primary"
+          active-class="bg-brand-surface-raised text-brand-accent border border-brand-border"
         >
           <Icon name="portfolio" :size="16" />
           <span>Portfolio</span>
@@ -146,7 +148,8 @@ function handleLogout() {
 
         <RouterLink
           to="/risk/demo"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-[#8994a2] transition-all hover:bg-[#14191f] hover:text-[#ebedf0] [&.router-link-active]:bg-[#14191f] [&.router-link-active]:text-[#4c8dff] [&.router-link-active]:border [&.router-link-active]:border-[#222830]"
+          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-brand-secondary transition-all hover:bg-brand-surface-raised hover:text-brand-primary"
+          active-class="bg-brand-surface-raised text-brand-accent border border-brand-border"
         >
           <Icon name="risks" :size="16" />
           <span>Risks</span>
@@ -154,7 +157,8 @@ function handleLogout() {
 
         <RouterLink
           to="/reports"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-[#8994a2] transition-all hover:bg-[#14191f] hover:text-[#ebedf0] [&.router-link-active]:bg-[#14191f] [&.router-link-active]:text-[#4c8dff] [&.router-link-active]:border [&.router-link-active]:border-[#222830]"
+          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-brand-secondary transition-all hover:bg-brand-surface-raised hover:text-brand-primary"
+          active-class="bg-brand-surface-raised text-brand-accent border border-brand-border"
         >
           <Icon name="reports" :size="16" />
           <span>Reports</span>
@@ -162,7 +166,8 @@ function handleLogout() {
 
         <RouterLink
           to="/news"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-[#8994a2] transition-all hover:bg-[#14191f] hover:text-[#ebedf0] [&.router-link-active]:bg-[#14191f] [&.router-link-active]:text-[#4c8dff] [&.router-link-active]:border [&.router-link-active]:border-[#222830]"
+          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-brand-secondary transition-all hover:bg-brand-surface-raised hover:text-brand-primary"
+          active-class="bg-brand-surface-raised text-brand-accent border border-brand-border"
         >
           <Icon name="news" :size="16" />
           <span>News</span>
@@ -170,10 +175,10 @@ function handleLogout() {
       </nav>
 
       <!-- Sidebar Footer (BaseCard) -->
-      <div class="p-3 border-t border-[#222830] space-y-3 bg-[#0b0e12]">
+      <div class="p-3 border-t border-brand-border space-y-3 bg-brand-sidebar">
         <RouterLink
           to="/settings"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-[#8994a2] transition-all hover:bg-[#14191f] hover:text-[#ebedf0]"
+          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-brand-secondary transition-all hover:bg-brand-surface-raised hover:text-brand-primary"
         >
           <Icon name="settings" :size="16" />
           <span>Account Settings</span>
@@ -182,15 +187,17 @@ function handleLogout() {
         <!-- Real-time markets card (BaseCard) -->
         <BaseCard variant="standard" class="p-3">
           <div class="flex items-center justify-between mb-1">
-            <span class="text-[9px] font-semibold text-[#8994a2] uppercase tracking-wider"
+            <span class="text-[9px] font-semibold text-brand-secondary uppercase tracking-wider"
               >Data Refresh</span
             >
-            <span class="inline-flex items-center gap-1.5 text-[9px] font-semibold text-[#43d6a0]">
-              <span class="size-1.5 rounded-full bg-[#43d6a0] animate-pulse"></span>
+            <span
+              class="inline-flex items-center gap-1.5 text-[9px] font-semibold text-market-success"
+            >
+              <span class="size-1.5 rounded-full bg-market-success animate-pulse"></span>
               Demo mode
             </span>
           </div>
-          <div class="text-xs font-semibold text-[#ebedf0] mb-0.5">
+          <div class="text-xs font-semibold text-brand-primary mb-0.5">
             Data and authentication are currently mocked.
           </div>
         </BaseCard>

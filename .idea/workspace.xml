@@ -5,44 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="Modify design Login and Registration views, added view Layout, Dashboard from wireframes with uses data from mocs">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/Alerts.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/HistoryLog.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/MetricsGrid.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/PortfolioAllocation.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/Watchlist.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/mocks/authHandlers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/mocks/dashboardHandlers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/mocks/mainHandlers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/stores/dashboard.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/types/dashboard.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/utils/riskStyle.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/api/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/client.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/BaseAlert.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/BaseAlert.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/BaseButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/BaseButton.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/BaseCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/BaseCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/icons/IconEye.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/icons/IconEyeOff.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/icons/IconLock.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/icons/IconSecurity.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/icons/IconUser.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/icons/MainLogo.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/composables/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/composables/useLoginForm.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/composables/useRegisterForm.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/BaseInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/BaseInput.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/BaseTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/BaseTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/dashboard/Alerts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/Alerts.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/dashboard/HistoryLog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/HistoryLog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/dashboard/MetricsGrid.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/MetricsGrid.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/dashboard/PortfolioAllocation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/PortfolioAllocation.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/dashboard/Watchlist.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/Watchlist.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/layouts/AppLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/layouts/AppLayout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/mocks/browser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/mocks/browser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/mocks/handlers.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/mocks/init.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/mocks/init.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/types/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/DashboardView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/NotFoundView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/PortfolioDetailsView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/PortfoliosView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/RegisterView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/RiskAnalysisView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/mocks/dashboardHandlers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/mocks/dashboardHandlers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/types/dashboard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/types/dashboard.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,62 +80,65 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.000011894873095" />
-      <entry key="MS500" value="1.126098619497156" />
-      <entry key="S2" value="2.093902504335639" />
-      <entry key="S5" value="3.5566883460871854" />
-      <entry key="S10" value="5.599901122017215" />
-      <entry key="S30" value="12.133688776808008" />
-      <entry key="S60" value="17.29193841166925" />
-      <entry key="M2" value="21.357133824332138" />
-      <entry key="M5" value="24.692373670927488" />
-      <entry key="M10" value="27.721868259504507" />
-      <entry key="M15" value="31.977105385323465" />
-      <entry key="M30" value="56.35258830227183" />
-      <entry key="H1" value="126.0391752262956" />
-      <entry key="H2" value="248.13630157343587" />
-      <entry key="H4" value="398.97810436285107" />
-      <entry key="D1" value="666.6600946306727" />
-      <entry key="W1" value="738.0538949939648" />
+      <entry key="MS100" value="1.7309936651929597E-89" />
+      <entry key="MS500" value="1.76872003674852E-18" />
+      <entry key="S2" value="3.6468237452904735E-5" />
+      <entry key="S5" value="0.016778993645399046" />
+      <entry key="S10" value="0.12953375484946403" />
+      <entry key="S30" value="0.5059956491953969" />
+      <entry key="S60" value="0.7176007748895733" />
+      <entry key="M2" value="0.9732589344545883" />
+      <entry key="M5" value="1.9655614695796408" />
+      <entry key="M10" value="3.478660571094886" />
+      <entry key="M15" value="4.927801251705149" />
+      <entry key="M30" value="9.19824411660412" />
+      <entry key="H1" value="14.853749350038372" />
+      <entry key="H2" value="19.79565803414372" />
+      <entry key="H4" value="28.34098656763155" />
+      <entry key="D1" value="356.88069067397964" />
+      <entry key="W1" value="707.5089405617715" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="5.4047282036794597E-297" />
-      <entry key="S5" value="3.9522177506912854E-119" />
-      <entry key="S10" value="8.521477116283318E-60" />
-      <entry key="S30" value="3.2093416247417744E-20" />
-      <entry key="S60" value="2.530211715722025E-10" />
-      <entry key="M2" value="2.2488041008866058E-5" />
-      <entry key="M5" value="0.020991396189126814" />
-      <entry key="M10" value="0.21460969204955294" />
-      <entry key="M15" value="0.5138305069652035" />
-      <entry key="M30" value="1.6470445196771089" />
-      <entry key="H1" value="3.9055170865683664" />
-      <entry key="H2" value="7.126192986244943" />
-      <entry key="H4" value="10.756866277048342" />
-      <entry key="D1" value="17.024316584676843" />
-      <entry key="W1" value="18.696343751706696" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0000000000000004" />
+      <entry key="S30" value="1.000018038513583" />
+      <entry key="S60" value="1.0091970635875152" />
+      <entry key="M2" value="1.2610831447329298" />
+      <entry key="M5" value="3.6340696115228925" />
+      <entry key="M10" value="7.92233946736084" />
+      <entry key="M15" value="11.108440446678525" />
+      <entry key="M30" value="16.417105727422936" />
+      <entry key="H1" value="20.450157986134823" />
+      <entry key="H2" value="22.994729083106115" />
+      <entry key="H4" value="24.569763051331165" />
+      <entry key="D1" value="33.96044925237113" />
+      <entry key="W1" value="42.81381612998511" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9265994722538008" />
-      <entry key="MS500" value="1.1099513991147134" />
-      <entry key="S2" value="2.087608629570595" />
-      <entry key="S5" value="3.5348570139591207" />
-      <entry key="S10" value="5.5475636654821505" />
-      <entry key="S30" value="12.07784114668357" />
-      <entry key="S60" value="17.253471852568463" />
-      <entry key="M2" value="21.334399879766746" />
-      <entry key="M5" value="24.703175989862224" />
-      <entry key="M10" value="27.93078747626574" />
-      <entry key="M15" value="32.48663347063993" />
-      <entry key="M30" value="57.99628245982406" />
-      <entry key="H1" value="129.94135646969957" />
-      <entry key="H2" value="255.2592011801436" />
-      <entry key="H4" value="409.7320509334517" />
-      <entry key="D1" value="683.6834334294131" />
-      <entry key="W1" value="756.7500775338866" />
+      <entry key="MS100" value="4.42422500440194E-8" />
+      <entry key="MS500" value="0.03381952014142859" />
+      <entry key="S2" value="0.4288367330508283" />
+      <entry key="S5" value="0.7144042338023586" />
+      <entry key="S10" value="0.8853087347621272" />
+      <entry key="S30" value="1.2902119440085231" />
+      <entry key="S60" value="1.574599854534089" />
+      <entry key="M2" value="2.1369833116595123" />
+      <entry key="M5" value="5.533575014143351" />
+      <entry key="M10" value="11.345987687532517" />
+      <entry key="M15" value="15.988499911594461" />
+      <entry key="M30" value="25.581952171661317" />
+      <entry key="H1" value="35.283439073436924" />
+      <entry key="H2" value="42.77892759902619" />
+      <entry key="H4" value="52.90462880303075" />
+      <entry key="D1" value="390.8395921517795" />
+      <entry key="W1" value="750.322455489655" />
     </decayedShown>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2,
@@ -252,7 +232,7 @@
       <workItem from="1793965055281" duration="87000" />
       <workItem from="1793965161959" duration="101000" />
       <workItem from="1793965281030" duration="1942000" />
-      <workItem from="1793967838144" duration="2073000" />
+      <workItem from="1793967838144" duration="8525000" />
     </task>
     <task id="LOCAL-00001" summary="frontend(merge): Resolve merge conflicts">
       <option name="closed" value="true" />
@@ -318,7 +298,15 @@
       <option name="project" value="LOCAL" />
       <updated>1793904122041</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Modify design Login and Registration views, added view Layout, Dashboard from wireframes with uses data from mocs">
+      <option name="closed" value="true" />
+      <created>1793970054435</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1793970054435</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

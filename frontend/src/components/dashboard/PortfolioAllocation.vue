@@ -13,10 +13,10 @@ defineProps<{
     variant="standard"
     title="Portfolio allocation"
     subtitle="By asset class"
-    class="lg:col-span-3 flex flex-col justify-between"
+    class="lg:col-span-3 flex flex-col"
   >
     <template #header-actions>
-      <button class="text-[#8994a2] hover:text-white transition-colors">
+      <button class="text-brand-secondary hover:text-white transition-colors">
         <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             stroke-linecap="round"
@@ -34,7 +34,7 @@ defineProps<{
         <svg class="size-full -rotate-90" viewBox="0 0 36 36">
           <!-- Background track -->
           <path
-            class="text-[#222830]"
+            class="text-brand-border"
             stroke-width="4.5"
             stroke="currentColor"
             fill="none"
@@ -62,7 +62,7 @@ defineProps<{
           <span class="text-xl font-bold text-white tracking-tight">{{
             allocation.totalValue
           }}</span>
-          <span class="text-[10px] text-[#8994a2]">Total value</span>
+          <span class="text-[10px] text-brand-secondary">Total value</span>
         </div>
       </div>
     </div>
@@ -79,7 +79,7 @@ defineProps<{
             class="size-2 rounded-full shrink-0"
             :style="{ backgroundColor: item.color }"
           ></span>
-          <span class="text-[#8994a2] text-[11px]">{{ item.label }}</span>
+          <span class="text-brand-secondary text-[11px]">{{ item.label }}</span>
         </div>
         <span class="font-semibold text-white text-[11px]">{{ item.percentage }}%</span>
       </div>

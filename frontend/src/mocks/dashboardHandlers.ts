@@ -146,6 +146,7 @@ export const dashboardHandlers = [
         primaryRiskFactor: 'Volatility & concentration',
         riskRating: 'High',
         score: 74,
+        actionRecommended: 'Reduce equity exposure',
         actionStatus: 'Pending',
       },
       {
@@ -157,6 +158,7 @@ export const dashboardHandlers = [
         primaryRiskFactor: 'Cross-asset correlation',
         riskRating: 'Medium',
         score: 68,
+        actionRecommended: 'Hedge cross-asset risk',
         actionStatus: 'Applied',
       },
       {
@@ -168,6 +170,7 @@ export const dashboardHandlers = [
         primaryRiskFactor: 'Market cap concentration',
         riskRating: 'High',
         score: 82,
+        actionRecommended: 'Trim position size',
         actionStatus: 'In review',
       },
       {
@@ -179,6 +182,7 @@ export const dashboardHandlers = [
         primaryRiskFactor: 'Value at Risk (95%)',
         riskRating: 'Medium',
         score: 64,
+        actionRecommended: 'Adjust VaR threshold',
         actionStatus: 'Applied',
       },
       {
@@ -190,6 +194,7 @@ export const dashboardHandlers = [
         primaryRiskFactor: 'Sector correlation',
         riskRating: 'Low',
         score: 31,
+        actionRecommended: 'Maintain current allocation',
         actionStatus: 'Archived',
       },
     ]);
