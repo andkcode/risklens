@@ -1,25 +1,15 @@
-export async function initMsw(): Promise<void> {
-  if (!import.meta.env.DEV) {
+import { worker } from './browser';
+
+export async function initMocks() {
+  // Only enable MSW in development mode
+  if (import.meta.env.MODE !== 'development') {
     return;
   }
 
-  if (import.meta.env.VITE_ENABLE_MOCKS !== 'true') {
-    if ('serviceWorker' in navigator) {
-      const mockWorkerUrl = new URL('/mockServiceWorker.js', window.location.origin).href;
-      const registrations = await navigator.serviceWorker.getRegistrations();
-      const mockRegistrations = registrations.filter((registration) =>
-        [registration.active, registration.waiting, registration.installing].some(
-          (worker) => worker?.scriptURL === mockWorkerUrl,
-        ),
-      );
-      await Promise.all(mockRegistrations.map((registration) => registration.unregister()));
-    }
-    return;
-  }
-
-  const { worker } = await import('./browser');
-
+  // Start the Service Worker and wait for it to be ready
   await worker.start({
-    onUnhandledFrame: 'bypass',
+    onUnhandledFrame: 'bypass', // Ignore unhandled requests (like loading local .vue files or Vite assets)
   });
+
+  console.log('[MSW] Mock Service Worker initialized successfully.');
 }
