@@ -81,6 +81,7 @@ export function generateLinePath(data?: number[]): string {
     .join(' ');
 }
 
+
 /**
  * Calculates stroke-dashoffset for circular risk score gauge
  */
@@ -89,6 +90,7 @@ export function calculateCircleOffset(scoreValue: string): number {
   const circumference = 2 * Math.PI * 15; // r = 15
   return circumference - (numericVal / 100) * circumference;
 }
+
 /**
  * Calculates cumulative stroke-dashoffset for SVG donut/allocation slices
  */
@@ -98,4 +100,29 @@ export function getCumulativeOffset(items: Array<{ percentage: number }>, index:
     offset += items[i].percentage;
   }
   return -offset;
+}
+
+/**
+ * Returns a consistent dynamic color class for portfolio badge codes based on a string hash
+ */
+export function getPortfolioBadgeColor(code?: string): string {
+  if (!code) return 'text-[#4c8dff]';
+  const upper = code.toUpperCase();
+
+  const colorPalette = [
+    'text-[#4386f5]',
+    'text-[#a855f7]',
+    'text-[#38bdf8]',
+    'text-[#fb923c]',
+    'text-[#34d399]',
+    'text-[#f43f5e]',
+    'text-[#fbbf24]',
+    'text-[#a78bfa]',
+  ];
+
+  let hash = 0;
+  for (let i = 0; i < upper.length; i++) {
+    hash = upper.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return colorPalette[Math.abs(hash) % colorPalette.length];
 }

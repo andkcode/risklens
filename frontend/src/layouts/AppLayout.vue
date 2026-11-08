@@ -1,41 +1,30 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '../stores/auth';
+import { useAppLayout } from '../composables/useAppLayout';
 import Icon from '../../../../../WebstormProjects/risklens/frontend/src/components/icons/LayoutIcons.vue';
 import BaseButton from '../components/BaseButton.vue';
 import BaseInput from '../components/BaseInput.vue';
 import BaseCard from '../components/BaseCard.vue';
 
-const auth = useAuthStore();
-const router = useRouter();
-
-const isMobileMenuOpen = ref(false);
-const searchQuery = ref('');
-
-function toggleMobileMenu() {
-  isMobileMenuOpen.value = !isMobileMenuOpen.value;
-}
-
-function closeMobileMenu() {
-  isMobileMenuOpen.value = false;
-}
-
-function handleLogout() {
-  auth.logout();
-  void router.push({ name: 'login' });
-}
+const {
+  auth,
+  isFullWidth,
+  isMobileMenuOpen,
+  searchQuery,
+  toggleMobileMenu,
+  closeMobileMenu,
+  handleLogout,
+} = useAppLayout();
 </script>
 
 <template>
   <div
-    class="min-h-screen bg-brand-bg text-brand-primary font-sans antialiased selection:bg-brand-accent selection:text-white"
+    class="bg-brand-bg text-brand-primary font-sans antialiased selection:bg-brand-accent selection:text-white"
+    :class="isFullWidth ? 'h-screen overflow-hidden' : 'min-h-screen'"
   >
     <!-- TOP HEADER BAR -->
     <header
       class="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-brand-border bg-brand-sidebar px-4 lg:px-6"
     >
-      <!-- Left: Logo & Mobile Trigger -->
       <div class="flex items-center gap-4">
         <BaseButton
           variant="ghost"
@@ -65,7 +54,6 @@ function handleLogout() {
         </RouterLink>
       </div>
 
-      <!-- Center: Global Search Bar (BaseInput) -->
       <div class="hidden md:flex items-center flex-1 max-w-md mx-8">
         <BaseInput
           v-model="searchQuery"
@@ -78,15 +66,12 @@ function handleLogout() {
         </BaseInput>
       </div>
 
-      <!-- Right: Market Tickers & User Profile -->
       <div class="flex items-center gap-4">
-        <!-- Notification Button -->
         <BaseButton variant="ghost" size="icon" class="relative" aria-label="Notifications">
           <span class="absolute top-2 right-2 size-2 bg-brand-accent rounded-full"></span>
           <Icon name="bell" :size="16" />
         </BaseButton>
 
-        <!-- User Profile & Logout -->
         <div class="flex items-center gap-3 pl-2 border-l border-brand-border">
           <div class="flex items-center gap-2.5">
             <div
@@ -174,7 +159,6 @@ function handleLogout() {
         </RouterLink>
       </nav>
 
-      <!-- Sidebar Footer (BaseCard) -->
       <div class="p-3 border-t border-brand-border space-y-3 bg-brand-sidebar">
         <RouterLink
           to="/settings"
@@ -184,7 +168,6 @@ function handleLogout() {
           <span>Account Settings</span>
         </RouterLink>
 
-        <!-- Real-time markets card (BaseCard) -->
         <BaseCard variant="standard" class="p-3">
           <div class="flex items-center justify-between mb-1">
             <span class="text-[9px] font-semibold text-brand-secondary uppercase tracking-wider"
@@ -205,8 +188,15 @@ function handleLogout() {
     </aside>
 
     <!-- MAIN WORKSPACE CONTAINER -->
-    <main class="min-h-screen px-4 pb-12 pt-20 sm:px-6 lg:ml-64 lg:px-8 lg:pt-20">
-      <div class="mx-auto max-w-7xl">
+    <main
+      class="transition-all"
+      :class="
+        isFullWidth
+          ? 'fixed inset-x-0 top-16 bottom-0 overflow-hidden p-0 lg:left-64'
+          : 'relative min-h-screen px-4 pb-12 pt-20 sm:px-6 lg:ml-64 lg:px-8 lg:pt-20'
+      "
+    >
+      <div :class="isFullWidth ? 'h-full w-full' : 'mx-auto max-w-7xl'">
         <RouterView />
       </div>
     </main>

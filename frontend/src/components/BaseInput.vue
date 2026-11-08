@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 defineProps<{
   modelValue: string | number | boolean;
@@ -12,7 +13,7 @@ defineEmits(['update:modelValue']);
 </script>
 
 <template>
-  <!-- 1. Вариант для чекбокса -->
+  <!-- 1. Checkbox variant -->
   <label
     v-if="type === 'checkbox'"
     class="relative flex items-center gap-2 text-[9px] text-brand-secondary cursor-pointer select-none"
@@ -23,7 +24,7 @@ defineEmits(['update:modelValue']);
       :checked="Boolean(modelValue)"
       @change="$emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
     />
-    <!-- Динамические классы по условию modelValue вместо peer-checked -->
+    <!-- Dynamic classes based on modelValue condition instead of peer-checked -->
     <span
       class="w-3.5 h-3.5 flex items-center justify-center rounded-[3px] transition-all border"
       :class="
@@ -43,17 +44,15 @@ defineEmits(['update:modelValue']);
     <span>{{ label }}</span>
   </label>
 
-  <!-- 2. Вариант для обычных полей ввода -->
+  <!-- 2. Standard text/number input variant -->
   <div v-else class="flex flex-col gap-1.5">
     <label v-if="label" class="text-[9px] font-medium text-[#aeb6c0] uppercase tracking-wider">
       {{ label }}
     </label>
     <div
-      class="relative flex items-center h-10 px-3 bg-brand-surface border rounded-md transition-all focus-within:ring-3"
+      class="relative flex items-center h-10 px-3 bg-brand-surface border rounded-md transition-all"
       :class="[
-        error
-          ? 'border-market-danger ring-market-danger/10'
-          : 'border-b-brand-border focus-within:border-brand-accent focus-within:ring-brand-accent/10',
+        error ? 'border-market-danger' : 'border-brand-border focus-within:border-brand-accent',
       ]"
     >
       <slot name="prefix" />
@@ -61,7 +60,7 @@ defineEmits(['update:modelValue']);
         :type="type || 'text'"
         :value="modelValue"
         :placeholder="placeholder"
-        class="w-full bg-transparent border-0 outline-0 text-[11px] placeholder:text-brand-muted-2"
+        class="w-full bg-transparent border-0 outline-0 text-[11px] text-white placeholder:text-brand-muted-2"
         :class="{ 'font-mono': mono }"
         @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
       />
