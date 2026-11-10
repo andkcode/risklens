@@ -1,8 +1,8 @@
 <template>
-  <main class="grid min-h-screen place-items-center bg-slate-50 px-5">
+  <main class="grid min-h-screen place-items-center bg-brand-bg px-5">
     <div class="text-center">
-      <p class="font-mono text-sm font-semibold text-brand-accent">404</p>
-      <h1 class="mt-2 text-2xl font-bold text-slate-900">Page not found</h1>
+      <p class="font-mono text-lg font-semibold text-brand-accent">404</p>
+      <h1 class="mt-2 text-2xl font-bold text-wh-900">Page not found</h1>
       <p class="mt-2 text-sm text-slate-600"></p>
       <RouterLink
         to="/login"
