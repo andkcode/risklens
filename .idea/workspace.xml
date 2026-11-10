@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(auth): enable CORS and update configuration source in security setup">
-      <change afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/RiskExportService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/dto/ExportFileDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/RiskAssessmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/RiskAssessmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/.openapi-generator/FILES" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/.openapi-generator/FILES" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/.openapi-generator/VERSION" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/.openapi-generator/VERSION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/base.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/base.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/common.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/common.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/configuration.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/configuration.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/git_push.sh" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/git_push.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/openapi.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(risk): implement risk assessment export service and endpoint" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,61 +64,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0000000000000047" />
-      <entry key="S30" value="1.0000168132298606" />
-      <entry key="S60" value="1.0063170154085763" />
-      <entry key="M2" value="1.4748186425302918" />
-      <entry key="M5" value="14.468476455447743" />
-      <entry key="M10" value="51.11777632856853" />
-      <entry key="M15" value="85.34159676184979" />
-      <entry key="M30" value="165.96713048358475" />
-      <entry key="H1" value="272.23170574781676" />
-      <entry key="H2" value="400.02247166773503" />
-      <entry key="H4" value="535.8149309962483" />
-      <entry key="D1" value="755.887360132227" />
-      <entry key="W1" value="811.9289971496133" />
+      <entry key="MS100" value="1.000000000798285" />
+      <entry key="MS500" value="1.0357878097000863" />
+      <entry key="S2" value="1.990598947791069" />
+      <entry key="S5" value="2.925760118313991" />
+      <entry key="S10" value="3.4035700700328873" />
+      <entry key="S30" value="3.786392374173144" />
+      <entry key="S60" value="3.899357081834545" />
+      <entry key="M2" value="4.077962610839378" />
+      <entry key="M5" value="9.502493549670401" />
+      <entry key="M10" value="35.57606453091817" />
+      <entry key="M15" value="65.9062430524559" />
+      <entry key="M30" value="145.3590014234922" />
+      <entry key="H1" value="255.24178806882665" />
+      <entry key="H2" value="388.29216223973566" />
+      <entry key="H4" value="529.1743667481886" />
+      <entry key="D1" value="757.3646198033024" />
+      <entry key="W1" value="815.541332182152" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="4.810407146406714E-116" />
-      <entry key="S5" value="7.462433171049434E-47" />
-      <entry key="S10" value="8.686270454180026E-24" />
-      <entry key="S30" value="3.0764122792713925E-8" />
-      <entry key="S60" value="4.6415221114337856E-4" />
-      <entry key="M2" value="0.08725117934320573" />
-      <entry key="M5" value="2.8076755699586085" />
-      <entry key="M10" value="9.97026642263327" />
-      <entry key="M15" value="15.611908282548757" />
-      <entry key="M30" value="25.22706602511771" />
-      <entry key="H1" value="33.06750717955817" />
-      <entry key="H2" value="39.057572082727496" />
-      <entry key="H4" value="43.751940848267914" />
-      <entry key="D1" value="50.18155215919767" />
-      <entry key="W1" value="51.7248712469732" />
+      <entry key="MS100" value="3.052033804235497E-31" />
+      <entry key="MS500" value="7.887109455521254E-7" />
+      <entry key="S2" value="0.029800905957691172" />
+      <entry key="S5" value="0.24529674583510305" />
+      <entry key="S10" value="0.49527441467847216" />
+      <entry key="S30" value="0.7911921405470175" />
+      <entry key="S60" value="0.8894935877760177" />
+      <entry key="M2" value="0.9509883975940749" />
+      <entry key="M5" value="2.0489210554578476" />
+      <entry key="M10" value="7.149268703023564" />
+      <entry key="M15" value="12.318350705041407" />
+      <entry key="M30" value="22.483286437641087" />
+      <entry key="H1" value="31.516173171584853" />
+      <entry key="H2" value="38.52080388079642" />
+      <entry key="H4" value="43.882635995977175" />
+      <entry key="D1" value="51.01399725700778" />
+      <entry key="W1" value="52.700163686806256" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="6.857640994814438E-4" />
-      <entry key="MS500" value="0.23293510732619324" />
-      <entry key="S2" value="0.694718297179424" />
-      <entry key="S5" value="0.8644173893059977" />
-      <entry key="S10" value="0.9297404956793084" />
-      <entry key="S30" value="0.9760260142285957" />
-      <entry key="S60" value="0.9946727163889972" />
-      <entry key="M2" value="1.5532259319316257" />
-      <entry key="M5" value="17.240752855029918" />
-      <entry key="M10" value="61.02794352038671" />
-      <entry key="M15" value="100.8904817373405" />
-      <entry key="M30" value="191.14236399496033" />
-      <entry key="H1" value="305.2645636381777" />
-      <entry key="H2" value="439.05903498078544" />
-      <entry key="H4" value="579.5545967338667" />
-      <entry key="D1" value="806.0663492759235" />
-      <entry key="W1" value="863.6534819741098" />
+      <entry key="MS100" value="0.021792870428481603" />
+      <entry key="MS500" value="0.49894074639763747" />
+      <entry key="S2" value="1.8047640812864247" />
+      <entry key="S5" value="2.947304935588866" />
+      <entry key="S10" value="3.686154785227113" />
+      <entry key="S30" value="4.460245417553784" />
+      <entry key="S60" value="4.721724198293869" />
+      <entry key="M2" value="4.992298679410574" />
+      <entry key="M5" value="11.522958433044872" />
+      <entry key="M10" value="42.68062382186735" />
+      <entry key="M15" value="78.17380030762563" />
+      <entry key="M30" value="167.79559222856912" />
+      <entry key="H1" value="286.7247067641941" />
+      <entry key="H2" value="426.79214445379307" />
+      <entry key="H4" value="573.0446517138532" />
+      <entry key="D1" value="808.3760092938052" />
+      <entry key="W1" value="868.2411020154018" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -285,7 +270,15 @@
       <option name="project" value="LOCAL" />
       <updated>1793904122041</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="feat(risk): implement risk assessment export service and endpoint">
+      <option name="closed" value="true" />
+      <created>1794332609773</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1794332609773</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,8 +337,9 @@
     <MESSAGE value="feat(frontend): update risk metrics" />
     <MESSAGE value="feat(frontend): update risk metrics and add portfolio integration to dashboard" />
     <MESSAGE value="feat(frontend): add portfolio mock handlers and mock support config" />
-    <MESSAGE value="feat(" />
     <MESSAGE value="feat(frontend): add portfolio mock handlers and mock support toggle" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(frontend): add portfolio mock handlers and mock support toggle" />
+    <MESSAGE value="feat(" />
+    <MESSAGE value="feat(risk): implement risk assessment export service and endpoint" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(risk): implement risk assessment export service and endpoint" />
   </component>
 </project>
