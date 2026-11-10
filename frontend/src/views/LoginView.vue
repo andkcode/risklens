@@ -3,14 +3,7 @@ import { useLoginForm } from '../composables/useLoginForm';
 import BaseButton from '../components/BaseButton.vue';
 import BaseInput from '../components/BaseInput.vue';
 import BaseCard from '../components/BaseCard.vue';
-import IconLock from '../components/icons/IconLock.vue';
-import IconEye from '../components/icons/IconEye.vue';
-import IconEyeOff from '../components/icons/IconEyeOff.vue';
-import MainLogo from '../components/icons/MainLogo.vue';
-import IconSecurity from '../components/icons/IconSecurity.vue';
-import { useToastStore } from '../stores/toast';
-
-const toast = useToastStore();
+import AuthIcon from '../../../../../WebstormProjects/risklens/frontend/src/components/icons/AuthIcons.vue';
 
 const {
   email,
@@ -19,6 +12,7 @@ const {
   rememberMe,
   emailError,
   passwordError,
+  generalError,
   isLoading,
   handleSubmit,
   register,
@@ -32,11 +26,11 @@ const {
       class="flex h-16 items-center justify-between border-b border-brand-border bg-brand-card px-4 sm:px-6 lg:px-8"
     >
       <div class="flex items-center gap-3">
-        <MainLogo class="size-6" />
+        <AuthIcon name="logo" />
       </div>
 
       <div class="flex items-center gap-2 text-xs font-medium text-brand-secondary">
-        <IconSecurity class="size-4 text-emerald-500 shrink-0" />
+        <AuthIcon name="security" class="text-emerald-500 shrink-0" />
         <span>256-bit encrypted session</span>
       </div>
     </header>
@@ -44,12 +38,12 @@ const {
     <!-- 2. MAIN CONTENT -->
     <main class="relative flex flex-1 items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <BaseCard variant="auth" class="w-full max-w-md">
-        <!-- Шапка карточки -->
+        <!-- Card header -->
         <div class="mb-6 text-center">
           <div
             class="mx-auto mb-3 grid size-12 place-items-center rounded-xl bg-brand-surface text-brand-accent border border-brand-border"
           >
-            <IconLock class="size-6" />
+            <AuthIcon name="lock" :size="24" />
           </div>
           <span class="text-xs font-semibold uppercase tracking-wider text-brand-accent">
             Secure client access
@@ -60,20 +54,32 @@ const {
           </p>
         </div>
 
-        <!-- Форма входа -->
+        <!-- General authentication error -->
+        <div
+          v-if="generalError"
+          class="mb-4 rounded-lg bg-rose-500/10 border border-rose-500/20 p-3 text-xs text-rose-500 text-center font-medium"
+        >
+          {{ generalError }}
+        </div>
+
+        <!-- Login form -->
         <form class="space-y-4" novalidate @submit.prevent="handleSubmit">
-          <!-- Поле Email -->
+          <!-- Email field -->
           <div class="space-y-1">
             <BaseInput
               v-model="email"
               label="Email address or username"
               type="text"
               placeholder="name@company.com"
-            />
+            >
+              <template #prefix>
+                <AuthIcon name="mail" :size="16" class="text-brand-secondary mr-2.5 shrink-0" />
+              </template>
+            </BaseInput>
             <p v-if="emailError" class="text-xs text-rose-500 font-medium">{{ emailError }}</p>
           </div>
 
-          <!-- Поле Пароля -->
+          <!-- Password field -->
           <div class="space-y-1">
             <BaseInput
               v-model="password"
@@ -81,6 +87,9 @@ const {
               :type="showPassword ? 'text' : 'password'"
               placeholder="Enter your password"
             >
+              <template #prefix>
+                <AuthIcon name="lock" :size="16" class="text-brand-secondary mr-2.5 shrink-0" />
+              </template>
               <template #suffix>
                 <button
                   type="button"
@@ -88,8 +97,7 @@ const {
                   :aria-label="showPassword ? 'Hide password' : 'Show password'"
                   @click="showPassword = !showPassword"
                 >
-                  <IconEyeOff v-if="showPassword" class="size-4" />
-                  <IconEye v-else class="size-4" />
+                  <AuthIcon :name="showPassword ? 'eye-off' : 'eye'" :size="16" />
                 </button>
               </template>
             </BaseInput>
@@ -100,11 +108,7 @@ const {
 
           <div class="flex items-center justify-between text-sm">
             <BaseInput v-model="rememberMe" label="Remember me" type="checkbox" />
-            <button
-              type="button"
-              class="font-medium text-brand-accent hover:underline"
-              @click="toast.info('Password reset is not available yet.', 'Password reset')"
-            >
+            <button type="button" class="font-medium text-brand-accent hover:underline">
               Forgot password?
             </button>
           </div>

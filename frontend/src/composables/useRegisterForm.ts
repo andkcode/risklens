@@ -1,14 +1,10 @@
-// frontend/src/composables/useRegisterForm.ts
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
-import { useToastStore } from '../stores/toast';
-import { parseProblemDetail } from '../utils/errorMapper';
 
 export function useRegisterForm() {
   const router = useRouter();
-  const auth = useAuthStore();
-  const toast = useToastStore();
+  const authStore = useAuthStore();
 
   const fullName = ref('');
   const email = ref('');
@@ -18,7 +14,6 @@ export function useRegisterForm() {
   const showConfirmPassword = ref(false);
   const agreeTerms = ref(false);
   const agreePrivacy = ref(false);
-
   const isPasswordFocused = ref(false);
 
   const fullNameError = ref('');
@@ -26,103 +21,71 @@ export function useRegisterForm() {
   const passwordError = ref('');
   const confirmPasswordError = ref('');
   const termsError = ref('');
+  const generalError = ref('');
   const isLoading = ref(false);
 
+  // Password strength validation computed properties
   const hasMinLength = computed(() => password.value.length >= 8);
   const hasUpperCase = computed(() => /[A-Z]/.test(password.value));
-  const hasNumber = computed(() => /[0-9]/.test(password.value));
-  const hasSpecialChar = computed(() =>
-    /[!@#$%^&*(),.?":{}|<>\-_+=[\]{};:'",.<>/?\\|`~]/.test(password.value),
-  );
+  const hasNumber = computed(() => /\d/.test(password.value));
+  const hasSpecialChar = computed(() => /[@$!%*?&]/.test(password.value));
 
-  function validate(): boolean {
-    let isValid = true;
+  /**
+   * Handle registration form submission
+   */
+  const handleRegister = async () => {
+    fullNameError.value = '';
+    emailError.value = '';
+    passwordError.value = '';
+    confirmPasswordError.value = '';
+    termsError.value = '';
+    generalError.value = '';
 
-    if (!fullName.value.trim()) {
+    if (!fullName.value) {
       fullNameError.value = 'Full name is required';
-      isValid = false;
-    } else {
-      fullNameError.value = '';
+      return;
     }
-
-    if (!email.value.trim()) {
+    if (!email.value) {
       emailError.value = 'Email address is required';
-      isValid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-      emailError.value = 'Please enter a valid email address';
-      isValid = false;
-    } else {
-      emailError.value = '';
+      return;
     }
-
-    if (!password.value) {
-      passwordError.value = 'Password is required';
-      isValid = false;
-    } else if (
-      !hasMinLength.value ||
-      !hasUpperCase.value ||
-      !hasNumber.value ||
-      !hasSpecialChar.value
-    ) {
-      passwordError.value = 'Password must meet all security requirements';
-      isValid = false;
-    } else {
-      passwordError.value = '';
+    if (!hasMinLength.value || !hasUpperCase.value || !hasNumber.value) {
+      passwordError.value = 'Password does not meet security requirements';
+      return;
     }
-
-    if (!confirmPassword.value) {
-      confirmPasswordError.value = 'Please confirm your password';
-      isValid = false;
-    } else if (confirmPassword.value !== password.value) {
+    if (password.value !== confirmPassword.value) {
       confirmPasswordError.value = 'Passwords do not match';
-      isValid = false;
-    } else {
-      confirmPasswordError.value = '';
+      return;
     }
-
     if (!agreeTerms.value || !agreePrivacy.value) {
-      termsError.value = 'You must agree to the Terms and Privacy Policy';
-      isValid = false;
-    } else {
-      termsError.value = '';
-    }
-
-    return isValid;
-  }
-
-  async function handleRegister(): Promise<void> {
-    if (!validate()) {
-      toast.warning('Please correct the highlighted fields before continuing.', 'Check your details');
+      termsError.value = 'You must agree to the terms and privacy policy';
       return;
     }
 
     isLoading.value = true;
     try {
-      await auth.register(fullName.value, email.value, password.value);
-      toast.success('Your account has been created.', 'Account created');
-      await router.push({ name: 'dashboard' });
-    } catch (err: unknown) {
-      // Parse backend ProblemDetail response
-      const parsedError = parseProblemDetail(err);
-      toast.error(parsedError.generalMessage, 'Registration failed');
+      // Register user via store -> authService -> MSW mock database
+      await authStore.register({
+        fullName: fullName.value,
+        email: email.value,
+        password: password.value,
+      });
 
-      if (parsedError.fieldErrors.fullName) {
-        fullNameError.value = parsedError.fieldErrors.fullName;
-      }
-      if (parsedError.fieldErrors.email) {
-        emailError.value = parsedError.fieldErrors.email;
-      }
-      if (parsedError.fieldErrors.password) {
-        passwordError.value = parsedError.fieldErrors.password;
-      }
+      // Redirect to login view so the user can sign in with their newly created credentials
+      router.push('/login');
+    } catch (err: unknown) {
+      generalError.value = err.response?.data?.message || 'Registration failed. Try another email.';
     } finally {
       isLoading.value = false;
     }
-  }
+  };
 
-  function goToLogin(): void {
-    void router.push({ name: 'login' });
-  }
+  /**
+   * Navigate back to login view
+   */
+  const goToLogin = () => {
+    router.push('/login');
+  };
 
   return {
     fullName,
@@ -139,6 +102,7 @@ export function useRegisterForm() {
     passwordError,
     confirmPasswordError,
     termsError,
+    generalError,
     isLoading,
     hasMinLength,
     hasUpperCase,

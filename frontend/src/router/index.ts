@@ -35,13 +35,19 @@ const routes: RouteRecordRaw[] = [
         name: 'portfolios',
         component: () => import('../views/PortfoliosView.vue'),
         meta: { requiresAuth: true },
-      },
-      {
-        path: 'portfolios/:id',
-        name: 'portfolio-details',
-        component: () => import('../views/PortfolioDetailsView.vue'),
-        meta: { requiresAuth: true },
-        props: true,
+        children: [
+          {
+            path: '',
+            redirect: { name: 'portfolio-detail', params: { id: '1' } },
+          },
+          {
+            path: ':id',
+            name: 'portfolio-detail',
+            component: () => import('../views/PortfolioDetailsView.vue'),
+            meta: { requiresAuth: true },
+            props: true,
+          },
+        ],
       },
       {
         path: 'risk/:id',

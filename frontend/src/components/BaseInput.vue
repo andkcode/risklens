@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 defineProps<{
   modelValue: string | number | boolean;
@@ -12,10 +13,10 @@ defineEmits(['update:modelValue']);
 </script>
 
 <template>
-  <!-- 1. Вариант для чекбокса -->
+  <!-- 1. Checkbox variant -->
   <label
     v-if="type === 'checkbox'"
-    class="relative flex items-center gap-2 text-[9px] text-[#8994a2] cursor-pointer select-none"
+    class="relative flex items-center gap-2 text-[9px] text-brand-secondary cursor-pointer select-none"
   >
     <input
       type="checkbox"
@@ -23,9 +24,12 @@ defineEmits(['update:modelValue']);
       :checked="Boolean(modelValue)"
       @change="$emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
     />
-    <!-- Кастомный квадратик чекбокса в стиле вайрфрейма -->
+    <!-- Dynamic classes based on modelValue condition instead of peer-checked -->
     <span
-      class="w-3.5 h-3.5 flex items-center justify-center bg-[#0c1014] border border-[#343d48] rounded-[3px] peer-checked:bg-[#3278ee] peer-checked:border-[#4c8dff] peer-focus-visible:ring-3 peer-focus-visible:ring-[#4c8dff]/13 transition-all"
+      class="w-3.5 h-3.5 flex items-center justify-center rounded-[3px] transition-all border"
+      :class="
+        modelValue ? 'bg-brand-accent border-brand-accent' : 'bg-brand-surface border-brand-border'
+      "
     >
       <svg v-if="modelValue" class="w-2 h-1.5 text-white" viewBox="0 0 6 3" fill="none">
         <path
@@ -40,28 +44,28 @@ defineEmits(['update:modelValue']);
     <span>{{ label }}</span>
   </label>
 
-  <!-- 2. Вариант для обычных полей ввода (текст, пароль и т.д.) -->
+  <!-- 2. Standard text/number input variant -->
   <div v-else class="flex flex-col gap-1.5">
     <label v-if="label" class="text-[9px] font-medium text-[#aeb6c0] uppercase tracking-wider">
       {{ label }}
     </label>
     <div
-      class="relative flex items-center h-10 px-3 bg-[#0c1014] border border-[#29313a] rounded-md transition-all focus-within:border-[#3969ab] focus-within:ring-3 focus-within:ring-[#4c8dff]/10"
-      :class="{
-        'border-[#ff6978] focus-within:border-[#ff6978] focus-within:ring-[#ff6978]/10': error,
-      }"
+      class="relative flex items-center h-10 px-3 bg-brand-surface border rounded-md transition-all"
+      :class="[
+        error ? 'border-market-danger' : 'border-brand-border focus-within:border-brand-accent',
+      ]"
     >
       <slot name="prefix" />
       <input
         :type="type || 'text'"
         :value="modelValue"
         :placeholder="placeholder"
-        class="w-full bg-transparent border-0 outline-0 text-[11px] text-[#e2e6eb] placeholder:text-[#48515c]"
+        class="w-full bg-transparent border-0 outline-0 text-[11px] text-white placeholder:text-brand-muted-2"
         :class="{ 'font-mono': mono }"
         @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
       />
       <slot name="suffix" />
     </div>
-    <span v-if="error" class="text-[9px] text-[#ff6978]">{{ error }}</span>
+    <span v-if="error" class="text-[9px] text-market-danger">{{ error }}</span>
   </div>
 </template>

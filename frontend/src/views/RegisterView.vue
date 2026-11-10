@@ -4,11 +4,7 @@ import BaseButton from '../components/BaseButton.vue';
 import BaseInput from '../components/BaseInput.vue';
 import BaseCard from '../components/BaseCard.vue';
 import PasswordRequirements from '../components/PasswordRequirements.vue';
-import IconEye from '../components/icons/IconEye.vue';
-import IconEyeOff from '../components/icons/IconEyeOff.vue';
-import MainLogo from '../components/icons/MainLogo.vue';
-import IconSecurity from '../components/icons/IconSecurity.vue';
-import IconUser from '../components/icons/IconUser.vue';
+import AuthIcon from '../../../../../WebstormProjects/risklens/frontend/src/components/icons/AuthIcons.vue';
 
 const {
   fullName,
@@ -25,6 +21,7 @@ const {
   passwordError,
   confirmPasswordError,
   termsError,
+  generalError,
   isLoading,
   hasMinLength,
   hasUpperCase,
@@ -42,11 +39,11 @@ const {
       class="flex h-16 items-center justify-between border-b border-brand-border bg-brand-card px-4 sm:px-6 lg:px-8"
     >
       <div class="flex items-center gap-3">
-        <MainLogo class="size-8" />
+        <AuthIcon name="logo" />
       </div>
 
       <div class="flex items-center gap-2 text-xs font-medium text-brand-secondary">
-        <IconSecurity class="size-4 text-emerald-500 shrink-0" />
+        <AuthIcon name="security" class="text-emerald-500 shrink-0" />
         <span>256-bit encrypted session</span>
       </div>
     </header>
@@ -54,12 +51,12 @@ const {
     <!-- 2. MAIN CONTENT -->
     <main class="relative flex flex-1 items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <BaseCard variant="auth" class="w-full max-w-md">
-        <!-- Шапка карточки -->
+        <!-- Card header -->
         <div class="mb-6 text-center">
           <div
             class="mx-auto mb-3 grid size-12 place-items-center rounded-xl bg-brand-surface text-brand-accent border border-brand-border"
           >
-            <IconUser class="size-6" />
+            <AuthIcon name="user" :size="24" />
           </div>
           <span class="text-xs font-semibold uppercase tracking-wider text-brand-accent">
             Portfolio intelligence
@@ -73,37 +70,56 @@ const {
           </p>
         </div>
 
-        <!-- Форма регистрации -->
+        <!-- General error -->
+        <div
+          v-if="generalError"
+          class="mb-4 rounded-lg bg-rose-500/10 border border-rose-500/20 p-3 text-xs text-rose-500 text-center font-medium"
+        >
+          {{ generalError }}
+        </div>
+
+        <!-- Registration form -->
         <form class="space-y-4" novalidate @submit.prevent="handleRegister">
-          <!-- Полное имя -->
+          <!-- Full name field -->
           <div class="space-y-1">
-            <BaseInput v-model="fullName" label="Full name" type="text" placeholder="John Doe" />
+            <BaseInput v-model="fullName" label="Full name" type="text" placeholder="John Doe">
+              <template #prefix>
+                <AuthIcon name="user" :size="16" class="text-brand-secondary mr-2.5 shrink-0" />
+              </template>
+            </BaseInput>
             <p v-if="fullNameError" class="text-xs text-rose-500 font-medium">
               {{ fullNameError }}
             </p>
           </div>
 
-          <!-- Email -->
+          <!-- Email field -->
           <div class="space-y-1">
             <BaseInput
               v-model="email"
               label="Email address"
               type="email"
               placeholder="name@company.com"
-            />
+            >
+              <template #prefix>
+                <AuthIcon name="mail" :size="16" class="text-brand-secondary mr-2.5 shrink-0" />
+              </template>
+            </BaseInput>
             <p v-if="emailError" class="text-xs text-rose-500 font-medium">{{ emailError }}</p>
           </div>
 
-          <!-- Пароль -->
+          <!-- Password field -->
           <div class="space-y-1">
-            <!-- Обертка для отслеживания фокуса в поле ввода пароля -->
+            <!-- Wrapper to track password field focus -->
             <div @focusin="isPasswordFocused = true" @focusout="isPasswordFocused = false">
               <BaseInput
                 v-model="password"
                 label="Password"
                 :type="showPassword ? 'text' : 'password'"
-                placeholder="Create a password"
+                placeholder="Minimum 8 characters"
               >
+                <template #prefix>
+                  <AuthIcon name="lock" :size="16" class="text-brand-secondary mr-2.5 shrink-0" />
+                </template>
                 <template #suffix>
                   <button
                     type="button"
@@ -111,8 +127,7 @@ const {
                     :aria-label="showPassword ? 'Hide password' : 'Show password'"
                     @click="showPassword = !showPassword"
                   >
-                    <IconEyeOff v-if="showPassword" class="size-4" />
-                    <IconEye v-else class="size-4" />
+                    <AuthIcon :name="showPassword ? 'eye-off' : 'eye'" :size="16" />
                   </button>
                 </template>
               </BaseInput>
@@ -122,7 +137,7 @@ const {
             </p>
           </div>
 
-          <!-- Индикатор требований к паролю (появляется при фокусе или наборе) -->
+          <!-- Password requirements indicator (appears on focus or input) -->
           <PasswordRequirements
             v-if="isPasswordFocused || password.length > 0"
             :has-min-length="hasMinLength"
@@ -131,14 +146,17 @@ const {
             :has-special-char="hasSpecialChar"
           />
 
-          <!-- Подтверждение пароля -->
+          <!-- Confirm password field -->
           <div class="space-y-1">
             <BaseInput
               v-model="confirmPassword"
               label="Confirm password"
               :type="showConfirmPassword ? 'text' : 'password'"
-              placeholder="Confirm your password"
+              placeholder="Re-enter your password"
             >
+              <template #prefix>
+                <AuthIcon name="lock" :size="16" class="text-brand-secondary mr-2.5 shrink-0" />
+              </template>
               <template #suffix>
                 <button
                   type="button"
@@ -146,8 +164,7 @@ const {
                   :aria-label="showConfirmPassword ? 'Hide password' : 'Show password'"
                   @click="showConfirmPassword = !showConfirmPassword"
                 >
-                  <IconEyeOff v-if="showConfirmPassword" class="size-4" />
-                  <IconEye v-else class="size-4" />
+                  <AuthIcon :name="showConfirmPassword ? 'eye-off' : 'eye'" :size="16" />
                 </button>
               </template>
             </BaseInput>
@@ -156,7 +173,7 @@ const {
             </p>
           </div>
 
-          <!-- Чекбоксы соглашений -->
+          <!-- Terms agreements checkboxes -->
           <div class="space-y-2 pt-1">
             <BaseInput
               v-model="agreeTerms"
@@ -171,7 +188,7 @@ const {
             <p v-if="termsError" class="text-xs text-rose-500 font-medium">{{ termsError }}</p>
           </div>
 
-          <!-- Кнопка отправки формы -->
+          <!-- Submit button -->
           <BaseButton
             variant="primary"
             class="w-full mt-2"
@@ -183,7 +200,7 @@ const {
           </BaseButton>
         </form>
 
-        <!-- Переход на экран входа -->
+        <!-- Navigate to login screen -->
         <div class="mt-6 text-center text-sm text-brand-secondary">
           <span>Already have an account?</span>
           <button
