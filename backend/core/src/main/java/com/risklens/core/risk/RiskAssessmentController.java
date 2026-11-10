@@ -1,5 +1,6 @@
 package com.risklens.core.risk;
 
+import com.risklens.core.risk.dto.ExportFileDto;
 import com.risklens.core.risk.dto.RiskAssessmentCreateRequestDto;
 import com.risklens.core.risk.dto.RiskAssessmentResponseDto;
 import jakarta.validation.Valid;
@@ -7,8 +8,10 @@ import java.security.Principal;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class RiskAssessmentController {
 
   private final RiskCalculationService riskCalculationService;
+  private final RiskExportService riskExportService;
 
   @PostMapping("/risk-assessments")
   public ResponseEntity<RiskAssessmentResponseDto> calculateRisk(
@@ -29,7 +33,7 @@ public class RiskAssessmentController {
     return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 
-  @PostMapping("/portfolios/{portfolioId}/riskassessments")
+  @PostMapping("/portfolios/{portfolioId}/risk-assessments")
   public ResponseEntity<RiskAssessmentResponseDto> calculatePortfolioRisk(
       @PathVariable UUID portfolioId, Principal principal) {
     RiskAssessmentResponseDto response =
@@ -51,5 +55,21 @@ public class RiskAssessmentController {
     RiskAssessmentResponseDto response =
         riskCalculationService.getRiskAssessmentById(principal.getName(), id);
     return ResponseEntity.ok(response);
+  }
+
+  @GetMapping("/risk-assessments/{id}/export")
+  public ResponseEntity<Resource> exportRiskAssessment(
+      @PathVariable UUID id,
+      @RequestParam(defaultValue = "pdf") String format,
+      Principal principal) {
+
+    ExportFileDto exportFile = riskExportService.exportAssessment(principal.getName(), id, format);
+
+    return ResponseEntity.ok()
+        .contentType(exportFile.getMediaType())
+        .header(
+            HttpHeaders.CONTENT_DISPOSITION,
+            "attachment; filename=\"" + exportFile.getFilename() + "\"")
+        .body(exportFile.getResource());
   }
 }

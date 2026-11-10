@@ -387,7 +387,6 @@
     <MESSAGE value="feat(frontend): update risk metrics" />
     <MESSAGE value="feat(frontend): update risk metrics and add portfolio integration to dashboard" />
     <MESSAGE value="feat(frontend): add portfolio mock handlers and mock support config" />
-    <MESSAGE value="feat(" />
     <MESSAGE value="feat(frontend): add portfolio mock handlers and mock support toggle" />
     <MESSAGE value="Modify design Login and Registration views, added view Layout, Dashboard from wireframes with uses data from mocs" />
     <MESSAGE value="Modify design Login and Registration views, added view Layout, Dashboard from wireframes with uses data from mocs. Fix warnings in views and component" />
