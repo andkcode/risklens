@@ -23,4 +23,124 @@ import type { RequestArgs } from './base';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
 
+export interface RiskAssessmentCreateRequestDto {
+    'portfolioId': string;
+    'riskMethod'?: string;
+}
+
+/**
+ * DefaultApi - axios parameter creator
+ */
+export const DefaultApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Calculate risk assessment
+         * @param {RiskAssessmentCreateRequestDto} riskAssessmentCreateRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1RiskAssessmentsPost: async (riskAssessmentCreateRequestDto: RiskAssessmentCreateRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'riskAssessmentCreateRequestDto' is not null or undefined
+            assertParamExists('apiV1RiskAssessmentsPost', 'riskAssessmentCreateRequestDto', riskAssessmentCreateRequestDto)
+            const localVarPath = `/api/v1/risk-assessments`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(riskAssessmentCreateRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * DefaultApi - functional programming interface
+ */
+export const DefaultApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = DefaultApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Calculate risk assessment
+         * @param {RiskAssessmentCreateRequestDto} riskAssessmentCreateRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1RiskAssessmentsPost(riskAssessmentCreateRequestDto: RiskAssessmentCreateRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1RiskAssessmentsPost(riskAssessmentCreateRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DefaultApi.apiV1RiskAssessmentsPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * DefaultApi - factory interface
+ */
+export const DefaultApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = DefaultApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Calculate risk assessment
+         * @param {RiskAssessmentCreateRequestDto} riskAssessmentCreateRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1RiskAssessmentsPost(riskAssessmentCreateRequestDto: RiskAssessmentCreateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.apiV1RiskAssessmentsPost(riskAssessmentCreateRequestDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * DefaultApi - interface
+ */
+export interface DefaultApiInterface {
+    /**
+     * 
+     * @summary Calculate risk assessment
+     * @param {RiskAssessmentCreateRequestDto} riskAssessmentCreateRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    apiV1RiskAssessmentsPost(riskAssessmentCreateRequestDto: RiskAssessmentCreateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+
+}
+
+/**
+ * DefaultApi - object-oriented interface
+ */
+export class DefaultApi extends BaseAPI implements DefaultApiInterface {
+    /**
+     * 
+     * @summary Calculate risk assessment
+     * @param {RiskAssessmentCreateRequestDto} riskAssessmentCreateRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public apiV1RiskAssessmentsPost(riskAssessmentCreateRequestDto: RiskAssessmentCreateRequestDto, options?: RawAxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).apiV1RiskAssessmentsPost(riskAssessmentCreateRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
 

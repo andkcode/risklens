@@ -1,9 +1,10 @@
 .gitignore
 .npmignore
-.openapi-generator-ignore
 api.ts
 base.ts
 common.ts
 configuration.ts
+docs/DefaultApi.md
+docs/RiskAssessmentCreateRequestDto.md
 git_push.sh
 index.ts

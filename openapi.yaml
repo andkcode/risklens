@@ -3,28 +3,28 @@ info:
   title: RiskLens API
   version: 1.0.0
 paths:
-  /api/v1/portfolios/{portfolioId}/risk-assessments:
-    get:
-      summary: Get risk assessments for a portfolio
-      parameters:
-        - name: portfolioId
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: Successful response
   /api/v1/risk-assessments:
     post:
       summary: Calculate risk assessment
       requestBody:
         required: true
         content:
-          application-json:
+          application/json:
             schema:
               $ref: '#/components/schemas/RiskAssessmentCreateRequestDto'
       responses:
         '201':
           description: Created
+
+components:
+  schemas:
+    RiskAssessmentCreateRequestDto:
+      type: object
+      required:
+        - portfolioId
+      properties:
+        portfolioId:
+          type: string
+          format: uuid
+        riskMethod:
+          type: string

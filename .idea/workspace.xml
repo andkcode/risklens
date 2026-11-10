@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(frontend): add portfolio mock handlers and mock support toggle" />
+    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(auth): enable CORS and update configuration source in security setup">
+      <change afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/RiskExportService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/dto/ExportFileDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/RiskAssessmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/RiskAssessmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/.openapi-generator/FILES" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/.openapi-generator/FILES" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/.openapi-generator/VERSION" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/.openapi-generator/VERSION" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/base.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/base.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/common.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/common.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/configuration.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/configuration.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/git_push.sh" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/git_push.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/generated/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/generated/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/openapi.yaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +51,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="backend" />
+        <entry key="$PROJECT_DIR$" value="frontend" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,61 +79,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.3257847048767128" />
-      <entry key="MS500" value="2.84733090669245" />
-      <entry key="S2" value="5.891267737669685" />
-      <entry key="S5" value="8.154281690005833" />
-      <entry key="S10" value="11.370814997393314" />
-      <entry key="S30" value="22.11224235954404" />
-      <entry key="S60" value="31.45402316272665" />
-      <entry key="M2" value="39.62946174827012" />
-      <entry key="M5" value="49.6891050538087" />
-      <entry key="M10" value="65.98988994499398" />
-      <entry key="M15" value="83.53619380030882" />
-      <entry key="M30" value="133.60949640127117" />
-      <entry key="H1" value="206.02895146633912" />
-      <entry key="H2" value="301.95140197441305" />
-      <entry key="H4" value="410.2877929758684" />
-      <entry key="D1" value="587.9481320411289" />
-      <entry key="W1" value="632.9333967501858" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0000000000000047" />
+      <entry key="S30" value="1.0000168132298606" />
+      <entry key="S60" value="1.0063170154085763" />
+      <entry key="M2" value="1.4748186425302918" />
+      <entry key="M5" value="14.468476455447743" />
+      <entry key="M10" value="51.11777632856853" />
+      <entry key="M15" value="85.34159676184979" />
+      <entry key="M30" value="165.96713048358475" />
+      <entry key="H1" value="272.23170574781676" />
+      <entry key="H2" value="400.02247166773503" />
+      <entry key="H4" value="535.8149309962483" />
+      <entry key="D1" value="755.887360132227" />
+      <entry key="W1" value="811.9289971496133" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="9.16131837144835E-34" />
-      <entry key="MS500" value="2.4682639213594856E-7" />
-      <entry key="S2" value="0.02228937540420356" />
-      <entry key="S5" value="0.21839322397917368" />
-      <entry key="S10" value="0.46732560809265905" />
-      <entry key="S30" value="0.776020498500167" />
-      <entry key="S60" value="0.8809205164822766" />
-      <entry key="M2" value="0.9393635373860982" />
-      <entry key="M5" value="1.0817002133665568" />
-      <entry key="M10" value="1.5743068923429473" />
-      <entry key="M15" value="2.084929405532323" />
-      <entry key="M30" value="3.2642684356163767" />
-      <entry key="H1" value="4.715571376180717" />
-      <entry key="H2" value="6.624264644218386" />
-      <entry key="H4" value="8.888796559880669" />
-      <entry key="D1" value="12.796620734914415" />
-      <entry key="W1" value="13.816077559947137" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="4.810407146406714E-116" />
+      <entry key="S5" value="7.462433171049434E-47" />
+      <entry key="S10" value="8.686270454180026E-24" />
+      <entry key="S30" value="3.0764122792713925E-8" />
+      <entry key="S60" value="4.6415221114337856E-4" />
+      <entry key="M2" value="0.08725117934320573" />
+      <entry key="M5" value="2.8076755699586085" />
+      <entry key="M10" value="9.97026642263327" />
+      <entry key="M15" value="15.611908282548757" />
+      <entry key="M30" value="25.22706602511771" />
+      <entry key="H1" value="33.06750717955817" />
+      <entry key="H2" value="39.057572082727496" />
+      <entry key="H4" value="43.751940848267914" />
+      <entry key="D1" value="50.18155215919767" />
+      <entry key="W1" value="51.7248712469732" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.262661849463767" />
-      <entry key="MS500" value="2.8143640247032145" />
-      <entry key="S2" value="5.834098513331788" />
-      <entry key="S5" value="8.265001788015779" />
-      <entry key="S10" value="11.741708006881685" />
-      <entry key="S30" value="22.83697407673301" />
-      <entry key="S60" value="32.3051339601504" />
-      <entry key="M2" value="40.55249395507845" />
-      <entry key="M5" value="50.76295560030949" />
-      <entry key="M10" value="67.55804049946126" />
-      <entry key="M15" value="85.61516702314093" />
-      <entry key="M30" value="136.8681207092005" />
-      <entry key="H1" value="210.73980640319604" />
-      <entry key="H2" value="308.5718215869917" />
-      <entry key="H4" value="419.1735506289792" />
-      <entry key="D1" value="600.7438548206566" />
-      <entry key="W1" value="646.7493300289123" />
+      <entry key="MS100" value="6.857640994814438E-4" />
+      <entry key="MS500" value="0.23293510732619324" />
+      <entry key="S2" value="0.694718297179424" />
+      <entry key="S5" value="0.8644173893059977" />
+      <entry key="S10" value="0.9297404956793084" />
+      <entry key="S30" value="0.9760260142285957" />
+      <entry key="S60" value="0.9946727163889972" />
+      <entry key="M2" value="1.5532259319316257" />
+      <entry key="M5" value="17.240752855029918" />
+      <entry key="M10" value="61.02794352038671" />
+      <entry key="M15" value="100.8904817373405" />
+      <entry key="M30" value="191.14236399496033" />
+      <entry key="H1" value="305.2645636381777" />
+      <entry key="H2" value="439.05903498078544" />
+      <entry key="H4" value="579.5545967338667" />
+      <entry key="D1" value="806.0663492759235" />
+      <entry key="W1" value="863.6534819741098" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -144,7 +159,7 @@
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;backend&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;24.15.0&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;24.19.2&quot;,
