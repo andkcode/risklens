@@ -21,70 +21,71 @@ import org.springframework.web.server.ResponseStatusException;
 @RequiredArgsConstructor
 public class PositionService {
 
-    private final PositionRepository positionRepository;
-    private final PortfolioRepository portfolioRepository;
-    private final PositionMapper positionMapper;
-    private final CacheManager cacheManager;
+  private final PositionRepository positionRepository;
+  private final PortfolioRepository portfolioRepository;
+  private final PositionMapper positionMapper;
+  private final CacheManager cacheManager;
 
-    @Transactional
-    public PositionResponseDto addPosition(
-        String userEmail, UUID portfolioId, PositionCreateRequestDto createRequestDto) {
+  @Transactional
+  public PositionResponseDto addPosition(
+      String userEmail, UUID portfolioId, PositionCreateRequestDto createRequestDto) {
 
-        Portfolio portfolio =
-            portfolioRepository
-                .findByIdAndUserEmail(portfolioId, userEmail)
-                .orElseThrow(
-                    () ->
-                        new ResponseStatusException(
-                            HttpStatus.NOT_FOUND, "Portfolio not found with id: " + portfolioId));
+    Portfolio portfolio =
+        portfolioRepository
+            .findByIdAndUserEmail(portfolioId, userEmail)
+            .orElseThrow(
+                () ->
+                    new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Portfolio not found with id: " + portfolioId));
 
-        String normalizedAssetSymbol = createRequestDto.getAssetSymbol().toUpperCase();
+    String normalizedAssetSymbol = createRequestDto.getAssetSymbol().toUpperCase();
 
-        if (positionRepository.existsByPortfolioIdAndAssetSymbol(portfolioId, normalizedAssetSymbol)) {
-            throw new ResponseStatusException(
-                HttpStatus.CONFLICT,
-                "Position with symbol " + normalizedAssetSymbol + " already exists in this portfolio");
-        }
-
-        Position position =
-            Position.builder()
-                .portfolio(portfolio)
-                .assetSymbol(normalizedAssetSymbol)
-                .assetType(createRequestDto.getAssetType().toUpperCase())
-                .quantity(createRequestDto.getQuantity())
-                .avgBuyPrice(createRequestDto.getAvgBuyPrice())
-                .createdAt(OffsetDateTime.now())
-                .updatedAt(OffsetDateTime.now())
-                .build();
-
-        Position savedPosition = positionRepository.save(position);
-
-        evictPortfolioCache(portfolioId);
-
-        return positionMapper.toDto(savedPosition);
+    if (positionRepository.existsByPortfolioIdAndAssetSymbol(portfolioId, normalizedAssetSymbol)) {
+      throw new ResponseStatusException(
+          HttpStatus.CONFLICT,
+          "Position with symbol " + normalizedAssetSymbol + " already exists in this portfolio");
     }
 
-    public Page<PositionResponseDto> getPositions(
-        String userEmail, UUID portfolioId, Pageable pageable) {
+    Position position =
+        Position.builder()
+            .portfolio(portfolio)
+            .assetSymbol(normalizedAssetSymbol)
+            .assetType(createRequestDto.getAssetType().toUpperCase())
+            .quantity(createRequestDto.getQuantity())
+            .avgBuyPrice(createRequestDto.getAvgBuyPrice())
+            .createdAt(OffsetDateTime.now())
+            .updatedAt(OffsetDateTime.now())
+            .build();
 
-        Portfolio portfolio =
-            portfolioRepository
-                .findByIdAndUserEmail(portfolioId, userEmail)
-                .orElseThrow(
-                    () ->
-                        new ResponseStatusException(
-                            HttpStatus.NOT_FOUND, "Portfolio not found with id: " + portfolioId));
+    Position savedPosition = positionRepository.save(position);
 
-        Page<Position> positions = positionRepository.findAllByPortfolioId(portfolioId, pageable);
+    evictPortfolioCache(portfolioId);
 
-        return positions.map(positionMapper::toDto);
+    return positionMapper.toDto(savedPosition);
+  }
+
+  public Page<PositionResponseDto> getPositions(
+      String userEmail, UUID portfolioId, Pageable pageable) {
+
+    Portfolio portfolio =
+        portfolioRepository
+            .findByIdAndUserEmail(portfolioId, userEmail)
+            .orElseThrow(
+                () ->
+                    new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Portfolio not found with id: " + portfolioId));
+
+    Page<Position> positions = positionRepository.findAllByPortfolioId(portfolioId, pageable);
+
+    return positions.map(positionMapper::toDto);
+  }
+
+  private void evictPortfolioCache(UUID portfolioId) {
+    Cache cache = cacheManager.getCache(CacheConfig.RISK_ASSESSMENT_CACHE);
+    if (cache != null) {
+      cache.clear();
+      log.debug(
+          "Evicted risk assessment cache due to position update in portfolio {}", portfolioId);
     }
-
-    private void evictPortfolioCache(UUID portfolioId) {
-        Cache cache = cacheManager.getCache(CacheConfig.RISK_ASSESSMENT_CACHE);
-        if (cache != null) {
-            cache.clear();
-            log.debug("Evicted risk assessment cache due to position update in portfolio {}", portfolioId);
-        }
-    }
+  }
 }

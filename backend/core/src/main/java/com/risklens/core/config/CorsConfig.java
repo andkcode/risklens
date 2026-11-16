@@ -19,8 +19,7 @@ public class CorsConfig {
     CorsConfiguration config = new CorsConfiguration();
     config.setAllowCredentials(true);
     config.setAllowedOrigins(List.of(allowedOrigin));
-    config.setAllowedHeaders(
-        List.of("Authorization", "Cache-Control", "Content-Type", "Accept"));
+    config.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type", "Accept"));
     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
     config.setMaxAge(3600L);
 

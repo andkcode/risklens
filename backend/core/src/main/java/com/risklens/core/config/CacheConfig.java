@@ -12,16 +12,16 @@ import org.springframework.context.annotation.Configuration;
 @EnableCaching
 public class CacheConfig {
 
-    public static final String RISK_ASSESSMENT_CACHE = "riskAssessments";
+  public static final String RISK_ASSESSMENT_CACHE = "riskAssessments";
 
-    @Bean
-    public CacheManager cacheManager() {
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager(RISK_ASSESSMENT_CACHE);
-        cacheManager.setCaffeine(
-            Caffeine.newBuilder()
-                .expireAfterWrite(Duration.ofMinutes(10))
-                .maximumSize(500)
-                .recordStats());
-        return cacheManager;
-    }
+  @Bean
+  public CacheManager cacheManager() {
+    CaffeineCacheManager cacheManager = new CaffeineCacheManager(RISK_ASSESSMENT_CACHE);
+    cacheManager.setCaffeine(
+        Caffeine.newBuilder()
+            .expireAfterWrite(Duration.ofMinutes(10))
+            .maximumSize(500)
+            .recordStats());
+    return cacheManager;
+  }
 }

@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 @Data
 @AllArgsConstructor
 public class ExportFileDto {
-    private Resource resource;
-    private MediaType mediaType;
-    private String filename;
+  private Resource resource;
+  private MediaType mediaType;
+  private String filename;
 }
