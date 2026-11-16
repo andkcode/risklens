@@ -42,13 +42,17 @@ public class DataSeeder implements CommandLineRunner {
     OffsetDateTime now = OffsetDateTime.now();
     String defaultHash = passwordEncoder.encode("12345678");
 
+    riskAssessmentRepository.deleteAll();
+    positionRepository.deleteAll();
+    portfolioRepository.deleteAll();
+
     User regularUser = getOrCreateDemoUser("user@risklens.com", "USER", defaultHash, now);
     User analystUser = getOrCreateDemoUser("analyst@risklens.com", "ANALYST", defaultHash, now);
     User adminUser = getOrCreateDemoUser("admin@risklens.com", "ADMIN", defaultHash, now);
 
-    Portfolio p1 = getOrCreateDemoPortfolio(regularUser, "Growth Portfolio", now);
-    Portfolio p2 = getOrCreateDemoPortfolio(analystUser, "Crypto & Tech", now);
-    Portfolio p3 = getOrCreateDemoPortfolio(adminUser, "Conservative Assets", now);
+    Portfolio p1 = getOrCreateDemoPortfolio(regularUser, "Growth Portfolio", now.minusDays(40));
+    Portfolio p2 = getOrCreateDemoPortfolio(analystUser, "Crypto & Tech", now.minusDays(40));
+    Portfolio p3 = getOrCreateDemoPortfolio(adminUser, "Conservative Assets", now.minusDays(40));
 
     Position pos1 =
         Position.builder()
@@ -204,19 +208,15 @@ public class DataSeeder implements CommandLineRunner {
                         .build()));
   }
 
-  private Portfolio getOrCreateDemoPortfolio(User user, String name, OffsetDateTime now) {
-    return portfolioRepository
-        .findByNameAndUserEmail(name, user.getEmail())
-        .orElseGet(
-            () ->
-                portfolioRepository.save(
-                    Portfolio.builder()
-                        .user(user)
-                        .name(name)
-                        .baseCurrency("USD")
-                        .createdAt(now.minusDays(365))
-                        .updatedAt(now)
-                        .build()));
+  private Portfolio getOrCreateDemoPortfolio(User user, String name, OffsetDateTime createdAtTime) {
+    return portfolioRepository.save(
+        Portfolio.builder()
+            .user(user)
+            .name(name)
+            .baseCurrency("USD")
+            .createdAt(createdAtTime)
+            .updatedAt(OffsetDateTime.now())
+            .build());
   }
 
   private void savePositionsIfMissing(Portfolio portfolio, Position... positions) {
