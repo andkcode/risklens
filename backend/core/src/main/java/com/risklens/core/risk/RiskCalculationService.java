@@ -1,5 +1,6 @@
 package com.risklens.core.risk;
 
+import com.risklens.core.config.CacheConfig;
 import com.risklens.core.portfolio.Portfolio;
 import com.risklens.core.portfolio.PortfolioRepository;
 import com.risklens.core.portfolio.Position;
@@ -16,11 +17,11 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -33,7 +34,7 @@ public class RiskCalculationService {
   private final RiskStrategyFactory strategyFactory;
   private final RiskMapper riskMapper;
 
-  @Transactional
+  @Cacheable(value = CacheConfig.RISK_ASSESSMENT_CACHE, keyGenerator = "riskCacheKeyGenerator")
   public RiskAssessmentResponseDto calculateAndSaveRisk(
       String userEmail, UUID portfolioId, RiskMethod requestedMethod) {
     Portfolio portfolio = getAndValidatePortfolio(portfolioId, userEmail);

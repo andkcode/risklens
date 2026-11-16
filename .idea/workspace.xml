@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(risk): enhance risk assessment export service with detailed metrics and CSV formatting">
-      <change afterPath="$PROJECT_DIR$/backend/core/src/test/java/com/risklens/core/risk/RiskExportIntegrationTest.java" afterDir="false" />
+    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="test(risk): add unit and integration tests for risk export service">
+      <change afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/config/CacheConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/cache/RiskCacheKeyGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/config/DataSeeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/config/DataSeeder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/core/src/main/resources/db/seed/price_history_seed.csv" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/resources/db/seed/price_history_seed.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/portfolio/PositionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/portfolio/PositionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/RiskCalculationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/RiskCalculationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,61 +71,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.9368323521857004E-9" />
-      <entry key="MS500" value="0.031042927997212304" />
-      <entry key="S2" value="0.7054366461000925" />
-      <entry key="S5" value="1.3186668872320446" />
-      <entry key="S10" value="1.6546077380148152" />
-      <entry key="S30" value="2.3637764200795153" />
-      <entry key="S60" value="2.93224454622072" />
-      <entry key="M2" value="3.5092189586255995" />
-      <entry key="M5" value="7.2856252177719005" />
-      <entry key="M10" value="23.438241011815972" />
-      <entry key="M15" value="45.001356943985634" />
-      <entry key="M30" value="117.99260310040651" />
-      <entry key="H1" value="247.4417459043551" />
-      <entry key="H2" value="419.98907321159555" />
-      <entry key="H4" value="604.4120371401224" />
-      <entry key="D1" value="906.0420431199276" />
-      <entry key="W1" value="983.9459570964995" />
+      <entry key="MS100" value="1.0006794756876487" />
+      <entry key="MS500" value="1.4040682394574724" />
+      <entry key="S2" value="2.3407532430975215" />
+      <entry key="S5" value="2.7146088108052306" />
+      <entry key="S10" value="3.047876803339489" />
+      <entry key="S30" value="4.915262139814276" />
+      <entry key="S60" value="7.731337161293594" />
+      <entry key="M2" value="14.799357343903353" />
+      <entry key="M5" value="36.3512437541284" />
+      <entry key="M10" value="55.769855953042544" />
+      <entry key="M15" value="69.18126347911326" />
+      <entry key="M30" value="116.3281781696414" />
+      <entry key="H1" value="228.4041539403159" />
+      <entry key="H2" value="408.4642922529638" />
+      <entry key="H4" value="616.6462267289547" />
+      <entry key="D1" value="972.7824879767337" />
+      <entry key="W1" value="1066.934640122418" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0000000036803751" />
-      <entry key="S5" value="1.0004230160431642" />
-      <entry key="S10" value="1.0205673538201712" />
-      <entry key="S30" value="1.2739849087647288" />
-      <entry key="S60" value="1.5240059909603505" />
-      <entry key="M2" value="1.7545859129760188" />
-      <entry key="M5" value="2.8071970055914184" />
-      <entry key="M10" value="6.214844137918152" />
-      <entry key="M15" value="9.934641567982919" />
-      <entry key="M30" value="20.404100554272343" />
-      <entry key="H1" value="34.813628399320066" />
-      <entry key="H2" value="48.77527990421053" />
-      <entry key="H4" value="59.70509653941055" />
-      <entry key="D1" value="73.37451036337215" />
-      <entry key="W1" value="76.45689641897425" />
+      <entry key="MS100" value="2.3405699744490836E-294" />
+      <entry key="MS500" value="1.8960159241773995E-59" />
+      <entry key="S2" value="2.726771529241844E-15" />
+      <entry key="S5" value="2.1977602993900113E-6" />
+      <entry key="S10" value="0.0022076379268903016" />
+      <entry key="S30" value="0.25342872885358947" />
+      <entry key="S60" value="0.8843372577650255" />
+      <entry key="M2" value="1.908682950313346" />
+      <entry key="M5" value="3.9333872888984254" />
+      <entry key="M10" value="5.751112545140195" />
+      <entry key="M15" value="7.463100913150258" />
+      <entry key="M30" value="14.385939516858395" />
+      <entry key="H1" value="28.42383328767814" />
+      <entry key="H2" value="45.566666890538706" />
+      <entry key="H4" value="60.44868374816767" />
+      <entry key="D1" value="79.81489411604687" />
+      <entry key="W1" value="84.22278483830084" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.7500205034752148E-8" />
-      <entry key="MS500" value="0.04518140299054161" />
-      <entry key="S2" value="0.9869530553650647" />
-      <entry key="S5" value="1.911614010086534" />
-      <entry key="S10" value="2.4399895003241574" />
-      <entry key="S30" value="3.537718883165424" />
-      <entry key="S60" value="4.397844135222343" />
-      <entry key="M2" value="5.230427661515204" />
-      <entry key="M5" value="10.068508525567864" />
-      <entry key="M10" value="29.620385291683554" />
-      <entry key="M15" value="54.89740248764981" />
-      <entry key="M30" value="138.35234811392704" />
-      <entry key="H1" value="282.2157785435443" />
-      <entry key="H2" value="468.7359689827235" />
-      <entry key="H4" value="664.0993054129472" />
-      <entry key="D1" value="979.4126914378915" />
-      <entry key="W1" value="1060.4022693800323" />
+      <entry key="MS100" value="0.0017625260504207645" />
+      <entry key="MS500" value="0.6120385375896304" />
+      <entry key="S2" value="2.0045551798601258" />
+      <entry key="S5" value="2.5602151020947392" />
+      <entry key="S10" value="2.9505667802485873" />
+      <entry key="S30" value="5.075598146902827" />
+      <entry key="S60" value="8.522970293389031" />
+      <entry key="M2" value="16.613164112047617" />
+      <entry key="M5" value="40.19474203602661" />
+      <entry key="M10" value="61.45311432574498" />
+      <entry key="M15" value="76.58843088563682" />
+      <entry key="M30" value="130.6686341484889" />
+      <entry key="H1" value="256.7883100977787" />
+      <entry key="H2" value="454.0007105168152" />
+      <entry key="H4" value="677.075013921274" />
+      <entry key="D1" value="1052.5928906266422" />
+      <entry key="W1" value="1151.1567408385008" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -301,7 +303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1794829053379</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="test(risk): add unit and integration tests for risk export service">
+      <option name="closed" value="true" />
+      <created>1794831230879</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1794831230879</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -364,6 +374,8 @@
     <MESSAGE value="feat(risk): implement risk assessment export service and endpoint" />
     <MESSAGE value="feat(" />
     <MESSAGE value="feat(risk): enhance risk assessment export service with detailed metrics and CSV formatting" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(risk): enhance risk assessment export service with detailed metrics and CSV formatting" />
+    <MESSAGE value="test(" />
+    <MESSAGE value="test(risk): add unit and integration tests for risk export service" />
+    <option name="LAST_COMMIT_MESSAGE" value="test(risk): add unit and integration tests for risk export service" />
   </component>
 </project>
