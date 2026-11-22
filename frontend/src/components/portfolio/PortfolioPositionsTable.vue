@@ -1,37 +1,22 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import type { PortfolioDetailData } from '../../types/portfolios';
 import BaseCard from '../BaseCard.vue';
 import BaseTable from '../BaseTable.vue';
 import BaseIcon from '../icons/PortfolioIcons.vue';
 import { getRiskBadgeClass } from '../../utils/riskStyle';
 
-interface Position {
-  id: string;
-  name: string;
-  status: string;
-  ticker: string;
-  quantity: number;
-  avgPurchasePrice: string;
-  currentMarketValue: string;
-  allocationPercent: number;
-  riskRating: string;
-  profitLoss: string;
-  isPositive: boolean;
-}
-
 const props = defineProps<{
-  positions?: Position[];
-  costBasis?: string;
-  unrealizedProfit?: string;
+  portfolio: PortfolioDetailData;
 }>();
 
 const searchQuery = ref('');
 
 const filteredPositions = computed(() => {
-  if (!props.positions) return [];
-  if (!searchQuery.value.trim()) return props.positions;
+  if (!props.portfolio?.positions) return [];
+  if (!searchQuery.value.trim()) return props.portfolio.positions;
   const q = searchQuery.value.toLowerCase();
-  return props.positions.filter(
+  return props.portfolio.positions.filter(
     (p) => p.name.toLowerCase().includes(q) || p.ticker.toLowerCase().includes(q),
   );
 });
@@ -39,9 +24,9 @@ const filteredPositions = computed(() => {
 
 <template>
   <BaseCard
-    title="Comprehensive positions"
-    :subtitle="`${positions?.length || 0} active positions · Market values update in real time`"
     variant="standard"
+    :title="`Comprehensive positions`"
+    :subtitle="`${portfolio.positions?.length || 0} active positions · Market values update in real time`"
     class="my-6"
   >
     <!-- Header Actions (Search Input) -->
@@ -152,12 +137,12 @@ const filteredPositions = computed(() => {
     >
       <div>
         Portfolio cost basis:
-        <span class="font-mono font-semibold text-white">{{ costBasis || '$0' }}</span>
+        <span class="font-mono font-semibold text-white">{{ portfolio.costBasis }}</span>
       </div>
       <div>
         Unrealized profit:
         <span class="font-mono font-semibold text-emerald-400">{{
-          unrealizedProfit || '+$0'
+          portfolio.unrealizedProfit
         }}</span>
       </div>
     </div>

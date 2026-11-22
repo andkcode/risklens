@@ -4,13 +4,17 @@
 export function getRiskBadgeClass(level?: string): string {
   const normalized = level?.toLowerCase() || '';
 
-  if (normalized === 'high') {
+  if (normalized.includes('high') || normalized.includes('danger')) {
     return 'bg-[#ff6978]/20 text-[#ff6978] border border-[#ff6978]/30';
   }
-  if (normalized === 'medium') {
+  if (normalized.includes('medium') || normalized.includes('warning')) {
     return 'bg-[#f0ad55]/20 text-[#f0ad55] border border-[#f0ad55]/30';
   }
-  return 'bg-[#43d6a0]/20 text-[#43d6a0] border border-[#43d6a0]/30';
+  if (normalized.includes('low') || normalized.includes('protective')) {
+    return 'bg-[#43d6a0]/20 text-[#43d6a0] border border-[#43d6a0]/30';
+  }
+  // Нейтральный цвет для остальных случаев
+  return 'bg-[#222830] text-[#8994a2] border border-[#2b333d]';
 }
 
 /**

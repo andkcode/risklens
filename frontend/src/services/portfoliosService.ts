@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { PortfolioSummary, PortfolioDetailData } from '../types/portfolio';
+import type { PortfolioSummary, PortfolioDetailData } from '../types/portfolios';
 
 export interface PortfoliosListResponse {
   activeCount: number;

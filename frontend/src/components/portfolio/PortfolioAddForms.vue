@@ -1,35 +1,30 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import BaseCard from '../BaseCard.vue';
 import BaseButton from '../BaseButton.vue';
 import BaseInput from '../BaseInput.vue';
 import BaseIcon from '../icons/PortfolioIcons.vue';
 
+// Принимаем стейт форм через пропсы
 defineProps<{
-  portfolioName?: string;
+  stockForm: {
+    ticker: string;
+    quantity: string | number;
+    price: string | number;
+    date: string;
+  };
+  cryptoForm: {
+    search: string;
+    quantity: string | number;
+    price: string | number;
+    network: string;
+  };
 }>();
 
-const stockForm = ref({
-  ticker: '',
-  quantity: '',
-  price: '',
-  date: '',
-});
-
-const cryptoForm = ref({
-  search: '',
-  quantity: '',
-  price: '',
-  network: '',
-});
-
-const handleAddStock = () => {
-  console.log('Add stock submitted:', stockForm.value);
-};
-
-const handleAddCrypto = () => {
-  console.log('Add crypto submitted:', cryptoForm.value);
-};
+// Пробрасываем события клика наверх родителям
+defineEmits<{
+  (e: 'add-stock'): void;
+  (e: 'add-crypto'): void;
+}>();
 </script>
 
 <template>
@@ -73,7 +68,7 @@ const handleAddCrypto = () => {
         <BaseButton
           variant="primary"
           class="w-full py-2 bg-brand-accent hover:bg-blue-600 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(47,112,223,0.3)] transition-colors"
-          @click="handleAddStock"
+          @click="$emit('add-stock')"
         >
           <BaseIcon name="plus" />
           Add stock
@@ -120,13 +115,13 @@ const handleAddCrypto = () => {
               placeholder="$ 0.00"
               mono
             />
-            <!-- Network Select (Styled uniformly with BaseInput wrapper) -->
+            <!-- Network Select -->
             <div class="flex flex-col gap-1.5">
               <label class="text-[9px] font-medium text-[#aeb6c0] uppercase tracking-wider">
                 Select network
               </label>
               <div
-                class="relative flex items-center h-10 px-3 bg-brand-surface border border-b-brand-border rounded-md transition-all focus-within:border-brand-accent focus-within:ring-3 focus-within:ring-brand-accent/10"
+                class="relative flex items-center h-10 px-3 bg-brand-surface border border-brand-border rounded-md transition-all focus-within:border-brand-accent"
               >
                 <select
                   v-model="cryptoForm.network"
@@ -168,7 +163,7 @@ const handleAddCrypto = () => {
         <BaseButton
           variant="primary"
           class="w-full py-2 bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(124,58,237,0.3)] transition-colors"
-          @click="handleAddCrypto"
+          @click="$emit('add-crypto')"
         >
           <BaseIcon name="plus" />
           Add crypto

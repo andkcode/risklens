@@ -50,7 +50,7 @@ const routes: RouteRecordRaw[] = [
         ],
       },
       {
-        path: 'risk/:id',
+        path: 'risk/',
         name: 'risk-analysis',
         component: () => import('../views/RiskAnalysisView.vue'),
         meta: { requiresAuth: true },

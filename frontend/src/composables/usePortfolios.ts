@@ -1,33 +1,25 @@
-import { ref, onMounted, watch } from 'vue';
+import { onMounted, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import type { PortfolioSummary } from '../types/portfolio';
-import { portfolioService } from '../services/portfoliosService';
+import { storeToRefs } from 'pinia';
+import { usePortfoliosStore } from '../stores/portfolios';
 
 export function usePortfolios() {
   const router = useRouter();
   const route = useRoute();
+  const store = usePortfoliosStore();
 
-  const portfolios = ref<PortfolioSummary[]>([]);
-  const activeCount = ref(0);
-  const combinedValue = ref('$0');
-  const combinedChange = ref('');
-
-  const selectedId = ref<string>((route.params.id as string) || '1');
-
-  const loadPortfolios = async () => {
-    try {
-      const response = await portfolioService.getPortfolios();
-      portfolios.value = response.items;
-      activeCount.value = response.activeCount;
-      combinedValue.value = response.combinedValue;
-      combinedChange.value = response.combinedChange;
-    } catch (error) {
-      console.error('Failed to load portfolios list:', error);
-    }
-  };
+  const {
+    portfolios,
+    activeCount,
+    combinedValue,
+    combinedChange,
+    selectedId,
+    isLoadingList,
+    error,
+  } = storeToRefs(store);
 
   const handleSelect = (id: string) => {
-    selectedId.value = id;
+    store.selectedId = id;
     void router.push({ name: 'portfolio-detail', params: { id } });
   };
 
@@ -39,13 +31,13 @@ export function usePortfolios() {
     () => route.params.id,
     (newId) => {
       if (newId) {
-        selectedId.value = newId as string;
+        store.selectedId = newId as string;
       }
     },
   );
 
   onMounted(() => {
-    void loadPortfolios();
+    void store.fetchPortfolios();
   });
 
   return {
@@ -54,6 +46,8 @@ export function usePortfolios() {
     combinedValue,
     combinedChange,
     selectedId,
+    isLoadingList,
+    error,
     handleSelect,
     handleCreate,
   };

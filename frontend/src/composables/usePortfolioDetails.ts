@@ -1,47 +1,48 @@
-import { ref, watch, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import type { PortfolioDetailData } from '../types/portfolio';
-import { portfolioService } from '../services/portfoliosService';
+import { storeToRefs } from 'pinia';
+import { usePortfoliosStore } from '../stores/portfolios';
 
 export function usePortfolioDetails() {
   const route = useRoute();
+  const store = usePortfoliosStore();
 
-  const portfolio = ref<PortfolioDetailData | null>(null);
-  const isLoading = ref(true);
-  const errorMessage = ref('');
+  const {
+    currentPortfolio: portfolio,
+    isLoadingDetails: isLoading,
+    error: errorMessage,
+  } = storeToRefs(store);
 
-  // Fetch portfolio details via portfolioService directly assigned to portfolio.value
+  const stockForm = ref({ ticker: '', quantity: '', price: '', date: '' });
+  const cryptoForm = ref({ search: '', quantity: '', price: '', network: '' });
+
   const loadPortfolioData = async (id: string | string[]) => {
-    isLoading.value = true;
-    errorMessage.value = '';
-    try {
-      const portfolioId = Array.isArray(id) ? id[0] : id;
-      if (!portfolioId) return;
-      portfolio.value = await portfolioService.getPortfolioById(portfolioId);
-    } catch (error) {
-      console.error('Failed to load portfolio details:', error);
-      errorMessage.value = 'Portfolio not found or unavailable.';
-      portfolio.value = null;
-    } finally {
-      isLoading.value = false;
-    }
+    const portfolioId = Array.isArray(id) ? id[0] : id;
+    if (!portfolioId) return;
+    await store.fetchPortfolioById(portfolioId);
   };
 
-  // Load data on initial mount with fallback to '1'
   onMounted(() => {
     const id = (route.params.id as string) || '1';
     void loadPortfolioData(id);
   });
 
-  // Watch for route parameter changes (switching portfolios in sidebar)
   watch(
     () => route.params.id,
     (newId) => {
-      if (newId) {
-        void loadPortfolioData(newId as string);
-      }
+      if (newId) void loadPortfolioData(newId as string);
     },
   );
+
+  const handleAddStock = () => {
+    if (!stockForm.value.ticker) return;
+    console.log('Add stock submitted:', stockForm.value);
+  };
+
+  const handleAddCrypto = () => {
+    if (!cryptoForm.value.search) return;
+    console.log('Add crypto submitted:', cryptoForm.value);
+  };
 
   const handleExport = () => {
     console.log('Exporting portfolio report...');
@@ -55,6 +56,10 @@ export function usePortfolioDetails() {
     portfolio,
     isLoading,
     errorMessage,
+    stockForm,
+    cryptoForm,
+    handleAddStock,
+    handleAddCrypto,
     handleExport,
     handleRunAnalysis,
   };

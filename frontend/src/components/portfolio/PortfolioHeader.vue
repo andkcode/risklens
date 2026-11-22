@@ -1,16 +1,15 @@
 <script setup lang="ts">
+import type { PortfolioDetailData } from '../../types/portfolios';
 import BaseButton from '../BaseButton.vue';
 import BaseIcon from '../icons/PortfolioIcons.vue';
 
 defineProps<{
-  name?: string;
-  description?: string;
-  code?: string;
+  portfolio: PortfolioDetailData;
 }>();
 
 defineEmits<{
   (e: 'export'): void;
-  (e: 'runAnalysis'): void;
+  (e: 'run-analysis'): void;
 }>();
 </script>
 
@@ -20,13 +19,13 @@ defineEmits<{
   >
     <div>
       <div class="text-[11px] font-semibold text-brand-accent tracking-[0.08em] uppercase mb-1">
-        Portfolios / {{ code || 'PORTFOLIO' }}
+        Portfolios / {{ portfolio.code || 'PORTFOLIO' }}
       </div>
       <h1 class="text-2xl font-bold text-white tracking-tight">
-        {{ name || 'Portfolio Overview' }}
+        {{ portfolio.name }}
       </h1>
       <p class="text-xs text-brand-secondary mt-1">
-        {{ description || 'Position-level performance, allocation, and risk controls.' }}
+        {{ portfolio.description }}
       </p>
     </div>
     <div class="flex items-center gap-3">
@@ -41,7 +40,7 @@ defineEmits<{
       <BaseButton
         variant="primary"
         class="bg-brand-accent hover:bg-blue-600 text-white px-4 py-2 text-xs font-semibold rounded-lg flex items-center gap-2 shadow-[0_4px_16px_rgba(47,112,223,0.3)] transition-colors"
-        @click="$emit('runAnalysis')"
+        @click="$emit('run-analysis')"
       >
         <BaseIcon name="analysis" />
         Run analysis

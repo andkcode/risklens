@@ -7,7 +7,7 @@ import type {
   RiskAlert,
   HistoryLogItem,
   PortfolioAllocationData,
-} from '../../../../../Desktop/RiskLense-local/RisksLens-app/src/types/dashboard';
+} from '../types/dashboard';
 
 export const useDashboardStore = defineStore('dashboard', () => {
   const metrics = ref<MetricCardData[]>([]);
