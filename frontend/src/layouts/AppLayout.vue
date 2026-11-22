@@ -132,7 +132,7 @@ const {
         </RouterLink>
 
         <RouterLink
-          to="/risk/demo"
+          to="/risk/"
           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-brand-secondary transition-all hover:bg-brand-surface-raised hover:text-brand-primary"
           active-class="bg-brand-surface-raised text-brand-accent border border-brand-border"
         >

@@ -1,15 +1,10 @@
 <script setup lang="ts">
+import type { PortfolioDetailData } from '../../types/portfolios';
 import BaseCard from '../BaseCard.vue';
 import { getRiskBadgeClass } from '../../utils/riskStyle';
 
 defineProps<{
-  totalValue?: string;
-  valueChangeToday?: string;
-  performanceYtd?: string;
-  performanceComparison?: string;
-  riskScore?: number;
-  riskLevel?: string;
-  lastAnalyzed?: string;
+  portfolio: PortfolioDetailData;
 }>();
 </script>
 
@@ -21,10 +16,10 @@ defineProps<{
         Total value
       </div>
       <div class="text-2xl font-bold text-white mt-2 font-mono tracking-tight">
-        {{ totalValue || '$0' }}
+        {{ portfolio.totalValue }}
       </div>
       <div class="text-[11px] text-emerald-400 mt-1 font-semibold flex items-center gap-1">
-        <span>↗</span> {{ valueChangeToday || '+$0 today' }}
+        <span>↗</span> {{ portfolio.valueChangeToday }}
       </div>
     </BaseCard>
 
@@ -34,10 +29,10 @@ defineProps<{
         Performance YTD
       </div>
       <div class="text-2xl font-bold text-emerald-400 mt-2 font-mono tracking-tight">
-        {{ performanceYtd || '+0%' }}
+        {{ portfolio.performanceYtd }}
       </div>
       <div class="text-[11px] text-brand-secondary mt-1 font-medium">
-        {{ performanceComparison || 'vs S&P 500 +0%' }}
+        {{ portfolio.performanceComparison }}
       </div>
     </BaseCard>
 
@@ -48,16 +43,16 @@ defineProps<{
       </div>
       <div class="flex items-baseline gap-2 mt-2">
         <span class="text-2xl font-bold text-white font-mono tracking-tight">{{
-          riskScore || 50
+          portfolio.riskScore
         }}</span>
         <span class="text-xs text-brand-secondary">/100</span>
         <span
           :class="[
             'ml-auto px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider',
-            getRiskBadgeClass(riskLevel),
+            getRiskBadgeClass(portfolio.riskLevel),
           ]"
         >
-          {{ riskLevel || 'Medium' }}
+          {{ portfolio.riskLevel }}
         </span>
       </div>
       <div class="text-[11px] text-brand-secondary mt-1 font-medium">Comprehensive risk rating</div>
@@ -69,7 +64,7 @@ defineProps<{
         Last analyzed
       </div>
       <div class="text-2xl font-bold text-white mt-2 tracking-tight">
-        {{ lastAnalyzed || 'Never' }}
+        {{ portfolio.lastAnalyzed }}
       </div>
       <div class="text-[11px] text-emerald-400 mt-1 font-semibold flex items-center gap-1.5">
         <span class="size-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Real-time data
