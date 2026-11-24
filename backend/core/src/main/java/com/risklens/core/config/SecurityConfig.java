@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity; // Импорт
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -31,11 +31,17 @@ public class SecurityConfig {
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(
             auth ->
-                auth.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html")
+                auth.requestMatchers("/actuator/health", "/actuator/health/**")
+                    .permitAll()
+                    .requestMatchers("/actuator/info", "/actuator/info/**")
+                    .hasRole("ADMIN")
+                    .requestMatchers("/actuator/metrics", "/actuator/metrics/**")
+                    .hasRole("ADMIN")
+                    .requestMatchers("/actuator/**")
+                    .denyAll()
+                    .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html")
                     .permitAll()
                     .requestMatchers("/api/v1/auth/**", "/api/auth/**")
-                    .permitAll()
-                    .requestMatchers("/actuator/health")
                     .permitAll()
                     .anyRequest()
                     .authenticated())
