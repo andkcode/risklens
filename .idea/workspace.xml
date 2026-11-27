@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/marketdata/MarketDataProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/marketdata/StubMarketDataProvider.java" afterDir="false" />
+    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(marketdata): add MarketDataProvider interface and in-memory stub implementation">
+      <change afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/marketdata/SeededMarketDataProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/config/DataSeeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/config/DataSeeder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/portfolio/PriceHistoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/marketdata/PriceHistoryRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,61 +69,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="4.2781685675978104E-14" />
-      <entry key="MS500" value="0.0021196898459040483" />
-      <entry key="S2" value="0.23881882478494473" />
-      <entry key="S5" value="0.9349390578995004" />
-      <entry key="S10" value="2.4026966613465786" />
-      <entry key="S30" value="10.042063122687988" />
-      <entry key="S60" value="20.24907049763807" />
-      <entry key="M2" value="38.68721430092811" />
-      <entry key="M5" value="80.56654149300923" />
-      <entry key="M10" value="114.72722045038937" />
-      <entry key="M15" value="131.02496273211673" />
-      <entry key="M30" value="152.1363731002541" />
-      <entry key="H1" value="182.60253763172605" />
-      <entry key="H2" value="289.58957559847266" />
-      <entry key="H4" value="528.769032271304" />
-      <entry key="D1" value="1197.223737984644" />
-      <entry key="W1" value="1422.2206802349558" />
+      <entry key="MS100" value="1.0006810271808435" />
+      <entry key="MS500" value="1.2341616479067121" />
+      <entry key="S2" value="1.9967061682673508" />
+      <entry key="S5" value="3.238820413559868" />
+      <entry key="S10" value="5.173070902153888" />
+      <entry key="S30" value="11.864321236586756" />
+      <entry key="S60" value="20.213452452959242" />
+      <entry key="M2" value="34.87624436068406" />
+      <entry key="M5" value="61.59737864773404" />
+      <entry key="M10" value="89.51880322175305" />
+      <entry key="M15" value="113.8942579913617" />
+      <entry key="M30" value="168.6355700659189" />
+      <entry key="H1" value="233.48822156464857" />
+      <entry key="H2" value="354.0348554170068" />
+      <entry key="H4" value="598.2661460771365" />
+      <entry key="D1" value="1305.7635546879458" />
+      <entry key="W1" value="1551.0488817018465" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.000000000027497" />
-      <entry key="S2" value="1.0024768572673037" />
-      <entry key="S5" value="1.120149844605851" />
-      <entry key="S10" value="1.4760767603596798" />
-      <entry key="S30" value="2.2418811872961397" />
-      <entry key="S60" value="2.689121794213883" />
-      <entry key="M2" value="3.2278775654427236" />
-      <entry key="M5" value="3.9907458510109333" />
-      <entry key="M10" value="4.420982722132091" />
-      <entry key="M15" value="4.612477569663541" />
-      <entry key="M30" value="5.386684434971712" />
-      <entry key="H1" value="9.883281455278793" />
-      <entry key="H2" value="25.364392883913535" />
-      <entry key="H4" value="52.930300454077766" />
-      <entry key="D1" value="112.54085781120793" />
-      <entry key="W1" value="129.81823868475547" />
+      <entry key="MS100" value="7.927658061278917E-71" />
+      <entry key="MS500" value="9.546165996150757E-15" />
+      <entry key="S2" value="3.1257716325575546E-4" />
+      <entry key="S5" value="0.03962624690183487" />
+      <entry key="S10" value="0.19915087293945424" />
+      <entry key="S30" value="0.661340991079866" />
+      <entry key="S60" value="1.3371956944193153" />
+      <entry key="M2" value="3.015838511038366" />
+      <entry key="M5" value="6.739228816763528" />
+      <entry key="M10" value="9.691988677519614" />
+      <entry key="M15" value="11.363644733863122" />
+      <entry key="M30" value="14.23751376979058" />
+      <entry key="H1" value="19.141394799782404" />
+      <entry key="H2" value="33.42391658564423" />
+      <entry key="H4" value="60.64895331653259" />
+      <entry key="D1" value="124.25138282703776" />
+      <entry key="W1" value="143.43864610462407" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.517365425005628E-6" />
-      <entry key="MS500" value="0.0693999281567149" />
-      <entry key="S2" value="0.7016428139573997" />
-      <entry key="S5" value="1.711103623681763" />
-      <entry key="S10" value="3.574698775039688" />
-      <entry key="S30" value="11.979360498958687" />
-      <entry key="S60" value="22.64666987606838" />
-      <entry key="M2" value="41.63953517359843" />
-      <entry key="M5" value="84.33965450704984" />
-      <entry key="M10" value="118.9988186668741" />
-      <entry key="M15" value="135.52523080371824" />
-      <entry key="M30" value="157.45819814093844" />
-      <entry key="H1" value="192.4422598511156" />
-      <entry key="H2" value="314.9118394663238" />
-      <entry key="H4" value="581.6606829285057" />
-      <entry key="D1" value="1309.752175412636" />
-      <entry key="W1" value="1552.0369037739315" />
+      <entry key="MS100" value="7.371247067212036E-4" />
+      <entry key="MS500" value="0.3296999679935359" />
+      <entry key="S2" value="1.426881865332642" />
+      <entry key="S5" value="2.8092460080608808" />
+      <entry key="S10" value="4.949940517228592" />
+      <entry key="S30" value="12.210641394612207" />
+      <entry key="S60" value="21.297627235162192" />
+      <entry key="M2" value="37.67208922484995" />
+      <entry key="M5" value="68.17829803890066" />
+      <entry key="M10" value="99.10045457454387" />
+      <entry key="M15" value="125.16666262250563" />
+      <entry key="M30" value="182.80679318729784" />
+      <entry key="H1" value="252.58075564382764" />
+      <entry key="H2" value="387.4143718520176" />
+      <entry key="H4" value="658.8751080210013" />
+      <entry key="D1" value="1430.001795306686" />
+      <entry key="W1" value="1694.4853796066557" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -180,6 +181,9 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\profi\Desktop\RiskLense" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.risklens.core.portfolio" />
     </key>
   </component>
   <component name="RunManager">
@@ -345,7 +349,15 @@
       <option name="project" value="LOCAL" />
       <updated>1795542387698</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="feat(marketdata): add MarketDataProvider interface and in-memory stub implementation">
+      <option name="closed" value="true" />
+      <created>1795819461234</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1795819461234</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -386,7 +398,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ci(ci" />
     <MESSAGE value="ci(ci):" />
     <MESSAGE value="ci(ci): synchronize workflows and update repository configuration" />
     <MESSAGE value="ci(" />
@@ -405,12 +416,13 @@
     <MESSAGE value="feat(frontend): add portfolio mock handlers and mock support config" />
     <MESSAGE value="feat(frontend): add portfolio mock handlers and mock support toggle" />
     <MESSAGE value="feat(risk): implement risk assessment export service and endpoint" />
-    <MESSAGE value="feat(" />
     <MESSAGE value="feat(risk): enhance risk assessment export service with detailed metrics and CSV formatting" />
     <MESSAGE value="test(" />
     <MESSAGE value="test(risk): add unit and integration tests for risk export service" />
     <MESSAGE value="feat(risk): implement caffeine caching for risk calculation service" />
     <MESSAGE value="feat(core): add structured logging and actuator endpoints configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(core): add structured logging and actuator endpoints configuration" />
+    <MESSAGE value="feat(" />
+    <MESSAGE value="feat(marketdata): add MarketDataProvider interface and in-memory stub implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(marketdata): add MarketDataProvider interface and in-memory stub implementation" />
   </component>
 </project>
