@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(marketdata): add MarketDataProvider interface and in-memory stub implementation">
-      <change afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/marketdata/SeededMarketDataProvider.java" afterDir="false" />
+    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(marketdata): add SeededMarketDataProvider and price history seed migration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/config/DataSeeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/config/DataSeeder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/portfolio/PriceHistoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/marketdata/PriceHistoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/RiskExportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/RiskExportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/strategy/HistoricalVarRiskStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/strategy/HistoricalVarRiskStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/strategy/ScoringRiskStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/strategy/ScoringRiskStrategy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,61 +69,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0006810271808435" />
-      <entry key="MS500" value="1.2341616479067121" />
-      <entry key="S2" value="1.9967061682673508" />
-      <entry key="S5" value="3.238820413559868" />
-      <entry key="S10" value="5.173070902153888" />
-      <entry key="S30" value="11.864321236586756" />
-      <entry key="S60" value="20.213452452959242" />
-      <entry key="M2" value="34.87624436068406" />
-      <entry key="M5" value="61.59737864773404" />
-      <entry key="M10" value="89.51880322175305" />
-      <entry key="M15" value="113.8942579913617" />
-      <entry key="M30" value="168.6355700659189" />
-      <entry key="H1" value="233.48822156464857" />
-      <entry key="H2" value="354.0348554170068" />
-      <entry key="H4" value="598.2661460771365" />
-      <entry key="D1" value="1305.7635546879458" />
-      <entry key="W1" value="1551.0488817018465" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000000000000007" />
+      <entry key="S2" value="1.0003213999843112" />
+      <entry key="S5" value="1.083458113867273" />
+      <entry key="S10" value="1.6173737419213874" />
+      <entry key="S30" value="4.080145011573492" />
+      <entry key="S60" value="6.333971994956252" />
+      <entry key="M2" value="9.163469165413138" />
+      <entry key="M5" value="15.721281279779701" />
+      <entry key="M10" value="26.443106876778483" />
+      <entry key="M15" value="40.514668209949335" />
+      <entry key="M30" value="90.96145491923102" />
+      <entry key="H1" value="173.6787779712216" />
+      <entry key="H2" value="310.00712434162995" />
+      <entry key="H4" value="563.566302462672" />
+      <entry key="D1" value="1317.9352383088433" />
+      <entry key="W1" value="1587.1160266923057" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="7.927658061278917E-71" />
-      <entry key="MS500" value="9.546165996150757E-15" />
-      <entry key="S2" value="3.1257716325575546E-4" />
-      <entry key="S5" value="0.03962624690183487" />
-      <entry key="S10" value="0.19915087293945424" />
-      <entry key="S30" value="0.661340991079866" />
-      <entry key="S60" value="1.3371956944193153" />
-      <entry key="M2" value="3.015838511038366" />
-      <entry key="M5" value="6.739228816763528" />
-      <entry key="M10" value="9.691988677519614" />
-      <entry key="M15" value="11.363644733863122" />
-      <entry key="M30" value="14.23751376979058" />
-      <entry key="H1" value="19.141394799782404" />
-      <entry key="H2" value="33.42391658564423" />
-      <entry key="H4" value="60.64895331653259" />
-      <entry key="D1" value="124.25138282703776" />
-      <entry key="W1" value="143.43864610462407" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="2.7662793507861372E-112" />
+      <entry key="S2" value="1.31779819458423E-28" />
+      <entry key="S5" value="9.016088914584644E-12" />
+      <entry key="S10" value="4.607305534422756E-6" />
+      <entry key="S30" value="0.0336578031739404" />
+      <entry key="S60" value="0.3377888495137239" />
+      <entry key="M2" value="1.4097104339687032" />
+      <entry key="M5" value="4.78422961794119" />
+      <entry key="M10" value="8.305264542222101" />
+      <entry key="M15" value="10.839538856297176" />
+      <entry key="M30" value="16.385864038923028" />
+      <entry key="H1" value="23.90286719680288" />
+      <entry key="H2" value="38.92589238999683" />
+      <entry key="H4" value="66.74497562493539" />
+      <entry key="D1" value="135.46821518643682" />
+      <entry key="W1" value="156.97666390309482" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="7.371247067212036E-4" />
-      <entry key="MS500" value="0.3296999679935359" />
-      <entry key="S2" value="1.426881865332642" />
-      <entry key="S5" value="2.8092460080608808" />
-      <entry key="S10" value="4.949940517228592" />
-      <entry key="S30" value="12.210641394612207" />
-      <entry key="S60" value="21.297627235162192" />
-      <entry key="M2" value="37.67208922484995" />
-      <entry key="M5" value="68.17829803890066" />
-      <entry key="M10" value="99.10045457454387" />
-      <entry key="M15" value="125.16666262250563" />
-      <entry key="M30" value="182.80679318729784" />
-      <entry key="H1" value="252.58075564382764" />
-      <entry key="H2" value="387.4143718520176" />
-      <entry key="H4" value="658.8751080210013" />
-      <entry key="D1" value="1430.001795306686" />
-      <entry key="W1" value="1694.4853796066557" />
+      <entry key="MS100" value="0.024180703024099838" />
+      <entry key="MS500" value="0.4750001914374433" />
+      <entry key="S2" value="0.8304094265832711" />
+      <entry key="S5" value="0.9921443981737595" />
+      <entry key="S10" value="1.4886061766670982" />
+      <entry key="S30" value="3.9402603804324623" />
+      <entry key="S60" value="6.532485670704275" />
+      <entry key="M2" value="10.474153377779293" />
+      <entry key="M5" value="20.440876912482327" />
+      <entry key="M10" value="34.699623705388575" />
+      <entry key="M15" value="51.309538154818455" />
+      <entry key="M30" value="107.30468315254258" />
+      <entry key="H1" value="197.5421749485286" />
+      <entry key="H2" value="348.8933542458448" />
+      <entry key="H4" value="630.273385009457" />
+      <entry key="D1" value="1453.3901096122697" />
+      <entry key="W1" value="1744.0904789825436" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -135,49 +135,50 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.CoreApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RiskCacheAndLoggingIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RiskCalculationServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RiskExportIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RiskExportServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.core [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.core [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.core [spotless:apply...].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.core [verify].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;backend&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;24.15.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;24.19.2&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/profi/Desktop/RiskLense&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;C:\\Program Files\\nodejs\\npm.cmd&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;Z:\\IdeaProjects\\risklens\\frontend\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.blarc.ai.commits.intellij.plugin.settings.AppSettingsConfigurable&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;Z:\\IdeaProjects\\risklens\\frontend\\node_modules\\typescript\\lib&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CoreApplication.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "JUnit.RiskCacheAndLoggingIntegrationTest.executor": "Run",
+    "JUnit.RiskCalculationServiceTest.executor": "Run",
+    "JUnit.RiskExportIntegrationTest.executor": "Run",
+    "JUnit.RiskExportServiceTest.executor": "Run",
+    "Maven.core [clean].executor": "Run",
+    "Maven.core [compile].executor": "Run",
+    "Maven.core [spotless:apply...].executor": "Run",
+    "Maven.core [verify].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "backend",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.nodejs.core.library.configured.version": "24.15.0",
+    "javascript.nodejs.core.library.typings.version": "24.19.2",
+    "javascript.preferred.runtime.type.id": "node",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/profi/Desktop/RiskLense",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "C:\\Program Files\\nodejs\\npm.cmd",
+    "prettierjs.PrettierConfiguration.Package": "Z:\\IdeaProjects\\risklens\\frontend\\node_modules\\prettier",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "com.github.blarc.ai.commits.intellij.plugin.settings.AppSettingsConfigurable",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "Z:\\IdeaProjects\\risklens\\frontend\\node_modules\\typescript\\lib"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\profi\Desktop\RiskLense" />
@@ -357,7 +358,15 @@
       <option name="project" value="LOCAL" />
       <updated>1795819461234</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="feat(marketdata): add SeededMarketDataProvider and price history seed migration">
+      <option name="closed" value="true" />
+      <created>1795821014278</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1795821014278</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -398,7 +407,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ci(ci):" />
     <MESSAGE value="ci(ci): synchronize workflows and update repository configuration" />
     <MESSAGE value="ci(" />
     <MESSAGE value="ci(ci): add CI workflows, Docker configuration, and project documentation" />
@@ -423,6 +431,7 @@
     <MESSAGE value="feat(core): add structured logging and actuator endpoints configuration" />
     <MESSAGE value="feat(" />
     <MESSAGE value="feat(marketdata): add MarketDataProvider interface and in-memory stub implementation" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(marketdata): add MarketDataProvider interface and in-memory stub implementation" />
+    <MESSAGE value="feat(marketdata): add SeededMarketDataProvider and price history seed migration" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(marketdata): add SeededMarketDataProvider and price history seed migration" />
   </component>
 </project>

@@ -2,6 +2,7 @@ package com.risklens.core.risk;
 
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
+import com.risklens.core.marketdata.MarketDataProvider;
 import com.risklens.core.portfolio.Position;
 import com.risklens.core.risk.dto.ExportFileDto;
 import java.awt.Color;
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RiskExportService {
 
   private final RiskAssessmentRepository riskAssessmentRepository;
+  private final MarketDataProvider marketDataProvider;
 
   private static final String FONT_PATH = "fonts/Metropolis-Black.otf";
 
@@ -169,14 +171,21 @@ public class RiskExportService {
       addTableHeader(positionsTable, "Asset Type", boldFont);
       addTableHeader(positionsTable, "Quantity", boldFont);
       addTableHeader(positionsTable, "Avg Buy Price", boldFont);
+      addTableHeader(positionsTable, "Current Price", boldFont);
 
       if (assessment.getPortfolio().getPositions() != null
           && !assessment.getPortfolio().getPositions().isEmpty()) {
         for (Position pos : assessment.getPortfolio().getPositions()) {
+          String currentPrice =
+              marketDataProvider
+                  .getLastPrice(pos.getAssetSymbol())
+                  .map(quote -> quote.price().toString())
+                  .orElse(pos.getAvgBuyPrice() != null ? pos.getAvgBuyPrice().toString() : "-");
           addTableCell(positionsTable, pos.getAssetSymbol(), normalFont);
           addTableCell(positionsTable, pos.getAssetType(), normalFont);
           addTableCell(positionsTable, pos.getQuantity().toString(), normalFont);
           addTableCell(positionsTable, pos.getAvgBuyPrice().toString(), normalFont);
+          addTableCell(positionsTable, currentPrice, normalFont);
         }
       } else {
         PdfPCell cell = new PdfPCell(new Phrase("No positions recorded", normalFont));
@@ -247,7 +256,7 @@ public class RiskExportService {
     sb.append("Risk Score,").append(assessment.getRiskScore()).append("\n\n");
 
     sb.append("=== PORTFOLIO POSITIONS ===\n");
-    sb.append("Asset Symbol,Asset Type,Quantity,Avg Buy Price\n");
+    sb.append("Asset Symbol,Asset Type,Quantity,Avg Buy Price,Current Price \n");
 
     if (assessment.getPortfolio().getPositions() != null
         && !assessment.getPortfolio().getPositions().isEmpty()) {
@@ -256,6 +265,14 @@ public class RiskExportService {
           .getPositions()
           .forEach(
               position -> {
+                String currentPrice =
+                    marketDataProvider
+                        .getLastPrice(position.getAssetSymbol())
+                        .map(quote -> quote.price().toString())
+                        .orElse(
+                            position.getAvgBuyPrice() != null
+                                ? position.getAvgBuyPrice().toString()
+                                : "");
                 sb.append(escapeCsv(position.getAssetSymbol()))
                     .append(",")
                     .append(escapeCsv(position.getAssetType()))
@@ -263,10 +280,12 @@ public class RiskExportService {
                     .append(position.getQuantity())
                     .append(",")
                     .append(position.getAvgBuyPrice())
+                    .append(",")
+                    .append(escapeCsv(currentPrice))
                     .append("\n");
               });
     } else {
-      sb.append("No positions recorded,-,-\n");
+      sb.append("No positions recorded,-,-,-,-\n");
     }
 
     return sb.toString();

@@ -23,4 +23,6 @@ public interface PriceHistoryRepository extends JpaRepository<PriceHistory, Long
         @Param("to") LocalDate to);
 
     Optional<PriceHistory> findFirstByAssetSymbolIgnoreCaseOrderByTradeDateDesc(String assetSymbol);
+
+    boolean existsByAssetSymbolAndTradeDate(String assetSymbol, LocalDate tradeDate);
 }
