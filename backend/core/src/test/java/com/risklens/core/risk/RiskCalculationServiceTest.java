@@ -6,17 +6,16 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import com.risklens.core.BaseIntegrationTest;
+import com.risklens.core.marketdata.MarketDataProvider;
 import com.risklens.core.portfolio.Portfolio;
 import com.risklens.core.portfolio.PortfolioRepository;
 import com.risklens.core.portfolio.Position;
 import com.risklens.core.portfolio.PositionRepository;
 import com.risklens.core.risk.dto.RiskAssessmentResponseDto;
-import com.risklens.core.risk.strategy.RiskMethod;
-import com.risklens.core.risk.strategy.RiskParams;
-import com.risklens.core.risk.strategy.RiskResult;
-import com.risklens.core.risk.strategy.RiskStrategy;
-import com.risklens.core.risk.strategy.RiskStrategyFactory;
+import com.risklens.core.risk.strategy.*;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.*;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +34,8 @@ import org.springframework.web.server.ResponseStatusException;
 class RiskCalculationServiceTest extends BaseIntegrationTest {
 
   @Mock private PortfolioRepository portfolioRepository;
+
+  @Mock private MarketDataProvider marketDataProvider;
 
   @Mock private PositionRepository positionRepository;
 
@@ -70,6 +71,69 @@ class RiskCalculationServiceTest extends BaseIntegrationTest {
   void flywayMigrationsAppliedAndRepositoryAccessible() {
     long count = riskAssessmentRepository.count();
     assertThat(count).isGreaterThanOrEqualTo(0);
+  }
+
+  @Test
+  void calculateAndSaveRisk_WorksOffline_WhenOutboundProxyBlocksNetwork() {
+    ProxySelector previousSelector = ProxySelector.getDefault();
+    ProxySelector.setDefault(
+        new ProxySelector() {
+          @Override
+          public List<Proxy> select(URI uri) {
+            throw new AssertionError("Outbound network call attempted to: " + uri);
+          }
+
+          @Override
+          public void connectFailed(URI uri, SocketAddress sa, IOException ioe) {
+            // no-op
+          }
+        });
+
+    try {
+      when(portfolioRepository.findByIdAndUserEmail(portfolioId, userEmail))
+          .thenReturn(Optional.of(validPortfolio));
+
+      List<Position> positions =
+          List.of(
+              Position.builder()
+                  .assetSymbol("AAPL")
+                  .quantity(BigDecimal.valueOf(10))
+                  .avgBuyPrice(BigDecimal.valueOf(150.0))
+                  .build());
+      when(positionRepository.findAllByPortfolioId(portfolioId)).thenReturn(positions);
+      when(strategyFactory.getStrategy(RiskMethod.HISTORICAL_VAR)).thenReturn(riskStrategy);
+
+      RiskResult mockResult =
+          RiskResult.builder()
+              .score((short) 50)
+              .level("MEDIUM")
+              .varValue(BigDecimal.valueOf(120.0000))
+              .volatility(BigDecimal.valueOf(0.200000))
+              .maxDrawdown(BigDecimal.valueOf(0.100000))
+              .sharpeRatio(BigDecimal.valueOf(1.200000))
+              .build();
+
+      when(riskStrategy.calculate(eq(validPortfolio), any(RiskParams.class)))
+          .thenReturn(mockResult);
+      when(riskAssessmentRepository.save(any(RiskAssessment.class)))
+          .thenAnswer(inv -> inv.getArgument(0));
+
+      RiskAssessmentResponseDto expectedDto =
+          RiskAssessmentResponseDto.builder()
+              .riskScore((short) 50)
+              .var95(BigDecimal.valueOf(120.0000))
+              .build();
+      when(riskMapper.toDto(any(RiskAssessment.class))).thenReturn(expectedDto);
+
+      RiskAssessmentResponseDto response =
+          riskCalculationService.calculateAndSaveRisk(
+              userEmail, portfolioId, RiskMethod.HISTORICAL_VAR);
+
+      assertNotNull(response);
+      assertEquals(50, Integer.valueOf(response.getRiskScore()));
+    } finally {
+      ProxySelector.setDefault(previousSelector);
+    }
   }
 
   @Test

@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="feat(marketdata): add SeededMarketDataProvider and price history seed migration">
+    <list default="true" id="0258835a-e506-4a24-8782-f262576bbc62" name="Changes" comment="refactor(risk): integrate MarketDataProvider into risk strategies and export service">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/RiskExportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/RiskExportService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/strategy/HistoricalVarRiskStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/strategy/HistoricalVarRiskStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/strategy/ScoringRiskStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/main/java/com/risklens/core/risk/strategy/ScoringRiskStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/core/src/test/java/com/risklens/core/risk/RiskCalculationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/core/src/test/java/com/risklens/core/risk/RiskCalculationServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -366,7 +364,15 @@
       <option name="project" value="LOCAL" />
       <updated>1795821014278</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="refactor(risk): integrate MarketDataProvider into risk strategies and export service">
+      <option name="closed" value="true" />
+      <created>1795824078181</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1795824078181</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -407,8 +413,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ci(ci): synchronize workflows and update repository configuration" />
-    <MESSAGE value="ci(" />
     <MESSAGE value="ci(ci): add CI workflows, Docker configuration, and project documentation" />
     <MESSAGE value="frontend(merge): Resolve merge conflicts" />
     <MESSAGE value="chore(" />
@@ -432,6 +436,8 @@
     <MESSAGE value="feat(" />
     <MESSAGE value="feat(marketdata): add MarketDataProvider interface and in-memory stub implementation" />
     <MESSAGE value="feat(marketdata): add SeededMarketDataProvider and price history seed migration" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(marketdata): add SeededMarketDataProvider and price history seed migration" />
+    <MESSAGE value="refactor(risk): integrate MarketDataProvider into risk strategies and export" />
+    <MESSAGE value="refactor(risk): integrate MarketDataProvider into risk strategies and export service" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor(risk): integrate MarketDataProvider into risk strategies and export service" />
   </component>
 </project>

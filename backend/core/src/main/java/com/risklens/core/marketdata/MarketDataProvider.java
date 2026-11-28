@@ -8,21 +8,18 @@ import java.util.Optional;
 
 public interface MarketDataProvider {
 
-    List<PriceBar> getHistory(String ticker, LocalDate from, LocalDate to);
+  List<PriceBar> getHistory(String ticker, LocalDate from, LocalDate to);
 
-    Optional<LastPrice> getLastPrice(String ticker);
+  Optional<LastPrice> getLastPrice(String ticker);
 
-    record PriceBar(
-        String ticker,
-        LocalDate date,
-        BigDecimal open,
-        BigDecimal high,
-        BigDecimal low,
-        BigDecimal close,
-        BigDecimal volume) {}
+  record PriceBar(
+      String ticker,
+      LocalDate date,
+      BigDecimal open,
+      BigDecimal high,
+      BigDecimal low,
+      BigDecimal close,
+      BigDecimal volume) {}
 
-    record LastPrice(
-        String ticker,
-        BigDecimal price,
-        Instant timestamp) {}
+  record LastPrice(String ticker, BigDecimal price, Instant timestamp) {}
 }

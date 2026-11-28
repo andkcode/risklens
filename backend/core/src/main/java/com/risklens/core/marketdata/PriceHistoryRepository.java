@@ -10,19 +10,18 @@ import org.springframework.data.repository.query.Param;
 
 public interface PriceHistoryRepository extends JpaRepository<PriceHistory, Long> {
 
-    @Query("""
+  @Query(
+      """
       SELECT p FROM PriceHistory p
       WHERE UPPER(p.assetSymbol) = :symbol
         AND p.tradeDate >= :from
         AND p.tradeDate <= :to
       ORDER BY p.tradeDate ASC
       """)
-    List<PriceHistory> findHistoryBetween(
-        @Param("symbol") String symbol,
-        @Param("from") LocalDate from,
-        @Param("to") LocalDate to);
+  List<PriceHistory> findHistoryBetween(
+      @Param("symbol") String symbol, @Param("from") LocalDate from, @Param("to") LocalDate to);
 
-    Optional<PriceHistory> findFirstByAssetSymbolIgnoreCaseOrderByTradeDateDesc(String assetSymbol);
+  Optional<PriceHistory> findFirstByAssetSymbolIgnoreCaseOrderByTradeDateDesc(String assetSymbol);
 
-    boolean existsByAssetSymbolAndTradeDate(String assetSymbol, LocalDate tradeDate);
+  boolean existsByAssetSymbolAndTradeDate(String assetSymbol, LocalDate tradeDate);
 }

@@ -1,8 +1,8 @@
 package com.risklens.core.config;
 
-import com.risklens.core.portfolio.PriceHistory;
 import com.risklens.core.marketdata.PriceHistoryRepository;
 import com.risklens.core.portfolio.*;
+import com.risklens.core.portfolio.PriceHistory;
 import com.risklens.core.risk.RiskAssessment;
 import com.risklens.core.risk.RiskAssessmentRepository;
 import com.risklens.core.user.User;
